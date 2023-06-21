@@ -67,7 +67,7 @@ const YearButtons = mount(() => {
         <button class="tui-calendar-btn tui-calendar-btn-prev-year">
           Prev year
         </button>
-        <em class="tui-calendar-title ${titleClass}">${title}}</em>
+        <em class="tui-calendar-title ${titleClass}">${title}</em>
         <button class="tui-calendar-btn tui-calendar-btn-next-year">
           Next year
         </button>

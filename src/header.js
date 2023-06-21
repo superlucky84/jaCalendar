@@ -203,7 +203,7 @@ export class Header extends CustomEvents {
       title: this._getTitleText(date, type),
     };
 
-    // this._container.innerHTML = headerTmpl(context).replace(/^\s+|\s+$/g, '');
+    this._container.innerHTML = '';
     lithentRender(html`<${HeaderTmpl} ...${context} />`, this._container);
 
     this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
