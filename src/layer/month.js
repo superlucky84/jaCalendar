@@ -70,8 +70,7 @@ export class MonthLayer extends LayerBase {
       html`<${BodyTmpl} ...${context} />`,
       container
     );
-    // this._element = container.firstChild;
-    this._element = {};
+    this._element = container.firstChild;
   }
 
   /**
