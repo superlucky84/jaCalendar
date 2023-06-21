@@ -230,7 +230,7 @@ export class DateTimeFormatter {
     var meridiem = 'a'; // Default value for unusing meridiem format
     var replaceMap;
 
-    if (inArray(TYPE_MERIDIEM, this._keyOrder) > -1) {
+    if (this._keyOrder.includes(TYPE_MERIDIEM)) {
       meridiem = hour >= 12 ? 'pm' : 'am';
       hour = dateUtil.getMeridiemHour(hour);
     }

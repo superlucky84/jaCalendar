@@ -111,18 +111,16 @@ export class CustomEvents {
   }
 
   on(eventName, handler, context) {
-    var self = this;
-
     if (isString(eventName)) {
       eventName = eventName.split(/\s+/g);
-      forEach(eventName, function (name) {
-        self._bindEvent(name, handler, context);
+      eventName.forEach(name => {
+        this._bindEvent(name, handler, context);
       });
     } else if (isObject(eventName)) {
       // [syntax 3, 4]
       context = handler;
-      forEach(eventName, function (func, name) {
-        self.on(name, func, context);
+      eventName.forEach((func, name) => {
+        this.on(name, func, context);
       });
     }
   }

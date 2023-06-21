@@ -27,6 +27,8 @@ const YEAR_TITLE_FORMAT = 'yyyy';
  */
 export class Header extends CustomEvents {
   constructor(container, option) {
+    super();
+
     this.eventHandler = null;
     /**
      * Container element
@@ -114,7 +116,8 @@ export class Header extends CustomEvents {
   _setEvents() {
     // mouseTouchEvent.on(this._container, 'click', this._onClickHandler, this);
     this.eventHandler = this._onClickHandler.bind(this);
-    this.container.addEventListenr('click', this.eventHandler);
+    console.log(this._container);
+    this._container.addEventListener('click', this.eventHandler);
   }
 
   /**

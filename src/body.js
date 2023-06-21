@@ -1,8 +1,8 @@
-import { TYPE_DATE, TYPE_MONTH, TYPE_YEAR } from 'constants';
+import { TYPE_DATE, TYPE_MONTH, TYPE_YEAR } from '@/constants';
 
-import { DateLayer } from '@/layerBody/date';
-import { MonthLayer } from '@/layerBody/month';
-import { YearLayer } from '@/layerBody/year';
+import { DateLayer } from '@/layer/date';
+import { MonthLayer } from '@/layer/month';
+import { YearLayer } from '@/layer/year';
 
 /**
  * @ignore

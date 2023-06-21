@@ -1,7 +1,10 @@
+import { h, render as lithentRender } from 'lithent';
+import htm from 'htm';
 import { LayerBase } from '@/layer/base';
 import { TYPE_MONTH } from '@/constants';
-import { dateUtil } from '@/dateUtil';
 import { BodyTmpl } from '@/monthBodyTmpl';
+
+const html = htm.bind(h);
 
 const DATE_SELECTOR = '.tui-calendar-month';
 
@@ -11,7 +14,7 @@ const DATE_SELECTOR = '.tui-calendar-month';
  * @param {string} language - Initial language
  * @ignore
  */
-class MonthLayer extends LayerBase {
+export class MonthLayer extends LayerBase {
   constructor(language) {
     super(language);
 
@@ -45,7 +48,6 @@ class MonthLayer extends LayerBase {
       Oct: monthsShort[9],
       Nov: monthsShort[10],
       Dec: monthsShort[11],
-      getFirstDayTimestamp: dateUtil.getFirstDayTimestamp,
     };
   }
 
@@ -58,7 +60,8 @@ class MonthLayer extends LayerBase {
   render(date, container) {
     var context = this._makeContext(date);
 
-    container.innerHTML = bodyTmpl(context);
+    // container.innerHTML = bodyTmpl(context);
+    lithentRender(html`<${BodyTmpl} ...${context} />`, container);
     this._element = container.firstChild;
   }
 

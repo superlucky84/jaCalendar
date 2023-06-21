@@ -5,8 +5,6 @@ import { Body } from '@/body';
 import { CustomEvents } from './customEvents';
 import { localeTexts } from '@/localeTexts';
 import { dateUtil } from './dateUtil';
-const html = htm.bind(h);
-var util = require('../util');
 
 import {
   DEFAULT_WEEK_START_DAY,
@@ -23,7 +21,9 @@ import {
   CLASS_NAME_HIDDEN,
   HEADER_SELECTOR,
   BODY_SELECTOR,
-} from 'constants';
+} from '@/constants';
+
+const html = htm.bind(h);
 
 /**
  * const calendar = DatePicker.createCalendar('#calendar-wrapper', {
@@ -122,10 +122,6 @@ export class Calendar extends CustomEvents {
       date: options.date,
       type: options.type,
     });
-
-    if (options.usageStatistics) {
-      util.sendHostName();
-    }
   }
 
   /**
@@ -134,11 +130,11 @@ export class Calendar extends CustomEvents {
    * @private
    */
   _initHeader(options) {
-    var headerContainer = this._element.querySelector(HEADER_SELECTOR);
+    const headerContainer = this._element.querySelector(HEADER_SELECTOR);
 
     this._header = new Header(headerContainer, options);
     this._header.on('click', ev => {
-      var target = util.getTarget(ev);
+      var target = ev.target;
       if (target.classList.contains(CLASS_NAME_PREV_MONTH_BTN)) {
         this.drawPrev();
       } else if (target.classList.contains(CLASS_NAME_PREV_YEAR_BTN)) {
