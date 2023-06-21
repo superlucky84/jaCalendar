@@ -5,7 +5,7 @@ const calendar = new Calendar(document.getElementById('calendar-wrapper'), {
   showToday: true,
   showJumpButtons: true,
   date: new Date(),
-  type: 'month',
+  type: 'date',
 });
 
 console.log(calendar);
