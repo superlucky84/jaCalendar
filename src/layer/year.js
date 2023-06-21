@@ -53,8 +53,11 @@ export class YearLayer extends LayerBase {
   render(date, container) {
     var context = this._makeContext(date);
 
+    if (this.remove) {
+      this.remove();
+    }
     // container.innerHTML = bodyTmpl(context);
-    lithentRender(html`<${BodyTmpl} ...${context} />`, container);
+    this.remove = lithentRender(html`<${BodyTmpl} ...${context} />`, container);
 
     this._element = container.firstChild;
   }
