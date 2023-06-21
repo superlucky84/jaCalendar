@@ -2,28 +2,26 @@ import { h, mount, Fragment } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
 
-export const HeaderTmpl = mount(
-  ({ showJumpButtons, showToday, isDateCalendar }) => {
-    let Component;
-    if (isDateCalendar) {
-      if (showJumpButtons) {
-        Component = PrevNextWithJumpButtons;
-      } else {
-        Component = PrevNextButtons;
-      }
+export const HeaderTmpl = mount((_r, { showJumpButtons, isDateCalendar }) => {
+  let Component;
+  if (isDateCalendar) {
+    if (showJumpButtons) {
+      Component = PrevNextWithJumpButtons;
     } else {
-      Component = YearButtons;
+      Component = PrevNextButtons;
     }
-
-    return ({ title, titleClass }) =>
-      html`
-        <${Fragment}>
-          <${Component} title=${title} titleClass=${titleClass} />
-          ${showToday && html`<${TodayButton} todayText=${todayText} />`}
-        <//>
-      `;
+  } else {
+    Component = YearButtons;
   }
-);
+
+  return ({ title, titleClass, showToday, todayText }) =>
+    html`
+      <${Fragment}>
+        <${Component} title=${title} titleClass=${titleClass} />
+        ${showToday && html`<${TodayButton} todayText=${todayText} />`}
+      <//>
+    `;
+});
 
 const PrevNextWithJumpButtons = mount(() => {
   return ({ title, titleClass }) =>

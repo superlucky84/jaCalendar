@@ -4,7 +4,21 @@ import htm from 'htm';
 const html = htm.bind(h);
 
 export const BodyTmpl = mount(() => {
-  return ({ Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec }) =>
+  return ({
+    year,
+    Jan,
+    Feb,
+    Mar,
+    Apr,
+    May,
+    Jun,
+    Jul,
+    Aug,
+    Sep,
+    Oct,
+    Nov,
+    Dec,
+  }) =>
     html`
       <table class="tui-calendar-body-inner">
         <caption>

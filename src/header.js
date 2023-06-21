@@ -29,6 +29,7 @@ export class Header extends CustomEvents {
   constructor(container, option) {
     super();
 
+    this.tmplRemove = null;
     this.eventHandler = null;
     /**
      * Container element
@@ -194,7 +195,7 @@ export class Header extends CustomEvents {
   }
 
   render(date, type) {
-    var context = {
+    const context = {
       showToday: this._showToday,
       showJumpButtons: this._showJumpButtons,
       todayText: this._todayFormatter.format(new Date()),
@@ -203,8 +204,14 @@ export class Header extends CustomEvents {
       title: this._getTitleText(date, type),
     };
 
-    this._container.innerHTML = '';
-    lithentRender(html`<${HeaderTmpl} ...${context} />`, this._container);
+    if (this.tmplRemove) {
+      this.tmplRemove();
+    }
+
+    this.tmplRemove = lithentRender(
+      html`<${HeaderTmpl} ...${context} />`,
+      this._container
+    );
 
     this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
     if (context.showToday) {

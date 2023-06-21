@@ -24,6 +24,7 @@ export class MonthLayer extends LayerBase {
      * @private
      */
     this._type = TYPE_MONTH;
+    this.removeTmpl = null;
   }
 
   /**
@@ -60,9 +61,17 @@ export class MonthLayer extends LayerBase {
   render(date, container) {
     var context = this._makeContext(date);
 
-    // container.innerHTML = bodyTmpl(context);
-    lithentRender(html`<${BodyTmpl} ...${context} />`, container);
-    this._element = container.firstChild;
+    if (this.removeTmpl) {
+      this.removeTmpl();
+    }
+
+    console.log('aa', container);
+    this.removeTmpl = lithentRender(
+      html`<${BodyTmpl} ...${context} />`,
+      container
+    );
+    // this._element = container.firstChild;
+    this._element = {};
   }
 
   /**
@@ -71,6 +80,6 @@ export class MonthLayer extends LayerBase {
    * @returns {HTMLElement[]}
    */
   getDateElements() {
-    return this._element.querySelectorAll(DATE_SELECTOR);
+    // return this._element.querySelectorAll(DATE_SELECTOR);
   }
 }
