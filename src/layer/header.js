@@ -2,11 +2,11 @@ import { h, render as lithentRender } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
 
-import { CustomEvents } from './customEvents';
+import { CustomEvents } from '@/helper/customEvents';
 import { TYPE_DATE, TYPE_MONTH, TYPE_YEAR } from '@/constants';
-import { localeTexts } from '@/localeTexts';
+import { localeTexts } from '@/locale/localeTexts';
 import { HeaderTmpl } from '@/tmpl/headerTmpl';
-import { DateTimeFormatter } from '@/dateTimeFormatter';
+import { DateTimeFormatter } from '@/helper/dateTimeFormatter';
 
 const CLASS_NAME_TITLE_MONTH = 'tui-calendar-title-month';
 const CLASS_NAME_TITLE_YEAR = 'tui-calendar-title-year';

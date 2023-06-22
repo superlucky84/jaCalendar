@@ -1,4 +1,4 @@
-import { localeTexts } from '@/localeTexts';
+import { localeTexts } from '@/locale/localeTexts';
 import { DEFAULT_LANGUAGE_TYPE } from '@/constants';
 
 /**

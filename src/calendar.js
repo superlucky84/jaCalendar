@@ -1,10 +1,10 @@
 import { h, render as lithentRender, mount } from 'lithent';
 import htm from 'htm';
-import { Header } from './header';
-import { Body } from '@/body';
-import { CustomEvents } from './customEvents';
-import { localeTexts } from '@/localeTexts';
-import { dateUtil } from './dateUtil';
+import { Header } from '@/layer/header';
+import { Body } from '@/layer/body';
+import { CustomEvents } from '@/helper/customEvents';
+import { localeTexts } from '@/locale/localeTexts';
+import { dateUtil } from '@/helper/dateUtil';
 
 import {
   DEFAULT_WEEK_START_DAY,
@@ -51,18 +51,16 @@ export class Calendar extends CustomEvents {
 
     this.static = { localeTexts };
 
-    options = Object.assign(
-      {
-        language: DEFAULT_LANGUAGE_TYPE,
-        showToday: true,
-        showJumpButtons: false,
-        date: new Date(),
-        type: TYPE_DATE,
-        usageStatistics: true,
-        weekStartDay: DEFAULT_WEEK_START_DAY,
-      },
-      options
-    );
+    options = {
+      language: DEFAULT_LANGUAGE_TYPE,
+      showToday: true,
+      showJumpButtons: false,
+      date: new Date(),
+      type: TYPE_DATE,
+      usageStatistics: true,
+      weekStartDay: DEFAULT_WEEK_START_DAY,
+      ...options,
+    };
 
     /**
      * Container element

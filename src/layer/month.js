@@ -65,7 +65,6 @@ export class MonthLayer extends LayerBase {
       this.removeTmpl();
     }
 
-    console.log('aa', container);
     this.removeTmpl = lithentRender(
       html`<${BodyTmpl} ...${context} />`,
       container
@@ -79,6 +78,6 @@ export class MonthLayer extends LayerBase {
    * @returns {HTMLElement[]}
    */
   getDateElements() {
-    // return this._element.querySelectorAll(DATE_SELECTOR);
+    return this._element.querySelectorAll(DATE_SELECTOR);
   }
 }

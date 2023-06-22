@@ -1,6 +1,6 @@
 import { h, render as lithentRender } from 'lithent';
 import htm from 'htm';
-import { dateUtil } from '@/dateUtil';
+import { dateUtil } from '@/helper/dateUtil';
 import { TYPE_DATE, WEEK_START_DAY_MAP } from '@/constants';
 import { LayerBase } from '@/layer/base';
 import { BodyTmpl } from '@/tmpl/dateBodyTmpl';

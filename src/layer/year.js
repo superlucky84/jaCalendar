@@ -1,7 +1,7 @@
 import { h, render as lithentRender } from 'lithent';
 import htm from 'htm';
 import { TYPE_YEAR } from '@/constants';
-import { dateUtil } from '@/dateUtil';
+import { dateUtil } from '@/helper/dateUtil';
 import { BodyTmpl } from '@/tmpl/yearBodyTmpl';
 import { LayerBase } from '@/layer/base';
 

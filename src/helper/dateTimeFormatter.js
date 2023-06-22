@@ -6,8 +6,8 @@ import {
   TYPE_MINUTE,
   TYPE_MERIDIEM,
 } from '@/constants';
-import { dateUtil } from './dateUtil';
-import { localeTexts } from '@/localeTexts';
+import { dateUtil } from '@/helper/dateUtil';
+import { localeTexts } from '@/locale/localeTexts';
 
 const rFormableKeys = /\\?(yyyy|yy|mmmm|mmm|mm|m|dd|d|hh|h|a)/gi;
 const mapForConverting = {
