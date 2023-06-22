@@ -2,7 +2,7 @@ import { h, render as lithentRender } from 'lithent';
 import htm from 'htm';
 import { LayerBase } from '@/layer/base';
 import { TYPE_MONTH } from '@/constants';
-import { BodyTmpl } from '@/monthBodyTmpl';
+import { BodyTmpl } from '@/tmpl/monthBodyTmpl';
 
 const html = htm.bind(h);
 

@@ -3,7 +3,7 @@ import htm from 'htm';
 import { dateUtil } from '@/dateUtil';
 import { TYPE_DATE, WEEK_START_DAY_MAP } from '@/constants';
 import { LayerBase } from '@/layer/base';
-import { BodyTmpl } from '@/dateBodyTmpl';
+import { BodyTmpl } from '@/tmpl/dateBodyTmpl';
 
 const html = htm.bind(h);
 const DATE_SELECTOR = '.tui-calendar-date';

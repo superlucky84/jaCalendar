@@ -2,7 +2,7 @@ import { h, render as lithentRender } from 'lithent';
 import htm from 'htm';
 import { TYPE_YEAR } from '@/constants';
 import { dateUtil } from '@/dateUtil';
-import { BodyTmpl } from '@/yearBodyTmpl';
+import { BodyTmpl } from '@/tmpl/yearBodyTmpl';
 import { LayerBase } from '@/layer/base';
 
 const html = htm.bind(h);

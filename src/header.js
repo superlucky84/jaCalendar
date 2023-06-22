@@ -5,7 +5,7 @@ const html = htm.bind(h);
 import { CustomEvents } from './customEvents';
 import { TYPE_DATE, TYPE_MONTH, TYPE_YEAR } from '@/constants';
 import { localeTexts } from '@/localeTexts';
-import { HeaderTmpl } from '@/headerTmpl';
+import { HeaderTmpl } from '@/tmpl/headerTmpl';
 import { DateTimeFormatter } from '@/dateTimeFormatter';
 
 const CLASS_NAME_TITLE_MONTH = 'tui-calendar-title-month';

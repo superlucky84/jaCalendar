@@ -1,4 +1,4 @@
-import { dateUtil } from './dateUtil';
+import { dateUtil } from '@/dateUtil';
 import { h, mount } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
