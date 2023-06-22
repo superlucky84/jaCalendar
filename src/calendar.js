@@ -100,7 +100,8 @@ export class Calendar extends CustomEvents {
    * });
    */
   draw(options) {
-    var date, type;
+    let date;
+    let type;
 
     options = options || {};
     date = options.date || this._date;
@@ -230,7 +231,8 @@ export class Calendar extends CustomEvents {
 
     this._header = new Header(headerContainer, options);
     this._header.on('click', ev => {
-      var target = ev.target;
+      const target = ev.target;
+
       if (target.classList.contains(CLASS_NAME_PREV_MONTH_BTN)) {
         this.drawPrev();
       } else if (target.classList.contains(CLASS_NAME_PREV_YEAR_BTN)) {
@@ -274,7 +276,7 @@ export class Calendar extends CustomEvents {
   }
 
   _shouldUpdate(date, type) {
-    var prevDate = this._date;
+    const prevDate = this._date;
 
     if (!dateUtil.isValidDate(date)) {
       throw new Error('Invalid date');
@@ -293,8 +295,8 @@ export class Calendar extends CustomEvents {
   }
 
   _render() {
-    var date = this._date;
-    var type = this.getType();
+    const date = this._date;
+    const type = this.getType();
 
     this._header.render(date, type);
     this._body.render(date, type);
@@ -316,7 +318,7 @@ export class Calendar extends CustomEvents {
   }
 
   _getRelativeDate(step) {
-    var prev = this._date;
+    const prev = this._date;
 
     return new Date(prev.getFullYear(), prev.getMonth() + step);
   }

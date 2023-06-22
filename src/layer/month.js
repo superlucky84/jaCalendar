@@ -24,7 +24,6 @@ export class MonthLayer extends LayerBase {
      * @private
      */
     this._type = TYPE_MONTH;
-    this.removeTmpl = null;
   }
 
   /**
@@ -61,14 +60,7 @@ export class MonthLayer extends LayerBase {
   render(date, container) {
     var context = this._makeContext(date);
 
-    if (this.removeTmpl) {
-      this.removeTmpl();
-    }
-
-    this.removeTmpl = lithentRender(
-      html`<${BodyTmpl} ...${context} />`,
-      container
-    );
+    this.remove = lithentRender(html`<${BodyTmpl} ...${context} />`, container);
     this._element = container.firstChild;
   }
 

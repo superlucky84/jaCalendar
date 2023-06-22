@@ -85,7 +85,7 @@ export class LayerBase {
    */
   remove() {
     if (this._element) {
-      // this._element.remove();
+      this.remove();
     }
     this._element = null;
   }

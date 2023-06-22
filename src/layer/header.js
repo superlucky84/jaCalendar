@@ -31,163 +31,18 @@ export class Header extends CustomEvents {
 
     this.tmplRemove = null;
     this.eventHandler = null;
-    /**
-     * Container element
-     * @type {HTMLElement}
-     * @private
-     */
+
     this._container = container;
-
-    /**
-     * Header inner element
-     * @type {HTMLElement}
-     * @private
-     */
     this._innerElement = null;
-
-    /**
-     * Header info element
-     * @type {HTMLElement}
-     * @private
-     */
     this._infoElement = null;
-
-    /**
-     * Render today box or not
-     * @type {boolean}
-     * @private
-     */
     this._showToday = option.showToday;
-
-    /**
-     * Render jump buttons or not (next,prev year on date calendar)
-     * @type {boolean}
-     * @private
-     */
     this._showJumpButtons = option.showJumpButtons;
-
-    /**
-     * Year_Month title formatter
-     * @type {DateTimeFormatter}
-     * @private
-     */
     this._yearMonthTitleFormatter = null;
-
-    /**
-     * Year title formatter
-     * @type {DateTimeFormatter}
-     * @private
-     */
     this._yearTitleFormatter = null;
-
-    /**
-     * Today formatter
-     * @type {DateTimeFormatter}
-     * @private
-     */
     this._todayFormatter = null;
 
     this._setFormatters(localeTexts[option.language]);
     this._setEvents(option);
-  }
-
-  /**
-   * @param {object} localeText - Locale text
-   * @private
-   */
-  _setFormatters(localeText) {
-    this._yearMonthTitleFormatter = new DateTimeFormatter(
-      localeText.titleFormat,
-      localeText.titles
-    );
-    this._yearTitleFormatter = new DateTimeFormatter(
-      YEAR_TITLE_FORMAT,
-      localeText.titles
-    );
-    this._todayFormatter = new DateTimeFormatter(
-      localeText.todayFormat,
-      localeText.titles
-    );
-  }
-
-  /**
-   * @param {object} option - Constructor option
-   * @private
-   */
-  _setEvents() {
-    // mouseTouchEvent.on(this._container, 'click', this._onClickHandler, this);
-    this.eventHandler = this._onClickHandler.bind(this);
-    console.log(this._container);
-    this._container.addEventListener('click', this.eventHandler);
-  }
-
-  /**
-   * @private
-   */
-  _removeEvents() {
-    this.off();
-    // mouseTouchEvent.off(this._container, 'click', this._onClickHandler);
-    this._container.removeEventListener('click', this.eventHandler);
-  }
-
-  /**
-   * Fire customEvents
-   * @param {Event} ev An event object
-   * @private
-   */
-  _onClickHandler(ev) {
-    const target = ev.target;
-
-    if (target.closest(SELECTOR_BTN)) {
-      this.fire('click', ev);
-    }
-  }
-
-  /**
-   * @param {string} type - Calendar type
-   * @returns {string}
-   * @private
-   */
-  _getTitleClass(type) {
-    switch (type) {
-      case TYPE_DATE:
-        return CLASS_NAME_TITLE_MONTH;
-      case TYPE_MONTH:
-        return CLASS_NAME_TITLE_YEAR;
-      case TYPE_YEAR:
-        return CLASS_NAME_TITLE_YEAR_TO_YEAR;
-      default:
-        return '';
-    }
-  }
-
-  /**
-   * @param {Date} date - date
-   * @param {string} type - Calendar type
-   * @returns {string}
-   * @private
-   */
-  _getTitleText(date, type) {
-    var currentYear, start, end;
-
-    switch (type) {
-      case TYPE_DATE:
-        return this._yearMonthTitleFormatter.format(date);
-      case TYPE_MONTH:
-        return this._yearTitleFormatter.format(date);
-      case TYPE_YEAR:
-        currentYear = date.getFullYear();
-        start = new Date(currentYear - 4, 0, 1);
-        end = new Date(currentYear + 4, 0, 1);
-
-        return (
-          this._yearTitleFormatter.format(start) +
-          ' - ' +
-          this._yearTitleFormatter.format(end)
-        );
-      default:
-        return '';
-    }
   }
 
   changeLanguage(language) {
@@ -204,11 +59,11 @@ export class Header extends CustomEvents {
       title: this._getTitleText(date, type),
     };
 
-    if (this.tmplRemove) {
-      this.tmplRemove();
+    if (this.remove) {
+      this.remove();
     }
 
-    this.tmplRemove = lithentRender(
+    this.remove = lithentRender(
       html`<${HeaderTmpl} ...${context} />`,
       this._container
     );
@@ -231,5 +86,74 @@ export class Header extends CustomEvents {
     this._todayFormatter = null;
     this._innerElement = null;
     this._infoElement = null;
+  }
+
+  _setFormatters(localeText) {
+    this._yearMonthTitleFormatter = new DateTimeFormatter(
+      localeText.titleFormat,
+      localeText.titles
+    );
+    this._yearTitleFormatter = new DateTimeFormatter(
+      YEAR_TITLE_FORMAT,
+      localeText.titles
+    );
+    this._todayFormatter = new DateTimeFormatter(
+      localeText.todayFormat,
+      localeText.titles
+    );
+  }
+
+  _setEvents() {
+    this.eventHandler = this._onClickHandler.bind(this);
+    this._container.addEventListener('click', this.eventHandler);
+  }
+
+  _removeEvents() {
+    this.off();
+    this._container.removeEventListener('click', this.eventHandler);
+  }
+
+  _onClickHandler(ev) {
+    const target = ev.target;
+
+    if (target.closest(SELECTOR_BTN)) {
+      this.fire('click', ev);
+    }
+  }
+
+  _getTitleClass(type) {
+    switch (type) {
+      case TYPE_DATE:
+        return CLASS_NAME_TITLE_MONTH;
+      case TYPE_MONTH:
+        return CLASS_NAME_TITLE_YEAR;
+      case TYPE_YEAR:
+        return CLASS_NAME_TITLE_YEAR_TO_YEAR;
+      default:
+        return '';
+    }
+  }
+
+  _getTitleText(date, type) {
+    var currentYear, start, end;
+
+    switch (type) {
+      case TYPE_DATE:
+        return this._yearMonthTitleFormatter.format(date);
+      case TYPE_MONTH:
+        return this._yearTitleFormatter.format(date);
+      case TYPE_YEAR:
+        currentYear = date.getFullYear();
+        start = new Date(currentYear - 4, 0, 1);
+        end = new Date(currentYear + 4, 0, 1);
+
+        return (
+          this._yearTitleFormatter.format(start) +
+          ' - ' +
+          this._yearTitleFormatter.format(end)
+        );
+      default:
+        return '';
+    }
   }
 }
