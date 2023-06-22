@@ -3,10 +3,9 @@ import htm from 'htm';
 import { LayerBase } from '@/layer/base';
 import { TYPE_MONTH } from '@/constants';
 import { BodyTmpl } from '@/tmpl/monthBodyTmpl';
+import { DATE_SELECTOR_MONTH as DATE_SELECTOR } from '@/constants';
 
 const html = htm.bind(h);
-
-const DATE_SELECTOR = '.tui-calendar-month';
 
 /**
  * @class

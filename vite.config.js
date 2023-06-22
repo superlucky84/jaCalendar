@@ -13,7 +13,7 @@ export default defineConfig({
     emptyOutDir: false,
     sourcemap: true,
     lib: {
-      entry: resolve(__dirname, 'src/calendar.js'),
+      entry: resolve(__dirname, 'src/dateIndicator.js'),
       name: 'onethingDiary',
       fileName: 'onethingDiary',
     },

@@ -30,6 +30,19 @@ export const CLASS_NAME_NEXT_MONTH_BTN = 'ja-calendar-btn-next-month';
 export const CLASS_NAME_TITLE_TODAY = 'ja-calendar-title-today';
 export const CLASS_NAME_TITLE = 'ja-calendar-title';
 
+export const CLASS_NAME_CALENDAR_MONTH = 'ja-calendar-month';
+export const CLASS_NAME_CALENDAR_YEAR = 'ja-calendar-year';
+export const CLASS_NAME_HIDDEN = 'ja-calendar-hidden';
+export const CLASS_NAME_HEADER = 'ja-calendar-header';
+export const CLASS_NAME_BODY = 'ja-calendar-body';
+
+export const CLASS_NAME_CALENDER_DATE = 'ja-calendar-date';
+export const CLASS_NAME_CALENDER_PREV_MONTH = 'ja-calendar-prev-month';
+export const CLASS_NAME_CALENDER_NEXT_MONTH = 'ja-calendar-next-month';
+
+export const CLASS_NAME_CALENDAR_SUN = 'ja-calendar-sun';
+export const CLASS_NAME_CALENDAR_SAT = 'ja-calendar-sat';
+
 export const CLASS_NAME_HEADER_INFO = 'ja-calendar-header-info';
 
 export const DEFAULT_WEEK_START_DAY = 'Sun';
@@ -43,8 +56,6 @@ export const WEEK_START_DAY_MAP = {
   fri: 5,
   sat: 6,
 };
-export const CLASS_NAME_CALENDAR_MONTH = 'ja-calendar-month';
-export const CLASS_NAME_CALENDAR_YEAR = 'ja-calendar-year';
-export const CLASS_NAME_HIDDEN = 'ja-calendar-hidden';
-export const CLASS_NAME_HEADER = 'ja-calendar-header';
-export const CLASS_NAME_BODY = 'ja-calendar-body';
+export const DATE_SELECTOR_DATE = '.ja-calendar-date';
+export const DATE_SELECTOR_MONTH = '.ja-calendar-month';
+export const DATE_SELECTOR_YEAR = '.ja-calendar-year';

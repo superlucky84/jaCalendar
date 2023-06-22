@@ -4,10 +4,9 @@ import { TYPE_YEAR } from '@/constants';
 import { dateUtil } from '@/helper/dateUtil';
 import { BodyTmpl } from '@/tmpl/yearBodyTmpl';
 import { LayerBase } from '@/layer/base';
+import { DATE_SELECTOR_YEAR as DATE_SELECTOR } from '@/constants';
 
 const html = htm.bind(h);
-
-const DATE_SELECTOR = '.tui-calendar-year';
 
 /**
  * @class

@@ -1,22 +1,12 @@
-import { Calendar } from '@/calendar';
+import { DateIndicator } from '@/dateIndicator';
 
-const calendar = new Calendar(document.getElementById('calendar-wrapper'), {
-  language: 'ko',
-  showToday: true,
-  showJumpButtons: true,
-  weekStartDay: 'Mon',
-  date: new Date(),
-  type: 'date',
+const ins = new DateIndicator({
+  container: document.getElementById('calendar-wrapper'),
+  type: 'year',
+  selectedList: {
+    1687418469215: ['classA', 'classB', 'classC'],
+    1687579980000: ['classA', 'classB'],
+  },
 });
 
-calendar.on('draw', event => {
-  console.log(event);
-
-  /*
-  for (let i = 0, len = event.dateElements.length; i < len; i += 1) {
-    const el = event.dateElements[i];
-    const date = new Date(Number(el.dataset.timestamp));
-    console.log(date);
-  }
-  */
-});
+console.log(ins);

@@ -11,8 +11,8 @@ export const dateUtil = {
    * @returns {number} Weeks count (4~6)
    **/
   getWeeksCount(year, month) {
-    var firstDay = utils.getFirstDay(year, month),
-      lastDate = utils.getLastDayInMonth(year, month);
+    var firstDay = dateUtil.getFirstDay(year, month),
+      lastDate = dateUtil.getLastDayInMonth(year, month);
 
     return Math.ceil((firstDay + lastDate) / 7);
   },
@@ -215,7 +215,7 @@ export const dateUtil = {
   compare(dateA, dateB, cmpLevel) {
     var aTimestamp, bTimestamp;
 
-    if (!(utils.isValidDate(dateA) && utils.isValidDate(dateB))) {
+    if (!(dateUtil.isValidDate(dateA) && dateUtil.isValidDate(dateB))) {
       return NaN;
     }
 
@@ -223,8 +223,8 @@ export const dateUtil = {
       aTimestamp = dateA.getTime();
       bTimestamp = dateB.getTime();
     } else {
-      aTimestamp = utils.cloneWithStartOf(dateA, cmpLevel).getTime();
-      bTimestamp = utils.cloneWithStartOf(dateB, cmpLevel).getTime();
+      aTimestamp = dateUtil.cloneWithStartOf(dateA, cmpLevel).getTime();
+      bTimestamp = dateUtil.cloneWithStartOf(dateB, cmpLevel).getTime();
     }
 
     if (aTimestamp > bTimestamp) {
@@ -242,7 +242,7 @@ export const dateUtil = {
    * @returns {boolean}
    */
   isSame(dateA, dateB, cmpLevel) {
-    return utils.compare(dateA, dateB, cmpLevel) === 0;
+    return dateUtil.compare(dateA, dateB, cmpLevel) === 0;
   },
 
   /**
@@ -255,8 +255,8 @@ export const dateUtil = {
    */
   inRange(start, end, target, cmpLevel) {
     return (
-      utils.compare(start, target, cmpLevel) < 1 &&
-      utils.compare(end, target, cmpLevel) > -1
+      dateUtil.compare(start, target, cmpLevel) < 1 &&
+      dateUtil.compare(end, target, cmpLevel) > -1
     );
   },
 };

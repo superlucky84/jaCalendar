@@ -1,4 +1,4 @@
-import { h, render as lithentRender, mount } from 'lithent';
+import { h, render as lithentRender } from 'lithent';
 import htm from 'htm';
 import { Header } from '@/layer/header';
 import { Body } from '@/layer/body';

@@ -4,9 +4,16 @@ import { dateUtil } from '@/helper/dateUtil';
 import { TYPE_DATE, WEEK_START_DAY_MAP } from '@/constants';
 import { LayerBase } from '@/layer/base';
 import { BodyTmpl } from '@/tmpl/dateBodyTmpl';
+import {
+  DATE_SELECTOR_DATE as DATE_SELECTOR,
+  CLASS_NAME_CALENDER_DATE,
+  CLASS_NAME_CALENDER_PREV_MONTH,
+  CLASS_NAME_CALENDER_NEXT_MONTH,
+  CLASS_NAME_CALENDAR_SUN,
+  CLASS_NAME_CALENDAR_SAT,
+} from '@/constants';
 
 const html = htm.bind(h);
-const DATE_SELECTOR = '.tui-calendar-date';
 const DAYS_OF_WEEK = 7;
 
 /**
@@ -120,21 +127,21 @@ export class DateLayer extends LayerBase {
     var date, className;
 
     for (; i < length; i += 1) {
-      className = 'tui-calendar-date';
+      className = CLASS_NAME_CALENDER_DATE;
       date = dates[i];
 
       if (date < firstDateOfCurrentMonth) {
-        className += ' tui-calendar-prev-month';
+        className += ` ${CLASS_NAME_CALENDER_PREV_MONTH}`;
       }
 
       if (date > lastDateOfCurrentMonth) {
-        className += ' tui-calendar-next-month';
+        className += ` ${CLASS_NAME_CALENDER_NEXT_MONTH}`;
       }
 
       if (date.getDay() === 0) {
-        className += ' tui-calendar-sun';
+        className += ` ${CLASS_NAME_CALENDAR_SUN}`;
       } else if (date.getDay() === 6) {
-        className += ' tui-calendar-sat';
+        className += ` ${CLASS_NAME_CALENDAR_SAT}`;
       }
 
       contexts.push({
