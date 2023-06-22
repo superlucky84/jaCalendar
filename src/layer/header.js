@@ -8,12 +8,12 @@ import { localeTexts } from '@/locale/localeTexts';
 import { HeaderTmpl } from '@/tmpl/headerTmpl';
 import { DateTimeFormatter } from '@/helper/dateTimeFormatter';
 
-const CLASS_NAME_TITLE_MONTH = 'tui-calendar-title-month';
-const CLASS_NAME_TITLE_YEAR = 'tui-calendar-title-year';
+const CLASS_NAME_TITLE_MONTH = 'ja-calendar-title-month';
+const CLASS_NAME_TITLE_YEAR = 'ja-calendar-title-year';
 const CLASS_NAME_TITLE_YEAR_TO_YEAR = 'tui-calendar-title-year-to-year';
-const SELECTOR_INNER_ELEM = '.tui-calendar-header-inner';
-const SELECTOR_INFO_ELEM = '.tui-calendar-header-info';
-const SELECTOR_BTN = '.tui-calendar-btn';
+const SELECTOR_INNER_ELEM = '.ja-calendar-header-inner';
+const SELECTOR_INFO_ELEM = '.ja-calendar-header-info';
+const SELECTOR_BTN = '.ja-calendar-btn';
 const YEAR_TITLE_FORMAT = 'yyyy';
 
 /**
@@ -105,6 +105,7 @@ export class Header extends CustomEvents {
 
   _setEvents() {
     this.eventHandler = this._onClickHandler.bind(this);
+    console.log(this._container);
     this._container.addEventListener('click', this.eventHandler);
   }
 

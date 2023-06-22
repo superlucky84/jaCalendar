@@ -26,17 +26,17 @@ export const HeaderTmpl = mount((_r, { showJumpButtons, isDateCalendar }) => {
 const PrevNextWithJumpButtons = mount(() => {
   return ({ title, titleClass }) =>
     html`
-      <div class="tui-calendar-header-inner tui-calendar-has-btns">
-        <button class="tui-calendar-btn tui-calendar-btn-prev-year">
+      <div class="ja-calendar-header-inner ja-calendar-has-btns">
+        <button class="ja-calendar-btn ja-calendar-btn-prev-year">
           Prev year
         </button>
-        <button class="tui-calendar-btn tui-calendar-btn-prev-month">
+        <button class="ja-calendar-btn ja-calendar-btn-prev-month">
           Prev month</button
-        ><em class="tui-calendar-title ${titleClass}">${title}</em>
-        <button class="tui-calendar-btn tui-calendar-btn-next-month">
+        ><em class="ja-calendar-title ${titleClass}">${title}</em>
+        <button class="ja-calendar-btn ja-calendar-btn-next-month">
           Next month
         </button>
-        <button class="tui-calendar-btn tui-calendar-btn-next-year">
+        <button class="ja-calendar-btn ja-calendar-btn-next-year">
           Next year
         </button>
       </div>
@@ -46,12 +46,12 @@ const PrevNextWithJumpButtons = mount(() => {
 const PrevNextButtons = mount(() => {
   return ({ title, titleClass }) =>
     html`
-      <div class="tui-calendar-header-inner">
-        <button class="tui-calendar-btn tui-calendar-btn-prev-month">
+      <div class="ja-calendar-header-inner">
+        <button class="ja-calendar-btn ja-calendar-btn-prev-month">
           Prev month
         </button>
-        <em class="tui-calendar-title ${titleClass}">${title}</em>' +
-        <button class="tui-calendar-btn tui-calendar-btn-next-month">
+        <em class="ja-calendar-title ${titleClass}">${title}</em>' +
+        <button class="ja-calendar-btn ja-calendar-btn-next-month">
           Next month
         </button>
       </div>
@@ -61,12 +61,12 @@ const PrevNextButtons = mount(() => {
 const YearButtons = mount(() => {
   return ({ title, titleClass }) =>
     html`
-      <div class="tui-calendar-header-inner">
-        <button class="tui-calendar-btn tui-calendar-btn-prev-year">
+      <div class="ja-calendar-header-inner">
+        <button class="ja-calendar-btn ja-calendar-btn-prev-year">
           Prev year
         </button>
-        <em class="tui-calendar-title ${titleClass}">${title}</em>
-        <button class="tui-calendar-btn tui-calendar-btn-next-year">
+        <em class="ja-calendar-title ${titleClass}">${title}</em>
+        <button class="ja-calendar-btn ja-calendar-btn-next-year">
           Next year
         </button>
       </div>
@@ -76,8 +76,8 @@ const YearButtons = mount(() => {
 const TodayButton = mount(() => {
   return ({ todayText }) =>
     html`
-      <div class="tui-calendar-header-info">
-        <p class="tui-calendar-title-today">${todayText}</p>
+      <div class="ja-calendar-header-info">
+        <p class="ja-calendar-title-today">${todayText}</p>
       </div>
     `;
 });

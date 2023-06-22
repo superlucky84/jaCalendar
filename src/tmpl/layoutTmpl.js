@@ -5,9 +5,9 @@ const html = htm.bind(h);
 export const LayoutTmpl = mount(
   () => () =>
     html`
-      <div class="tui-calendar">
-        <div class="tui-calendar-header"></div>
-        <div class="tui-calendar-body"></div>
+      <div class="ja-calendar">
+        <div class="ja-calendar-header"></div>
+        <div class="ja-calendar-body"></div>
       </div>
     `
 );
