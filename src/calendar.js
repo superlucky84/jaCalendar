@@ -62,6 +62,7 @@ export class Calendar extends CustomEvents {
       weekStartDay: DEFAULT_WEEK_START_DAY,
       ...options,
     };
+    console.log(options);
 
     this._container = container;
 

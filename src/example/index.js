@@ -4,8 +4,9 @@ const calendar = new Calendar(document.getElementById('calendar-wrapper'), {
   language: 'ko',
   showToday: true,
   showJumpButtons: true,
+  weekStartDay: 'Mon',
   date: new Date(),
-  type: 'year',
+  type: 'date',
 });
 
 calendar.on('draw', event => {

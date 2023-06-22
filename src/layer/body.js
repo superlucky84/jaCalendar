@@ -111,11 +111,10 @@ export class Body {
       layer.remove();
     });
 
-    this._container =
-      this._currentLayer =
-      this._dateLayer =
-      this._monthLayer =
-      this._yearLayer =
-        null;
+    this._container = null;
+    this._currentLayer = null;
+    this._dateLayer = null;
+    this._monthLayer = null;
+    this._yearLayer = null;
   }
 }

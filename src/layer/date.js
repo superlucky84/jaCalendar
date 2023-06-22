@@ -72,10 +72,12 @@ export class DateLayer extends LayerBase {
    * @private
    */
   _getWeeks(year, month) {
-    var weekNumber = 0;
-    var weeksCount = 6; // Fix for no changing height
-    var weeks = [];
-    var week, dates, i;
+    let weekNumber = 0;
+    let weeksCount = 6; // Fix for no changing height
+    const weeks = [];
+    let week;
+    let dates;
+    let i;
 
     while (weekNumber < weeksCount) {
       dates = [];
