@@ -7,13 +7,33 @@ export const TYPE_MERIDIEM = 'meridiem';
 export const MIN_DATE = new Date(1900, 0, 1);
 export const MAX_DATE = new Date(2999, 11, 31);
 export const DEFAULT_LANGUAGE_TYPE = 'en';
+
+export const CLASS_NAME_CALENDAR = 'ja-calendar';
+export const CLASS_NAME_MONTH_GROUP = 'ja-calendar-month-group';
+export const CLASS_NAME_YEAR_GROUP = 'ja-calendar-year-group';
+export const CLASS_NAME_MONTH = 'ja-calendar-month';
+export const CLASS_NAME_YEAR = 'ja-calendar-year';
+export const CLASS_NAME_BODY_INNER = 'ja-calendar-body-inner';
+export const CLASS_NAME_HEADER_INNER = 'ja-calendar-header-inner';
+export const CLASS_NAME_BODY_HEADER = 'ja-calendar-body-header';
+export const CLASS_NAME_SUN = 'ja-calendar-sun';
+export const CLASS_NAME_SAT = 'ja-calendar-sat';
+export const CLASS_NAME_WEEK = 'ja-calendar-week';
+
+export const CLASS_NAME_BTN = 'ja-calendar-btn';
+export const CLASS_NAME_HAS_BTNS = 'ja-calendar-has-btns';
 export const CLASS_NAME_SELECTED = 'ja-calendar-is-selected';
 export const CLASS_NAME_PREV_MONTH_BTN = 'ja-calendar-btn-prev-month';
 export const CLASS_NAME_PREV_YEAR_BTN = 'ja-calendar-btn-prev-year';
 export const CLASS_NAME_NEXT_YEAR_BTN = 'ja-calendar-btn-next-year';
 export const CLASS_NAME_NEXT_MONTH_BTN = 'ja-calendar-btn-next-month';
 export const CLASS_NAME_TITLE_TODAY = 'ja-calendar-title-today';
+export const CLASS_NAME_TITLE = 'ja-calendar-title';
+
+export const CLASS_NAME_HEADER_INFO = 'ja-calendar-header-info';
+
 export const DEFAULT_WEEK_START_DAY = 'Sun';
+
 export const WEEK_START_DAY_MAP = {
   sun: 0,
   mon: 1,
@@ -26,5 +46,5 @@ export const WEEK_START_DAY_MAP = {
 export const CLASS_NAME_CALENDAR_MONTH = 'ja-calendar-month';
 export const CLASS_NAME_CALENDAR_YEAR = 'ja-calendar-year';
 export const CLASS_NAME_HIDDEN = 'ja-calendar-hidden';
-export const HEADER_SELECTOR = '.ja-calendar-header';
-export const BODY_SELECTOR = '.ja-calendar-body';
+export const CLASS_NAME_HEADER = 'ja-calendar-header';
+export const CLASS_NAME_BODY = 'ja-calendar-body';

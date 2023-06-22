@@ -105,7 +105,6 @@ export class Header extends CustomEvents {
 
   _setEvents() {
     this.eventHandler = this._onClickHandler.bind(this);
-    console.log(this._container);
     this._container.addEventListener('click', this.eventHandler);
   }
 

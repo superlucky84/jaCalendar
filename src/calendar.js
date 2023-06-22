@@ -20,8 +20,8 @@ import {
   CLASS_NAME_CALENDAR_MONTH,
   CLASS_NAME_CALENDAR_YEAR,
   CLASS_NAME_HIDDEN,
-  HEADER_SELECTOR,
-  BODY_SELECTOR,
+  CLASS_NAME_HEADER,
+  CLASS_NAME_BODY,
 } from '@/constants';
 
 const html = htm.bind(h);
@@ -227,7 +227,9 @@ export class Calendar extends CustomEvents {
   }
 
   _initHeader(options) {
-    const headerContainer = this._element.querySelector(HEADER_SELECTOR);
+    const headerContainer = this._element.querySelector(
+      `.${CLASS_NAME_HEADER}`
+    );
 
     this._header = new Header(headerContainer, options);
     this._header.on('click', ev => {
@@ -246,7 +248,7 @@ export class Calendar extends CustomEvents {
   }
 
   _initBody(options) {
-    var bodyContainer = this._element.querySelector(BODY_SELECTOR);
+    var bodyContainer = this._element.querySelector(`.${CLASS_NAME_BODY}`);
 
     this._body = new Body(bodyContainer, options);
   }

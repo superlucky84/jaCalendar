@@ -5,7 +5,7 @@ const calendar = new Calendar(document.getElementById('calendar-wrapper'), {
   showToday: true,
   showJumpButtons: true,
   date: new Date(),
-  type: 'date',
+  type: 'year',
 });
 
 calendar.on('draw', event => {
