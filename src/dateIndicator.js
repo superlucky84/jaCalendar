@@ -18,27 +18,32 @@ export class DateIndicator {
     this.selectedList = selectedList;
     this.dateElements = this.calendar.getDateElements();
     this.dateLayer = this.calendar._body._container;
-    this.calendar.on('draw', this.calendarUpdated.bind(this));
+    this.calendar.on('draw', this._calendarUpdated.bind(this));
 
-    this.addClassForDateElements();
-    this.addEvent();
+    this._addClassForDateElements();
+    this._addEvent();
   }
 
-  changeOption(option) {
-    this.calendar.draw(option);
+  update(calendarOptions = {}) {
+    const { selectedList, ...options } = calendarOptions;
+    if (calendarOptions.selectedList) {
+      this.selectedList = selectedList;
+    }
+
+    this.calendar.draw(options);
   }
 
-  calendarUpdated(event) {
+  _calendarUpdated(event) {
     this.dateElements = event.dateElements;
-    this.addClassForDateElements();
+    this._addClassForDateElements();
   }
 
-  addClassForDateElements() {
+  _addClassForDateElements() {
     Array.from(this.dateElements).forEach(item => {
       item.classList.add(CLASS_NAME_SELECTABLE);
 
-      const itemDate = this.getDateFromElement(item);
-      const classNameList = this.getAddingClassNameList(itemDate);
+      const itemDate = this._getDateFromElement(item);
+      const classNameList = this._getAddingClassNameList(itemDate);
 
       if (classNameList.length) {
         item.classList.add(...classNameList);
@@ -46,7 +51,7 @@ export class DateIndicator {
     });
   }
 
-  getAddingClassNameList(itemDate) {
+  _getAddingClassNameList(itemDate) {
     return Object.entries(this.selectedList).reduce((acc, [key, value]) => {
       if (dateUtil.isSame(itemDate, new Date(Number(key)), this.type)) {
         acc = acc.concat(value);
@@ -56,19 +61,19 @@ export class DateIndicator {
     }, []);
   }
 
-  addEvent() {
+  _addEvent() {
     this.dateLayer.addEventListener('click', event => {
       const target = event.target.closest(`.${CLASS_NAME_SELECTABLE}`);
 
       if (target) {
-        const date = this.getDateFromElement(target);
+        const date = this._getDateFromElement(target);
 
         console.log(date);
       }
     });
   }
 
-  getDateFromElement(element) {
+  _getDateFromElement(element) {
     return new Date(Number(element.dataset.timestamp));
   }
 }

@@ -279,8 +279,6 @@ export class Calendar extends CustomEvents {
   }
 
   _shouldUpdate(date, type) {
-    const prevDate = this._date;
-
     if (!dateUtil.isValidDate(date)) {
       throw new Error('Invalid date');
     }
@@ -289,12 +287,7 @@ export class Calendar extends CustomEvents {
       throw new Error('Invalid layer type');
     }
 
-    return (
-      !prevDate ||
-      prevDate.getFullYear() !== date.getFullYear() ||
-      prevDate.getMonth() !== date.getMonth() ||
-      this.getType() !== type
-    );
+    return true;
   }
 
   _render() {
