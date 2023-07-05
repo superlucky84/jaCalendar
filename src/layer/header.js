@@ -3,10 +3,11 @@ import htm from 'htm';
 const html = htm.bind(h);
 
 import { CustomEvents } from '@/helper/customEvents';
-import { TYPE_DATE, TYPE_MONTH, TYPE_YEAR } from '@/constants';
+import { TYPE_DATE, TYPE_WEEK, TYPE_MONTH, TYPE_YEAR } from '@/constants';
 import { localeTexts } from '@/locale/localeTexts';
 import { HeaderTmpl } from '@/tmpl/headerTmpl';
 import { DateTimeFormatter } from '@/helper/dateTimeFormatter';
+import { dateUtil } from '@/helper/dateUtil';
 
 const CLASS_NAME_TITLE_MONTH = 'ja-calendar-title-month';
 const CLASS_NAME_TITLE_YEAR = 'ja-calendar-title-year';
@@ -55,8 +56,10 @@ export class Header extends CustomEvents {
       showJumpButtons: this._showJumpButtons,
       todayText: this._todayFormatter.format(new Date()),
       isDateCalendar: type === TYPE_DATE,
+      isWeekCalendar: type === TYPE_WEEK,
       titleClass: this._getTitleClass(type),
       title: this._getTitleText(date, type),
+      type,
     };
 
     if (this.remove) {
@@ -89,6 +92,28 @@ export class Header extends CustomEvents {
   }
 
   _setFormatters(localeText) {
+    this._weekTitleFormatter = date => {
+      /*
+      const firstDay = dateUtil.getFirstDay(
+        date.getFullYear(),
+        date.getMonth() + 1
+      );
+      if (firstDay <= 4) {
+        console.log('AAAA', date.getDate());
+      } else {
+        console.log('BBBB', date.getDate());
+      }
+        */
+      /*
+      const currentDate = date.getDate();
+      const firstDay = new Date(date.setDate(1)).getDay();
+
+      const result = Math.ceil((currentDate + firstDay) / 7);
+      console.log(result);
+      */
+
+      return 'aa' + date;
+    };
     this._yearMonthTitleFormatter = new DateTimeFormatter(
       localeText.titleFormat,
       localeText.titles
@@ -138,6 +163,8 @@ export class Header extends CustomEvents {
     var currentYear, start, end;
 
     switch (type) {
+      case TYPE_WEEK:
+        return this._weekTitleFormatter(date);
       case TYPE_DATE:
         return this._yearMonthTitleFormatter.format(date);
       case TYPE_MONTH:

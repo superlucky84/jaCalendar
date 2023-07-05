@@ -1,6 +1,7 @@
 export const TYPE_DATE = 'date';
 export const TYPE_MONTH = 'month';
 export const TYPE_YEAR = 'year';
+export const TYPE_WEEK = 'week';
 export const TYPE_HOUR = 'hour';
 export const TYPE_MINUTE = 'minute';
 export const TYPE_MERIDIEM = 'meridiem';
@@ -23,13 +24,16 @@ export const CLASS_NAME_WEEK = 'ja-calendar-week';
 export const CLASS_NAME_BTN = 'ja-calendar-btn';
 export const CLASS_NAME_HAS_BTNS = 'ja-calendar-has-btns';
 export const CLASS_NAME_SELECTED = 'ja-calendar-is-selected';
+export const CLASS_NAME_PREV_WEEK_BTN = 'ja-calendar-btn-prev-week';
 export const CLASS_NAME_PREV_MONTH_BTN = 'ja-calendar-btn-prev-month';
 export const CLASS_NAME_PREV_YEAR_BTN = 'ja-calendar-btn-prev-year';
 export const CLASS_NAME_NEXT_YEAR_BTN = 'ja-calendar-btn-next-year';
+export const CLASS_NAME_NEXT_WEEK_BTN = 'ja-calendar-btn-next-week';
 export const CLASS_NAME_NEXT_MONTH_BTN = 'ja-calendar-btn-next-month';
 export const CLASS_NAME_TITLE_TODAY = 'ja-calendar-title-today';
 export const CLASS_NAME_TITLE = 'ja-calendar-title';
 
+export const CLASS_NAME_CALENDAR_WEEK = 'ja-calendar-week';
 export const CLASS_NAME_CALENDAR_MONTH = 'ja-calendar-month';
 export const CLASS_NAME_CALENDAR_YEAR = 'ja-calendar-year';
 export const CLASS_NAME_HIDDEN = 'ja-calendar-hidden';

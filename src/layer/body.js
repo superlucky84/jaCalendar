@@ -1,6 +1,7 @@
-import { TYPE_DATE, TYPE_MONTH, TYPE_YEAR } from '@/constants';
+import { TYPE_WEEK, TYPE_DATE, TYPE_MONTH, TYPE_YEAR } from '@/constants';
 
 import { DateLayer } from '@/layer/date';
+import { WeekLayer } from '@/layer/week';
 import { MonthLayer } from '@/layer/month';
 import { YearLayer } from '@/layer/year';
 
@@ -19,6 +20,13 @@ export class Body {
      * @private
      */
     this._container = bodyContainer;
+
+    /**
+     * DateLayer
+     * @type {DateLayer}
+     * @private
+     */
+    this._weekLayer = new WeekLayer(language, weekStartDay);
 
     /**
      * DateLayer
@@ -50,6 +58,8 @@ export class Body {
   }
   _getLayer(type) {
     switch (type) {
+      case TYPE_WEEK:
+        return this._weekLayer;
       case TYPE_DATE:
         return this._dateLayer;
       case TYPE_MONTH:

@@ -9,31 +9,37 @@ import {
   CLASS_NAME_PREV_YEAR_BTN,
   CLASS_NAME_PREV_MONTH_BTN,
   CLASS_NAME_NEXT_MONTH_BTN,
+  CLASS_NAME_NEXT_WEEK_BTN,
+  CLASS_NAME_PREV_WEEK_BTN,
   CLASS_NAME_HEADER_INFO,
   CLASS_NAME_TITLE_TODAY,
 } from '@/constants';
 const html = htm.bind(h);
 
-export const HeaderTmpl = mount((_r, { showJumpButtons, isDateCalendar }) => {
-  let Component;
-  if (isDateCalendar) {
-    if (showJumpButtons) {
-      Component = PrevNextWithJumpButtons;
+export const HeaderTmpl = mount(
+  (_r, { showJumpButtons, isDateCalendar, isWeekCalendar }) => {
+    let Component;
+    if (isWeekCalendar) {
+      Component = PrevNextWeekButtons;
+    } else if (isDateCalendar) {
+      if (showJumpButtons) {
+        Component = PrevNextWithJumpButtons;
+      } else {
+        Component = PrevNextMonthButtons;
+      }
     } else {
-      Component = PrevNextButtons;
+      Component = YearButtons;
     }
-  } else {
-    Component = YearButtons;
-  }
 
-  return ({ title, titleClass, showToday, todayText }) =>
-    html`
-      <${Fragment}>
-        <${Component} title=${title} titleClass=${titleClass} />
-        ${showToday && html`<${TodayButton} todayText=${todayText} />`}
-      <//>
-    `;
-});
+    return ({ title, titleClass, showToday, todayText }) =>
+      html`
+        <${Fragment}>
+          <${Component} title=${title} titleClass=${titleClass} />
+          ${showToday && html`<${TodayButton} todayText=${todayText} />`}
+        <//>
+      `;
+  }
+);
 
 const PrevNextWithJumpButtons = mount(() => {
   return ({ title, titleClass }) =>
@@ -55,7 +61,7 @@ const PrevNextWithJumpButtons = mount(() => {
     `;
 });
 
-const PrevNextButtons = mount(() => {
+const PrevNextMonthButtons = mount(() => {
   return ({ title, titleClass }) =>
     html`
       <div class=${CLASS_NAME_HEADER_INNER}>
@@ -65,6 +71,21 @@ const PrevNextButtons = mount(() => {
         <em class="${CLASS_NAME_TITLE} ${titleClass}">${title}</em>
         <button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_MONTH_BTN}">
           Next month
+        </button>
+      </div>
+    `;
+});
+
+const PrevNextWeekButtons = mount(() => {
+  return ({ title, titleClass }) =>
+    html`
+      <div class=${CLASS_NAME_HEADER_INNER}>
+        <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_WEEK_BTN}">
+          Prev week
+        </button>
+        <em class="${CLASS_NAME_TITLE} ${titleClass}">${title}</em>
+        <button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_WEEK_BTN}">
+          Next week
         </button>
       </div>
     `;

@@ -11,13 +11,17 @@ import {
   DEFAULT_WEEK_START_DAY,
   DEFAULT_LANGUAGE_TYPE,
   TYPE_DATE,
+  TYPE_WEEK,
   TYPE_MONTH,
   TYPE_YEAR,
   CLASS_NAME_PREV_MONTH_BTN,
+  CLASS_NAME_PREV_WEEK_BTN,
   CLASS_NAME_PREV_YEAR_BTN,
   CLASS_NAME_NEXT_YEAR_BTN,
+  CLASS_NAME_NEXT_WEEK_BTN,
   CLASS_NAME_NEXT_MONTH_BTN,
   CLASS_NAME_CALENDAR_MONTH,
+  CLASS_NAME_CALENDAR_WEEK,
   CLASS_NAME_CALENDAR_YEAR,
   CLASS_NAME_HIDDEN,
   CLASS_NAME_HEADER,
@@ -142,7 +146,9 @@ export class Calendar extends CustomEvents {
   }
 
   getNextDate() {
-    if (this.getType() === TYPE_DATE) {
+    if (this.getType() === TYPE_WEEK) {
+      return this._getRelativeWeek(7);
+    } else if (this.getType() === TYPE_DATE) {
       return this._getRelativeDate(1);
     }
 
@@ -150,7 +156,9 @@ export class Calendar extends CustomEvents {
   }
 
   getPrevDate() {
-    if (this.getType() === TYPE_DATE) {
+    if (this.getType() === TYPE_WEEK) {
+      return this._getRelativeWeek(-7);
+    } else if (this.getType() === TYPE_DATE) {
       return this._getRelativeDate(-1);
     }
 
@@ -164,6 +172,7 @@ export class Calendar extends CustomEvents {
 
     switch (this.getType()) {
       case TYPE_DATE:
+      case TYPE_WEEK:
       case TYPE_MONTH:
         return this._getRelativeDate(12); // 12 months = 1 year
       case TYPE_YEAR:
@@ -180,6 +189,7 @@ export class Calendar extends CustomEvents {
 
     switch (this.getType()) {
       case TYPE_DATE:
+      case TYPE_WEEK:
       case TYPE_MONTH:
         return this._getRelativeDate(-12); // 12 months = 1 year
       case TYPE_YEAR:
@@ -235,14 +245,21 @@ export class Calendar extends CustomEvents {
     this._header = new Header(headerContainer, options);
     this._header.on('click', ev => {
       const target = ev.target;
+      const targetClassList = target.classList;
 
-      if (target.classList.contains(CLASS_NAME_PREV_MONTH_BTN)) {
+      if (
+        targetClassList.contains(CLASS_NAME_PREV_MONTH_BTN) ||
+        targetClassList.contains(CLASS_NAME_PREV_WEEK_BTN)
+      ) {
         this.drawPrev();
-      } else if (target.classList.contains(CLASS_NAME_PREV_YEAR_BTN)) {
+      } else if (targetClassList.contains(CLASS_NAME_PREV_YEAR_BTN)) {
         this._onClickPrevYear();
-      } else if (target.classList.contains(CLASS_NAME_NEXT_MONTH_BTN)) {
+      } else if (
+        targetClassList.contains(CLASS_NAME_NEXT_MONTH_BTN) ||
+        targetClassList.contains(CLASS_NAME_NEXT_WEEK_BTN)
+      ) {
         this.drawNext();
-      } else if (target.classList.contains(CLASS_NAME_NEXT_YEAR_BTN)) {
+      } else if (targetClassList.contains(CLASS_NAME_NEXT_YEAR_BTN)) {
         this._onClickNextYear();
       }
     });
@@ -275,7 +292,12 @@ export class Calendar extends CustomEvents {
   }
 
   _isValidType(type) {
-    return type === TYPE_DATE || type === TYPE_MONTH || type === TYPE_YEAR;
+    return (
+      type === TYPE_DATE ||
+      type === TYPE_MONTH ||
+      type === TYPE_YEAR ||
+      type === TYPE_WEEK
+    );
   }
 
   _shouldUpdate(date, type) {
@@ -297,11 +319,15 @@ export class Calendar extends CustomEvents {
     this._header.render(date, type);
     this._body.render(date, type);
     this._element.classList.remove(
+      CLASS_NAME_CALENDAR_WEEK,
       CLASS_NAME_CALENDAR_MONTH,
       CLASS_NAME_CALENDAR_YEAR
     );
 
     switch (type) {
+      case TYPE_WEEK:
+        this._element.classList.add(CLASS_NAME_CALENDAR_WEEK);
+        break;
       case TYPE_MONTH:
         this._element.classList.add(CLASS_NAME_CALENDAR_MONTH);
         break;
@@ -311,6 +337,12 @@ export class Calendar extends CustomEvents {
       default:
         break;
     }
+  }
+
+  _getRelativeWeek(step) {
+    const prev = this._date;
+
+    return new Date(prev.getFullYear(), prev.getMonth(), prev.getDate() + step);
   }
 
   _getRelativeDate(step) {

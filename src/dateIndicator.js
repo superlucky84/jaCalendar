@@ -9,7 +9,7 @@ export class DateIndicator {
       language: 'ko',
       showToday: true,
       showJumpButtons: true,
-      weekStartDay: 'Mon',
+      weekStartDay: 'sun',
       date: new Date(),
       type,
     });
