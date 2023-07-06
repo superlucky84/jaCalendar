@@ -31,12 +31,13 @@ export const LayoutTmpl = mount(
 );
 
 export const HeaderTmpl = mount(() => {
-  return ({ showJumpButtons, isDateCalendar, isWeekCalendar, title }) => html`
+  return ({ isDateCalendar, isWeekCalendar, title }) => html`
     <div>
-      <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_YEAR_BTN}">
+      ${!isWeekCalendar &&
+      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_YEAR_BTN}">
         Prev year
-      </button>
-      ${(isDateCalendar || isWeekCalendar) &&
+      </button>`}
+      ${isDateCalendar &&
       html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_MONTH_BTN}">
         Prev month
       </button>`}
@@ -49,13 +50,14 @@ export const HeaderTmpl = mount(() => {
       html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_WEEK_BTN}">
         Next week
       </button>`}
-      ${(isDateCalendar || isWeekCalendar) &&
+      ${isDateCalendar &&
       html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_MONTH_BTN}">
         Next month
       </button>`}
-      <button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_YEAR_BTN}">
+      ${!isWeekCalendar &&
+      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_YEAR_BTN}">
         Next year
-      </button>
+      </button>`}
     </div>
   `;
 });
