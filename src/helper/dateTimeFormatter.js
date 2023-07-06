@@ -152,7 +152,6 @@ export class DateTimeFormatter {
         key = key.toLowerCase();
       }
 
-      console.log(mapForConverting[key], key);
       regExpStr += mapForConverting[key].expression + '[\\D\\s]*';
       keyOrder[index] = mapForConverting[key].type;
     });

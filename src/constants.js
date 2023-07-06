@@ -10,16 +10,7 @@ export const MAX_DATE = new Date(2999, 11, 31);
 export const DEFAULT_LANGUAGE_TYPE = 'en';
 
 export const CLASS_NAME_CALENDAR = 'ja-calendar';
-export const CLASS_NAME_MONTH_GROUP = 'ja-calendar-month-group';
-export const CLASS_NAME_YEAR_GROUP = 'ja-calendar-year-group';
-export const CLASS_NAME_MONTH = 'ja-calendar-month';
-export const CLASS_NAME_YEAR = 'ja-calendar-year';
-export const CLASS_NAME_BODY_INNER = 'ja-calendar-body-inner';
 export const CLASS_NAME_HEADER_INNER = 'ja-calendar-header-inner';
-export const CLASS_NAME_BODY_HEADER = 'ja-calendar-body-header';
-export const CLASS_NAME_SUN = 'ja-calendar-sun';
-export const CLASS_NAME_SAT = 'ja-calendar-sat';
-export const CLASS_NAME_WEEK = 'ja-calendar-week';
 
 export const CLASS_NAME_BTN = 'ja-calendar-btn';
 export const CLASS_NAME_HAS_BTNS = 'ja-calendar-has-btns';

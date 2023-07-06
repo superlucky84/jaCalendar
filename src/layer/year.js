@@ -67,6 +67,6 @@ export class YearLayer extends LayerBase {
    * @returns {HTMLElement[]}
    */
   getDateElements() {
-    return this._element.querySelectorAll(DATE_SELECTOR);
+    return this._element.querySelectorAll('[data-timestamp]');
   }
 }
