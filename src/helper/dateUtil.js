@@ -97,7 +97,7 @@ export const dateUtil = {
    * @param {number} startWeekDay - 달력이 무슨요일부터 시작하는지 (default 일요일)
    * @returns {number}
    */
-  getWeekDayInMonth(date, stardardFirstWeekDay = 4, startWeekDay = 0) {
+  getWeekDayInMonth(date, startWeekDay, stardardFirstWeekDay) {
     let startOneWeekDiff = -1;
     const currentDate = date.getDate();
     const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
@@ -105,9 +105,10 @@ export const dateUtil = {
       startOneWeekDiff = 0;
     }
 
-    return (
-      Math.ceil((currentDate + firstDay - startWeekDay) / 7) + startOneWeekDiff
-    );
+    const vv =
+      Math.ceil((currentDate + firstDay - startWeekDay) / 7) + startOneWeekDiff;
+
+    return vv;
   },
 
   // 날짜가 해당하는 주의 시작일

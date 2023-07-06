@@ -51,12 +51,20 @@ export class Header extends CustomEvents {
     this._weekStartStandardDay =
       WEEK_START_DAY_MAP[option.weekStartStandardDay.toLowerCase()];
 
-    this._setFormatters(localeTexts[option.language]);
+    this._setFormatters(
+      localeTexts[option.language],
+      this._weekStartDay,
+      this._weekStartStandardDay
+    );
     this._setEvents(option);
   }
 
   changeLanguage(language) {
-    this._setFormatters(localeTexts[language]);
+    this._setFormatters(
+      localeTexts[language],
+      this._weekStartDay,
+      this._weekStartStandardDay
+    );
   }
 
   render(date, type) {
@@ -100,10 +108,12 @@ export class Header extends CustomEvents {
     this._infoElement = null;
   }
 
-  _setFormatters(localeText) {
+  _setFormatters(localeText, weekStartDay, weekStartStandardDay) {
     this._weekTitleFormatter = new DateTimeFormatter(
-      'yyyy.MM (ww)',
-      localeText.titles
+      'yyyy.MM (WWWW)',
+      localeText.titles,
+      weekStartDay,
+      weekStartStandardDay
     );
     this._yearMonthTitleFormatter = new DateTimeFormatter(
       localeText.titleFormat,
@@ -161,15 +171,7 @@ export class Header extends CustomEvents {
           this._weekStartStandardDay
         );
 
-        const weekOrder = dateUtil.getWeekDayInMonth(
-          displayDate,
-          this._weekStartStandardDay,
-          this._weekStartDay
-        );
-
-        return `${displayDate.getFullYear()}년 ${
-          displayDate.getMonth() + 1
-        }월 ${weekOrder} 째주`;
+        return this._weekTitleFormatter.format(displayDate);
       case TYPE_DATE:
         return this._yearMonthTitleFormatter.format(date);
       case TYPE_MONTH:

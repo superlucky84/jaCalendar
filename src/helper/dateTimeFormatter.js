@@ -1,5 +1,6 @@
 import {
   TYPE_DATE,
+  TYPE_WEEK,
   TYPE_MONTH,
   TYPE_YEAR,
   TYPE_HOUR,
@@ -9,7 +10,7 @@ import {
 import { dateUtil } from '@/helper/dateUtil';
 import { localeTexts } from '@/locale/localeTexts';
 
-const rFormableKeys = /\\?(yyyy|yy|mmmm|mmm|mm|m|dd|d|hh|h|a)/gi;
+const rFormableKeys = /\\?(yyyy|yy|mmmm|mmm|mm|m|dd|d|hh|h|a|wwww)/gi;
 const mapForConverting = {
   yyyy: {
     expression: '(\\d{4}|\\d{2})',
@@ -46,6 +47,10 @@ const mapForConverting = {
   mmmm: {
     expression: '(1[012]|0[1-9]|[1-9])',
     type: TYPE_MONTH,
+  },
+  WWWW: {
+    expression: '(1[012]|0[1-9]|[1-9])',
+    type: TYPE_WEEK,
   },
   dd: {
     expression: '([12]\\d{1}|3[01]|0[1-9]|[1-9])',
@@ -102,7 +107,7 @@ const mapForConverting = {
  * @ignore
  */
 export class DateTimeFormatter {
-  constructor(rawStr, titles) {
+  constructor(rawStr, titles, weekStartDay, weekStartStandardDay) {
     /**
      * @type {string}
      * @private
@@ -131,6 +136,9 @@ export class DateTimeFormatter {
      */
     this._titles = titles || localeTexts.en.titles;
 
+    this._weekStartDay = weekStartDay;
+    this._weekStartStandardDay = weekStartStandardDay;
+
     this._parseFormat();
   }
   _parseFormat() {
@@ -140,10 +148,11 @@ export class DateTimeFormatter {
 
     matchedKeys = matchedKeys.filter(key => key[0] !== '\\');
     matchedKeys.forEach((key, index) => {
-      if (!/m/i.test(key)) {
+      if (!/(m|w)/i.test(key)) {
         key = key.toLowerCase();
       }
 
+      console.log(mapForConverting[key], key);
       regExpStr += mapForConverting[key].expression + '[\\D\\s]*';
       keyOrder[index] = mapForConverting[key].type;
     });
@@ -252,6 +261,12 @@ export class DateTimeFormatter {
       m: minute,
       A: meridiem.toUpperCase(),
       a: meridiem,
+      WWWW:
+        dateUtil.getWeekDayInMonth(
+          dateObj,
+          this._weekStartDay,
+          this._weekStartStandardDay
+        ) + this._titles.WWWW,
     };
 
     return this._rawStr.replace(rFormableKeys, function (key) {
