@@ -7,7 +7,6 @@ const ins = new DateIndicator({
   date: new Date(),
   weekStartDay: 'sun',
   weekStartStandardDay: 'thu',
-  showToday: true,
   showJumpButtons: true,
   selectedList: {
     1687418469215: ['classA', 'classB', 'classC'],

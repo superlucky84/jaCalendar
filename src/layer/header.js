@@ -29,7 +29,6 @@ const YEAR_TITLE_FORMAT = 'yyyy';
  * @param {HTMLElement} container - Header container or selector
  * @param {object} option - Header option
  * @param {string} option.language - Header language
- * @param {boolean} option.showToday - Has today box or not.
  * @param {boolean} option.showJumpButtons - Has jump buttons or not.
  */
 export class Header extends CustomEvents {
@@ -42,11 +41,9 @@ export class Header extends CustomEvents {
     this._container = container;
     this._innerElement = null;
     this._infoElement = null;
-    this._showToday = option.showToday;
     this._showJumpButtons = option.showJumpButtons;
     this._yearMonthTitleFormatter = null;
     this._yearTitleFormatter = null;
-    this._todayFormatter = null;
     this._weekStartDay = WEEK_START_DAY_MAP[option.weekStartDay.toLowerCase()];
     this._weekStartStandardDay =
       WEEK_START_DAY_MAP[option.weekStartStandardDay.toLowerCase()];
@@ -69,9 +66,7 @@ export class Header extends CustomEvents {
 
   render(date, type) {
     const context = {
-      showToday: this._showToday,
       showJumpButtons: this._showJumpButtons,
-      todayText: this._todayFormatter.format(new Date()),
       isDateCalendar: type === TYPE_DATE,
       isWeekCalendar: type === TYPE_WEEK,
       titleClass: this._getTitleClass(type),
@@ -89,9 +84,6 @@ export class Header extends CustomEvents {
     );
 
     this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
-    if (context.showToday) {
-      this._infoElement = this._container.querySelector(SELECTOR_INFO_ELEM);
-    }
   }
 
   destroy() {
@@ -99,11 +91,9 @@ export class Header extends CustomEvents {
     this._innerElement.remove();
     this._infoElement.remove();
     this._container = null;
-    this._showToday = null;
     this._showJumpButtons = null;
     this._yearMonthTitleFormatter = null;
     this._yearTitleFormatter = null;
-    this._todayFormatter = null;
     this._innerElement = null;
     this._infoElement = null;
   }
@@ -121,10 +111,6 @@ export class Header extends CustomEvents {
     );
     this._yearTitleFormatter = new DateTimeFormatter(
       YEAR_TITLE_FORMAT,
-      localeText.titles
-    );
-    this._todayFormatter = new DateTimeFormatter(
-      localeText.todayFormat,
       localeText.titles
     );
   }

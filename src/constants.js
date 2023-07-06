@@ -21,7 +21,6 @@ export const CLASS_NAME_PREV_YEAR_BTN = 'ja-calendar-btn-prev-year';
 export const CLASS_NAME_NEXT_YEAR_BTN = 'ja-calendar-btn-next-year';
 export const CLASS_NAME_NEXT_WEEK_BTN = 'ja-calendar-btn-next-week';
 export const CLASS_NAME_NEXT_MONTH_BTN = 'ja-calendar-btn-next-month';
-export const CLASS_NAME_TITLE_TODAY = 'ja-calendar-title-today';
 export const CLASS_NAME_TITLE = 'ja-calendar-title';
 
 export const CLASS_NAME_CALENDAR_WEEK = 'ja-calendar-week';

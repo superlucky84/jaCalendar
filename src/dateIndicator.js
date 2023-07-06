@@ -10,7 +10,6 @@ export class DateIndicator {
     container,
     weekStartDay,
     weekStartStandardDay,
-    showToday,
     showJumpButtons,
     language,
     selectedList,
@@ -20,7 +19,6 @@ export class DateIndicator {
       language,
       weekStartDay,
       weekStartStandardDay,
-      showToday,
       showJumpButtons,
       type,
     });

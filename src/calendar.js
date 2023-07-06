@@ -34,7 +34,6 @@ const html = htm.bind(h);
 /**
  * const calendar = DatePicker.createCalendar('#calendar-wrapper', {
  *     language: 'en',
- *     showToday: true,
  *     showJumpButtons: false,
  *     date: new Date(),
  *     type: 'date',
@@ -59,7 +58,6 @@ export class Calendar extends CustomEvents {
 
     options = {
       language: DEFAULT_LANGUAGE_TYPE,
-      showToday: true,
       showJumpButtons: false,
       date: new Date(),
       type: TYPE_DATE,

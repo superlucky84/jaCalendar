@@ -1,4 +1,4 @@
-import { h, mount, Fragment } from 'lithent';
+import { h, mount } from 'lithent';
 import htm from 'htm';
 import {
   CLASS_NAME_HEADER_INNER,
@@ -11,8 +11,6 @@ import {
   CLASS_NAME_NEXT_MONTH_BTN,
   CLASS_NAME_NEXT_WEEK_BTN,
   CLASS_NAME_PREV_WEEK_BTN,
-  CLASS_NAME_HEADER_INFO,
-  CLASS_NAME_TITLE_TODAY,
 } from '@/constants';
 const html = htm.bind(h);
 
@@ -31,13 +29,8 @@ export const HeaderTmpl = mount(
       Component = YearButtons;
     }
 
-    return ({ title, titleClass, showToday, todayText }) =>
-      html`
-        <${Fragment}>
-          <${Component} title=${title} titleClass=${titleClass} />
-          ${showToday && html`<${TodayButton} todayText=${todayText} />`}
-        <//>
-      `;
+    return ({ title, titleClass }) =>
+      html`<${Component} title=${title} titleClass=${titleClass} />`;
   }
 );
 
@@ -102,15 +95,6 @@ const YearButtons = mount(() => {
         <button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_YEAR_BTN}">
           Next year
         </button>
-      </div>
-    `;
-});
-
-const TodayButton = mount(() => {
-  return ({ todayText }) =>
-    html`
-      <div class=${CLASS_NAME_HEADER_INFO}>
-        <p class=${CLASS_NAME_TITLE_TODAY}>${todayText}</p>
       </div>
     `;
 });
