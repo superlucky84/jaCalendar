@@ -82,13 +82,10 @@ export class WeekLayer extends LayerBase {
   _getWeeks(year, month, day) {
     let dates = [];
     let i;
-    const thisTime = new Date(year, month - 1, day);
-    const thisyoil = thisTime.getDay();
-    const isYypeA = this.weekStartDay > thisyoil;
-    const diffDay = isYypeA
-      ? DAYS_OF_WEEK - this.weekStartDay + thisyoil
-      : thisyoil - this.weekStartDay;
-    const firstDay = day - diffDay;
+    const firstDay = dateUtil.getStartDayInWeek(
+      new Date(year, month - 1, day),
+      this.weekStartDay
+    );
 
     for (i = firstDay; i < firstDay + DAYS_OF_WEEK; i += 1) {
       dates.push(new Date(year, month - 1, i));
@@ -161,19 +158,4 @@ export class WeekLayer extends LayerBase {
   getDateElements() {
     return this._element.querySelectorAll(DATE_SELECTOR);
   }
-
-  _getFirstWeek(year, month) {
-    var firstWeekDates = [];
-    var i;
-
-    for (i = this.weekStartDay; i < DAYS_OF_WEEK + this.weekStartDay; i += 1) {
-      firstWeekDates.push(dateUtil.getDateOfWeek(year, month, -1, i));
-    }
-
-    return this._getWeek(year, month, firstWeekDates);
-  }
-}
-
-function _isFirstWeek(weekIndex, dayInMonth) {
-  return weekIndex || dayInMonth === 1 || dayInMonth > DAYS_OF_WEEK;
 }

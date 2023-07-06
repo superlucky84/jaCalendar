@@ -4,13 +4,24 @@ import { dateUtil } from '@/helper/dateUtil';
 const CLASS_NAME_SELECTABLE = 'ja-selectable';
 
 export class DateIndicator {
-  constructor({ type, container, selectedList }) {
+  constructor({
+    type,
+    date,
+    container,
+    weekStartDay,
+    weekStartStandardDay,
+    showToday,
+    showJumpButtons,
+    language,
+    selectedList,
+  }) {
     this.calendar = new Calendar(container, {
-      language: 'ko',
-      showToday: true,
-      showJumpButtons: true,
-      weekStartDay: 'sun',
-      date: new Date(),
+      date,
+      language,
+      weekStartDay,
+      weekStartStandardDay,
+      showToday,
+      showJumpButtons,
       type,
     });
 

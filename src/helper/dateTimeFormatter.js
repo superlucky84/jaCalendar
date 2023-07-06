@@ -2,7 +2,6 @@ import {
   TYPE_DATE,
   TYPE_MONTH,
   TYPE_YEAR,
-  TYPE_WEEK,
   TYPE_HOUR,
   TYPE_MINUTE,
   TYPE_MERIDIEM,
@@ -10,7 +9,7 @@ import {
 import { dateUtil } from '@/helper/dateUtil';
 import { localeTexts } from '@/locale/localeTexts';
 
-const rFormableKeys = /\\?(yyyy|yy|mmmm|mmm|mm|m|dd|d|hh|h|a|ww)/gi;
+const rFormableKeys = /\\?(yyyy|yy|mmmm|mmm|mm|m|dd|d|hh|h|a)/gi;
 const mapForConverting = {
   yyyy: {
     expression: '(\\d{4}|\\d{2})',
@@ -95,10 +94,6 @@ const mapForConverting = {
   A: {
     expression: '([ap]m)',
     type: TYPE_MERIDIEM,
-  },
-  ww: {
-    expression: '(d{1}|[01]\\d{1}|2[0123])',
-    type: TYPE_WEEK,
   },
 };
 
@@ -257,7 +252,6 @@ export class DateTimeFormatter {
       m: minute,
       A: meridiem.toUpperCase(),
       a: meridiem,
-      ww: dateUtil.getWeekDayInMonth(dateObj) + this._titles.ww,
     };
 
     return this._rawStr.replace(rFormableKeys, function (key) {

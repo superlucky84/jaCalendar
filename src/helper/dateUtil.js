@@ -2,6 +2,7 @@ import { TYPE_DATE, TYPE_MONTH, TYPE_YEAR, TYPE_WEEK } from '@/constants';
 
 const isDate = obj => obj instanceof Date;
 const isNumber = obj => typeof obj == 'number';
+const DAYS_OF_WEEK = 7;
 
 export const dateUtil = {
   /**
@@ -107,6 +108,44 @@ export const dateUtil = {
     return (
       Math.ceil((currentDate + firstDay - startWeekDay) / 7) + startOneWeekDiff
     );
+  },
+
+  // 날짜가 해당하는 주의 시작일
+  getStartDayInWeek(date, weekStartDay) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const thisTime = new Date(year, month - 1, day);
+    const thisyoil = thisTime.getDay();
+    const isYypeA = weekStartDay > thisyoil;
+    const diffDay = isYypeA
+      ? DAYS_OF_WEEK - weekStartDay + thisyoil
+      : thisyoil - weekStartDay;
+    return day - diffDay;
+  },
+
+  // 날짜가 해당하는 주의 기준요일 날짜
+  getStandardDayInWeek(date, weekStartDay, weekStartStandardDay) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const thisTime = new Date(year, month - 1, day);
+    const thisyoil = thisTime.getDay();
+    const isYypeA = weekStartDay > thisyoil;
+    const diffDay = isYypeA
+      ? DAYS_OF_WEEK - weekStartDay + thisyoil
+      : thisyoil - weekStartDay;
+
+    const a = [0, 1, 2, 3, 4, 5, 6];
+    const re = [...a.splice(a.indexOf(weekStartDay)), ...a];
+    const diffDay2 =
+      re.indexOf(weekStartStandardDay) - re.indexOf(weekStartDay);
+
+    const result = day - diffDay + diffDay2;
+
+    return new Date(year, month - 1, result);
   },
 
   /**

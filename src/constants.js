@@ -50,6 +50,7 @@ export const CLASS_NAME_CALENDAR_SAT = 'ja-calendar-sat';
 export const CLASS_NAME_HEADER_INFO = 'ja-calendar-header-info';
 
 export const DEFAULT_WEEK_START_DAY = 'Sun';
+export const DEFAULT_WEEK_START_STANDRAD_DAY = 'Thu';
 
 export const WEEK_START_DAY_MAP = {
   sun: 0,

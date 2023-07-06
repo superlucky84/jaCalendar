@@ -3,7 +3,13 @@ import htm from 'htm';
 const html = htm.bind(h);
 
 import { CustomEvents } from '@/helper/customEvents';
-import { TYPE_DATE, TYPE_WEEK, TYPE_MONTH, TYPE_YEAR } from '@/constants';
+import {
+  WEEK_START_DAY_MAP,
+  TYPE_DATE,
+  TYPE_WEEK,
+  TYPE_MONTH,
+  TYPE_YEAR,
+} from '@/constants';
 import { localeTexts } from '@/locale/localeTexts';
 import { HeaderTmpl } from '@/tmpl/headerTmpl';
 import { DateTimeFormatter } from '@/helper/dateTimeFormatter';
@@ -41,6 +47,9 @@ export class Header extends CustomEvents {
     this._yearMonthTitleFormatter = null;
     this._yearTitleFormatter = null;
     this._todayFormatter = null;
+    this._weekStartDay = WEEK_START_DAY_MAP[option.weekStartDay.toLowerCase()];
+    this._weekStartStandardDay =
+      WEEK_START_DAY_MAP[option.weekStartStandardDay.toLowerCase()];
 
     this._setFormatters(localeTexts[option.language]);
     this._setEvents(option);
@@ -146,7 +155,21 @@ export class Header extends CustomEvents {
 
     switch (type) {
       case TYPE_WEEK:
-        return this._weekTitleFormatter.format(date);
+        const displayDate = dateUtil.getStandardDayInWeek(
+          date,
+          this._weekStartDay,
+          this._weekStartStandardDay
+        );
+
+        const weekOrder = dateUtil.getWeekDayInMonth(
+          displayDate,
+          this._weekStartStandardDay,
+          this._weekStartDay
+        );
+
+        return `${displayDate.getFullYear()}년 ${
+          displayDate.getMonth() + 1
+        }월 ${weekOrder} 째주`;
       case TYPE_DATE:
         return this._yearMonthTitleFormatter.format(date);
       case TYPE_MONTH:

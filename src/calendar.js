@@ -10,6 +10,7 @@ import { dateUtil } from '@/helper/dateUtil';
 import {
   DEFAULT_WEEK_START_DAY,
   DEFAULT_LANGUAGE_TYPE,
+  DEFAULT_WEEK_START_STANDRAD_DAY,
   TYPE_DATE,
   TYPE_WEEK,
   TYPE_MONTH,
@@ -64,9 +65,9 @@ export class Calendar extends CustomEvents {
       type: TYPE_DATE,
       usageStatistics: true,
       weekStartDay: DEFAULT_WEEK_START_DAY,
+      weekStartStandardDay: DEFAULT_WEEK_START_STANDRAD_DAY,
       ...options,
     };
-    console.log(options);
 
     this._container = container;
 
