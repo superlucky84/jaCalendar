@@ -154,13 +154,13 @@ export class Calendar extends CustomEvents {
     this._element.classList.add(CLASS_NAME_HIDDEN);
   }
 
-  drawNext() {
+  drawNextMonth() {
     this.draw({
       date: this.getNextDate(),
     });
   }
 
-  drawPrev() {
+  drawPrevMonth() {
     this.draw({
       date: this.getPrevDate(),
     });
@@ -242,12 +242,12 @@ export class Calendar extends CustomEvents {
         targetClassList.contains(CLASS_NAME_PREV_MONTH_BTN) &&
         [TYPE_WEEK, TYPE_DATE].includes(options.type)
       ) {
-        this.drawPrev();
+        this.drawPrevMonth();
       } else if (
         targetClassList.contains(CLASS_NAME_NEXT_MONTH_BTN) &&
         [TYPE_WEEK, TYPE_DATE].includes(options.type)
       ) {
-        this.drawNext();
+        this.drawNextMonth();
       } else if (
         targetClassList.contains(CLASS_NAME_PREV_WEEK_BTN) &&
         options.type === TYPE_WEEK
