@@ -125,7 +125,7 @@ export const dateUtil = {
     return day - diffDay;
   },
 
-  // 날짜가 해당하는 주의 기준요일 날짜
+  // 날짜가 해당하는 주의 기준요일에 해당하는 날짜
   getStandardDayInWeek(date, weekStartDay, weekStartStandardDay) {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -138,10 +138,14 @@ export const dateUtil = {
       ? DAYS_OF_WEEK - weekStartDay + thisyoil
       : thisyoil - weekStartDay;
 
-    const a = [0, 1, 2, 3, 4, 5, 6];
-    const re = [...a.splice(a.indexOf(weekStartDay)), ...a];
+    const weekBaseList = [0, 1, 2, 3, 4, 5, 6];
+    const rebaseWeekList = [
+      ...weekBaseList.splice(weekBaseList.indexOf(weekStartDay)),
+      ...weekBaseList,
+    ];
     const diffDay2 =
-      re.indexOf(weekStartStandardDay) - re.indexOf(weekStartDay);
+      rebaseWeekList.indexOf(weekStartStandardDay) -
+      rebaseWeekList.indexOf(weekStartDay);
 
     const result = day - diffDay + diffDay2;
 
