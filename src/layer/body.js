@@ -26,28 +26,36 @@ export class Body {
      * @type {DateLayer}
      * @private
      */
-    this._weekLayer = new WeekLayer(language, weekStartDay);
+    this._weekLayer = new WeekLayer(
+      options.bodyWeekTmpl,
+      language,
+      weekStartDay
+    );
 
     /**
      * DateLayer
      * @type {DateLayer}
      * @private
      */
-    this._dateLayer = new DateLayer(language, weekStartDay);
+    this._dateLayer = new DateLayer(
+      options.bodyDateTmpl,
+      language,
+      weekStartDay
+    );
 
     /**
      * MonthLayer
      * @type {MonthLayer}
      * @private
      */
-    this._monthLayer = new MonthLayer(language);
+    this._monthLayer = new MonthLayer(options.bodyMonthTmpl, language);
 
     /**
      * YearLayer
      * @type {YearLayer}
      * @private
      */
-    this._yearLayer = new YearLayer(language);
+    this._yearLayer = new YearLayer(options.bodyYearTmpl, language);
 
     /**
      * Current Layer

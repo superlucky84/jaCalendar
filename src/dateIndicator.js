@@ -1,7 +1,54 @@
 import { Calendar } from '@/calendar';
 import { dateUtil } from '@/helper/dateUtil';
 
+import { h, mount, mountCallback } from 'lithent';
+import htm from 'htm';
+const html = htm.bind(h);
+
 const CLASS_NAME_SELECTABLE = 'ja-selectable';
+
+export const BodyWeekTmpl = mount(() => {
+  const testEvent = () => {
+    console.log('testEvent');
+  };
+
+  mountCallback(() => {
+    console.log('MOUNT');
+
+    return () => {
+      console.log('UNMOUNT');
+    };
+  });
+
+  return ({ Sun, Mon, Tue, Wed, Thu, Fri, Sat, weeks }) =>
+    html`
+      <table cellspacing="0" cellpadding="0">
+        <caption>
+          <span onClick=${testEvent}>Date!!!s</span>
+        </caption>
+        <tr>
+          ${weeks.map(item => html` <td>${item.dayInMonth}</td> `)}
+        </tr>
+        <tr>
+          <th scope="col">${Sun}</th>
+          <th scope="col">${Mon}</th>
+          <th scope="col">${Tue}</th>
+          <th scope="col">${Wed}</th>
+          <th scope="col">${Thu}</th>
+          <th scope="col">${Fri}</th>
+          <th scope="col">${Sat}</th>
+        </tr>
+        <tr>
+          ${weeks.map(
+            item =>
+              html`
+                <td data-timestamp=${item.timestamp}>${item.dayInMonth}</td>
+              `
+          )}
+        </tr>
+      </table>
+    `;
+});
 
 export class DateIndicator {
   constructor({
@@ -25,7 +72,7 @@ export class DateIndicator {
       headerTmpl: null,
       bodyYearTmpl: null,
       bodyMonthTmpl: null,
-      bodyWeekTmpl: null,
+      bodyWeekTmpl: BodyWeekTmpl,
       bodyDateTmpl: null,
     });
 

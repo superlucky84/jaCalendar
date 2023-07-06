@@ -23,11 +23,12 @@ const DAYS_OF_WEEK = 7;
  * @param {string} language - Initial language
  */
 export class DateLayer extends LayerBase {
-  constructor(language, weekStartDay) {
+  constructor(tmpl, language, weekStartDay) {
     super(language);
     this.weekStartDay =
       WEEK_START_DAY_MAP[String(weekStartDay).toLowerCase()] || 0;
     this._type = TYPE_DATE;
+    this._tmpl = tmpl || BodyTmpl;
   }
 
   /**
@@ -163,7 +164,10 @@ export class DateLayer extends LayerBase {
   render(date, container) {
     var context = this._makeContext(date);
 
-    this.remove = lithentRender(html`<${BodyTmpl} ...${context} />`, container);
+    this.remove = lithentRender(
+      html`<${this._tmpl} ...${context} />`,
+      container
+    );
     this._element = container.firstChild;
   }
 

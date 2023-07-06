@@ -15,7 +15,7 @@ const html = htm.bind(h);
  * @ignore
  */
 export class YearLayer extends LayerBase {
-  constructor(language) {
+  constructor(tmpl, language) {
     super(language);
 
     /**
@@ -24,6 +24,7 @@ export class YearLayer extends LayerBase {
      * @private
      */
     this._type = TYPE_YEAR;
+    this._tmpl = tmpl || BodyTmpl;
   }
   /**
    * @override
@@ -56,7 +57,10 @@ export class YearLayer extends LayerBase {
       this.remove();
     }
     // container.innerHTML = bodyTmpl(context);
-    this.remove = lithentRender(html`<${BodyTmpl} ...${context} />`, container);
+    this.remove = lithentRender(
+      html`<${this._tmpl} ...${context} />`,
+      container
+    );
 
     this._element = container.firstChild;
   }

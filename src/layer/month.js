@@ -14,7 +14,7 @@ const html = htm.bind(h);
  * @ignore
  */
 export class MonthLayer extends LayerBase {
-  constructor(language) {
+  constructor(tmpl, language) {
     super(language);
 
     /**
@@ -23,6 +23,7 @@ export class MonthLayer extends LayerBase {
      * @private
      */
     this._type = TYPE_MONTH;
+    this._tmpl = tmpl || BodyTmpl;
   }
 
   /**
@@ -59,7 +60,10 @@ export class MonthLayer extends LayerBase {
   render(date, container) {
     var context = this._makeContext(date);
 
-    this.remove = lithentRender(html`<${BodyTmpl} ...${context} />`, container);
+    this.remove = lithentRender(
+      html`<${this._tmpl} ...${context} />`,
+      container
+    );
     this._element = container.firstChild;
   }
 
