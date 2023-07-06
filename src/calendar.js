@@ -27,7 +27,18 @@ import {
   CLASS_NAME_HIDDEN,
   CLASS_NAME_HEADER,
   CLASS_NAME_BODY,
+  CLASS_NAME_BTN,
 } from '@/constants';
+
+export {
+  CLASS_NAME_BTN,
+  CLASS_NAME_NEXT_YEAR_BTN,
+  CLASS_NAME_PREV_YEAR_BTN,
+  CLASS_NAME_PREV_MONTH_BTN,
+  CLASS_NAME_NEXT_MONTH_BTN,
+  CLASS_NAME_NEXT_WEEK_BTN,
+  CLASS_NAME_PREV_WEEK_BTN,
+};
 
 const html = htm.bind(h);
 
@@ -64,6 +75,12 @@ export class Calendar extends CustomEvents {
       usageStatistics: true,
       weekStartDay: DEFAULT_WEEK_START_DAY,
       weekStartStandardDay: DEFAULT_WEEK_START_STANDRAD_DAY,
+      layoutTmpl: options.layoutTmpl,
+      headerTmpl: options.headerTmpl,
+      bodyYearTmpl: options.bodyYearTmpl,
+      bodyMonthTmpl: options.bodyMonthTmpl,
+      bodyWeekTmpl: options.bodyWeekTmpl,
+      bodyDateTmpl: options.bodyDateTmpl,
       ...options,
     };
 

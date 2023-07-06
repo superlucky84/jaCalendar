@@ -21,6 +21,12 @@ export class DateIndicator {
       weekStartStandardDay,
       showJumpButtons,
       type,
+      layoutTmpl: null,
+      headerTmpl: null,
+      bodyYearTmpl: null,
+      bodyMonthTmpl: null,
+      bodyWeekTmpl: null,
+      bodyDateTmpl: null,
     });
 
     this.type = type;

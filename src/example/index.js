@@ -3,7 +3,7 @@ import { DateIndicator } from '@/dateIndicator';
 const ins = new DateIndicator({
   container: document.getElementById('calendar-wrapper'),
   language: 'ko',
-  type: 'date',
+  type: 'week',
   date: new Date(),
   weekStartDay: 'sun',
   weekStartStandardDay: 'thu',
