@@ -32,9 +32,10 @@ const YEAR_TITLE_FORMAT = 'yyyy';
  * @param {boolean} option.showJumpButtons - Has jump buttons or not.
  */
 export class Header extends CustomEvents {
-  constructor(container, option) {
+  constructor(tmpl, container, option) {
     super();
 
+    this._tmpl = tmpl || HeaderTmpl;
     this.tmplRemove = null;
     this.eventHandler = null;
 
@@ -79,7 +80,7 @@ export class Header extends CustomEvents {
     }
 
     this.remove = lithentRender(
-      html`<${HeaderTmpl} ...${context} />`,
+      html`<${this._tmpl} ...${context} />`,
       this._container
     );
 

@@ -38,6 +38,8 @@ export {
   CLASS_NAME_NEXT_MONTH_BTN,
   CLASS_NAME_NEXT_WEEK_BTN,
   CLASS_NAME_PREV_WEEK_BTN,
+  CLASS_NAME_HEADER,
+  CLASS_NAME_BODY,
 };
 
 const html = htm.bind(h);
@@ -86,7 +88,10 @@ export class Calendar extends CustomEvents {
 
     this._container = container;
 
-    lithentRender(html`<${LayoutTmpl} />`, this._container);
+    lithentRender(
+      html`<${options.layoutTmpl || LayoutTmpl} />`,
+      this._container
+    );
 
     this._element = this._container.firstChild;
     this._date = null;
@@ -258,7 +263,7 @@ export class Calendar extends CustomEvents {
       `.${CLASS_NAME_HEADER}`
     );
 
-    this._header = new Header(headerContainer, options);
+    this._header = new Header(options.headerTmpl, headerContainer, options);
     this._header.on('click', ev => {
       const target = ev.target;
       const targetClassList = target.classList;

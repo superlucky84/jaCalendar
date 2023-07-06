@@ -1,4 +1,13 @@
-import { Calendar } from '@/calendar';
+import {
+  Calendar,
+  CLASS_NAME_HEADER,
+  CLASS_NAME_BODY,
+  CLASS_NAME_BTN,
+  CLASS_NAME_PREV_YEAR_BTN,
+  CLASS_NAME_PREV_MONTH_BTN,
+  CLASS_NAME_NEXT_MONTH_BTN,
+  CLASS_NAME_NEXT_YEAR_BTN,
+} from '@/calendar';
 import { dateUtil } from '@/helper/dateUtil';
 
 import { h, mount, mountCallback } from 'lithent';
@@ -7,24 +16,43 @@ const html = htm.bind(h);
 
 const CLASS_NAME_SELECTABLE = 'ja-selectable';
 
+export const LayoutTmpl = mount(
+  () => () =>
+    html`
+      <div>
+        asdga
+        <div class=${CLASS_NAME_HEADER}></div>
+        <div class=${CLASS_NAME_BODY}></div>
+        vase
+      </div>
+    `
+);
+
+export const HeaderTmpl = mount(() => {
+  return ({ showJumpButtons, isDateCalendar, isWeekCalendar, title }) => html`
+    <div>
+      <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_YEAR_BTN}">
+        Prev year
+      </button>
+      <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_MONTH_BTN}">
+        Prev month</button
+      ><em>${title}</em>
+      <button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_MONTH_BTN}">
+        Next month
+      </button>
+      <button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_YEAR_BTN}">
+        Next year
+      </button>
+    </div>
+  `;
+});
+
 export const BodyWeekTmpl = mount(() => {
-  const testEvent = () => {
-    console.log('testEvent');
-  };
-
-  mountCallback(() => {
-    console.log('MOUNT');
-
-    return () => {
-      console.log('UNMOUNT');
-    };
-  });
-
   return ({ Sun, Mon, Tue, Wed, Thu, Fri, Sat, weeks }) =>
     html`
       <table cellspacing="0" cellpadding="0">
         <caption>
-          <span onClick=${testEvent}>Date!!!s</span>
+          <span>Date!!!s</span>
         </caption>
         <tr>
           ${weeks.map(item => html` <td>${item.dayInMonth}</td> `)}
@@ -68,8 +96,8 @@ export class DateIndicator {
       weekStartStandardDay,
       showJumpButtons,
       type,
-      layoutTmpl: null,
-      headerTmpl: null,
+      layoutTmpl: LayoutTmpl,
+      headerTmpl: HeaderTmpl,
       bodyYearTmpl: null,
       bodyMonthTmpl: null,
       bodyWeekTmpl: BodyWeekTmpl,

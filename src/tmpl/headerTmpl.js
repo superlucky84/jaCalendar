@@ -26,12 +26,12 @@ export const HeaderTmpl = mount(
       Component = YearButtons;
     }
 
-    return ({ title, titleClass }) => html`<${Component} title=${title} />`;
+    return ({ title }) => html`<${Component} title=${title} />`;
   }
 );
 
 const PrevNextWithJumpButtons = mount(() => {
-  return ({ title, titleClass }) =>
+  return ({ title }) =>
     html`
       <div>
         <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_YEAR_BTN}">
@@ -51,7 +51,7 @@ const PrevNextWithJumpButtons = mount(() => {
 });
 
 const PrevNextMonthButtons = mount(() => {
-  return ({ title, titleClass }) =>
+  return ({ title }) =>
     html`
       <div>
         <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_MONTH_BTN}">
@@ -66,7 +66,7 @@ const PrevNextMonthButtons = mount(() => {
 });
 
 const PrevNextWeekButtons = mount(() => {
-  return ({ title, titleClass }) =>
+  return ({ title }) =>
     html`
       <div>
         <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_WEEK_BTN}">
@@ -81,7 +81,7 @@ const PrevNextWeekButtons = mount(() => {
 });
 
 const YearButtons = mount(() => {
-  return ({ title, titleClass }) =>
+  return ({ title }) =>
     html`
       <div>
         <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_YEAR_BTN}">
