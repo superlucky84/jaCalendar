@@ -90,6 +90,26 @@ export const dateUtil = {
   },
 
   /**
+   * Get week day in month
+   * @param {object} date - 검사하려는 날짜
+   * @param {number} stardardFirstWeekDay - 1일이 무슨요일부터 있어야 1주차로 취급할건지 (default 목요일)
+   * @param {number} startWeekDay - 달력이 무슨요일부터 시작하는지 (default 일요일)
+   * @returns {number}
+   */
+  getWeekDayInMonth(date, stardardFirstWeekDay = 4, startWeekDay = 0) {
+    let startOneWeekDiff = -1;
+    const currentDate = date.getDate();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    if (firstDay <= stardardFirstWeekDay) {
+      startOneWeekDiff = 0;
+    }
+
+    return (
+      Math.ceil((currentDate + firstDay - startWeekDay) / 7) + startOneWeekDiff
+    );
+  },
+
+  /**
    * Returns number or default
    * @param {*} any - Any value
    * @param {number} defaultNumber - Default number

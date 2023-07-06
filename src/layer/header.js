@@ -92,28 +92,10 @@ export class Header extends CustomEvents {
   }
 
   _setFormatters(localeText) {
-    this._weekTitleFormatter = date => {
-      /*
-      const firstDay = dateUtil.getFirstDay(
-        date.getFullYear(),
-        date.getMonth() + 1
-      );
-      if (firstDay <= 4) {
-        console.log('AAAA', date.getDate());
-      } else {
-        console.log('BBBB', date.getDate());
-      }
-        */
-      /*
-      const currentDate = date.getDate();
-      const firstDay = new Date(date.setDate(1)).getDay();
-
-      const result = Math.ceil((currentDate + firstDay) / 7);
-      console.log(result);
-      */
-
-      return 'aa' + date;
-    };
+    this._weekTitleFormatter = new DateTimeFormatter(
+      'yyyy.MM (ww)',
+      localeText.titles
+    );
     this._yearMonthTitleFormatter = new DateTimeFormatter(
       localeText.titleFormat,
       localeText.titles
@@ -164,7 +146,7 @@ export class Header extends CustomEvents {
 
     switch (type) {
       case TYPE_WEEK:
-        return this._weekTitleFormatter(date);
+        return this._weekTitleFormatter.format(date);
       case TYPE_DATE:
         return this._yearMonthTitleFormatter.format(date);
       case TYPE_MONTH:
