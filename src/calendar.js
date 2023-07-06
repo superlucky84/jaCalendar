@@ -166,24 +166,24 @@ export class Calendar extends CustomEvents {
     });
   }
 
-  getNextDate() {
-    if (this.getType() === TYPE_WEEK) {
-      return this._getRelativeWeek(7);
-    } else if (this.getType() === TYPE_DATE) {
-      return this._getRelativeDate(1);
-    }
+  drawNextWeek() {
+    this.draw({
+      date: this._getRelativeWeek(7),
+    });
+  }
 
-    return this.getNextYearDate();
+  drawPrevWeek() {
+    this.draw({
+      date: this._getRelativeWeek(-7),
+    });
+  }
+
+  getNextDate() {
+    return this._getRelativeDate(1);
   }
 
   getPrevDate() {
-    if (this.getType() === TYPE_WEEK) {
-      return this._getRelativeWeek(-7);
-    } else if (this.getType() === TYPE_DATE) {
-      return this._getRelativeDate(-1);
-    }
-
-    return this.getPrevYearDate();
+    return this._getRelativeDate(-1);
   }
 
   getNextYearDate(customStep) {
@@ -268,20 +268,30 @@ export class Calendar extends CustomEvents {
       const target = ev.target;
       const targetClassList = target.classList;
 
-      if (
-        targetClassList.contains(CLASS_NAME_PREV_MONTH_BTN) ||
-        targetClassList.contains(CLASS_NAME_PREV_WEEK_BTN)
-      ) {
-        this.drawPrev();
+      if (targetClassList.contains(CLASS_NAME_NEXT_YEAR_BTN)) {
+        this._onClickNextYear();
       } else if (targetClassList.contains(CLASS_NAME_PREV_YEAR_BTN)) {
         this._onClickPrevYear();
       } else if (
-        targetClassList.contains(CLASS_NAME_NEXT_MONTH_BTN) ||
-        targetClassList.contains(CLASS_NAME_NEXT_WEEK_BTN)
+        targetClassList.contains(CLASS_NAME_PREV_MONTH_BTN) &&
+        [TYPE_WEEK, TYPE_DATE].includes(options.type)
+      ) {
+        this.drawPrev();
+      } else if (
+        targetClassList.contains(CLASS_NAME_NEXT_MONTH_BTN) &&
+        [TYPE_WEEK, TYPE_DATE].includes(options.type)
       ) {
         this.drawNext();
-      } else if (targetClassList.contains(CLASS_NAME_NEXT_YEAR_BTN)) {
-        this._onClickNextYear();
+      } else if (
+        targetClassList.contains(CLASS_NAME_PREV_WEEK_BTN) &&
+        options.type === TYPE_WEEK
+      ) {
+        this.drawPrevWeek();
+      } else if (
+        targetClassList.contains(CLASS_NAME_NEXT_WEEK_BTN) &&
+        options.type === TYPE_WEEK
+      ) {
+        this.drawNextWeek();
       }
     });
   }
@@ -293,22 +303,26 @@ export class Calendar extends CustomEvents {
   }
 
   _onClickPrevYear() {
-    if (this.getType() === TYPE_DATE) {
+    if ([TYPE_DATE, TYPE_WEEK, TYPE_MONTH].includes(this.getType())) {
       this.draw({
         date: this._getRelativeDate(-12),
       });
     } else {
-      this.drawPrev();
+      this.draw({
+        date: this._getRelativeDate(-108),
+      });
     }
   }
 
   _onClickNextYear() {
-    if (this.getType() === TYPE_DATE) {
+    if ([TYPE_DATE, TYPE_WEEK, TYPE_MONTH].includes(this.getType())) {
       this.draw({
         date: this._getRelativeDate(12),
       });
     } else {
-      this.drawNext();
+      this.draw({
+        date: this._getRelativeDate(108),
+      });
     }
   }
 

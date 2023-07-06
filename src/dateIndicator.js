@@ -7,10 +7,12 @@ import {
   CLASS_NAME_PREV_MONTH_BTN,
   CLASS_NAME_NEXT_MONTH_BTN,
   CLASS_NAME_NEXT_YEAR_BTN,
+  CLASS_NAME_PREV_WEEK_BTN,
+  CLASS_NAME_NEXT_WEEK_BTN,
 } from '@/calendar';
 import { dateUtil } from '@/helper/dateUtil';
 
-import { h, mount, mountCallback } from 'lithent';
+import { h, mount } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
 
@@ -34,12 +36,23 @@ export const HeaderTmpl = mount(() => {
       <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_YEAR_BTN}">
         Prev year
       </button>
-      <button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_MONTH_BTN}">
-        Prev month</button
-      ><em>${title}</em>
-      <button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_MONTH_BTN}">
+      ${(isDateCalendar || isWeekCalendar) &&
+      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_MONTH_BTN}">
+        Prev month
+      </button>`}
+      ${isWeekCalendar &&
+      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_WEEK_BTN}">
+        Prev week
+      </button>`}
+      <em>${title}</em>
+      ${isWeekCalendar &&
+      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_WEEK_BTN}">
+        Next week
+      </button>`}
+      ${(isDateCalendar || isWeekCalendar) &&
+      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_MONTH_BTN}">
         Next month
-      </button>
+      </button>`}
       <button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_YEAR_BTN}">
         Next year
       </button>
