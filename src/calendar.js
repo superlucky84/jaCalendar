@@ -186,40 +186,6 @@ export class Calendar extends CustomEvents {
     return this._getRelativeDate(-1);
   }
 
-  getNextYearDate(customStep) {
-    if (customStep) {
-      return this._getRelativeDate(customStep);
-    }
-
-    switch (this.getType()) {
-      case TYPE_DATE:
-      case TYPE_WEEK:
-      case TYPE_MONTH:
-        return this._getRelativeDate(12); // 12 months = 1 year
-      case TYPE_YEAR:
-        return this._getRelativeDate(108); // 108 months = 9 years = 12 * 9
-      default:
-        throw new Error('Unknown layer type');
-    }
-  }
-
-  getPrevYearDate(customStep) {
-    if (customStep) {
-      return this._getRelativeDate(customStep);
-    }
-
-    switch (this.getType()) {
-      case TYPE_DATE:
-      case TYPE_WEEK:
-      case TYPE_MONTH:
-        return this._getRelativeDate(-12); // 12 months = 1 year
-      case TYPE_YEAR:
-        return this._getRelativeDate(-108); // 108 months = 9 years = 12 * 9
-      default:
-        throw new Error('Unknown layer type');
-    }
-  }
-
   changeLanguage(language) {
     this._header.changeLanguage(language);
     this._body.changeLanguage(language);
