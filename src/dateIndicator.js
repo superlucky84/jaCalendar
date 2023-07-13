@@ -30,37 +30,61 @@ export const LayoutTmpl = mount(
     `
 );
 
-export const HeaderTmpl = mount(() => {
-  return ({ isDateCalendar, isWeekCalendar, title }) => html`
-    <div>
-      ${!isWeekCalendar &&
-      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_YEAR_BTN}">
-        Prev year
-      </button>`}
-      ${isDateCalendar &&
-      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_MONTH_BTN}">
-        Prev month
-      </button>`}
-      ${isWeekCalendar &&
-      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_WEEK_BTN}">
-        Prev week
-      </button>`}
-      <em>${title}</em>
-      ${isWeekCalendar &&
-      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_WEEK_BTN}">
-        Next week
-      </button>`}
-      ${isDateCalendar &&
-      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_MONTH_BTN}">
-        Next month
-      </button>`}
-      ${!isWeekCalendar &&
-      html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_YEAR_BTN}">
-        Next year
-      </button>`}
-    </div>
-  `;
-});
+export const HeaderTmpl = mount(
+  (
+    renew,
+    {
+      updater,
+      events,
+      showJumpButtons,
+      isDateCalendar,
+      isWeekCalendar,
+      titleClass,
+      title,
+      type,
+    }
+  ) => {
+    if (updater) {
+      updater.value = context => {
+        showJumpButtons = context.showJumpButtons;
+        isDateCalendar = context.isDateCalendar;
+        isWeekCalendar = context.isWeekCalendar;
+        titleClass = context.titleClass;
+        title = context.title;
+        type = context.type;
+        renew();
+      };
+    }
+
+    return () => html`
+      <div>
+        ${!isWeekCalendar &&
+        html`<button onClick={events.drawPrevYear}">
+          Prev year
+        </button>`}
+        ${isDateCalendar &&
+        html`<button onClick="{events.drawPrevMonth}">Prev month</button>`}
+        ${isWeekCalendar &&
+        html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_PREV_WEEK_BTN}">
+          Prev week
+        </button>`}
+        <em>${title}</em>
+        ${isWeekCalendar &&
+        html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_WEEK_BTN}">
+          Next week
+        </button>`}
+        ${isDateCalendar &&
+        html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_MONTH_BTN}">
+          Next month
+        </button>`}
+        ${!isWeekCalendar &&
+        html`<button class="${CLASS_NAME_BTN} ${CLASS_NAME_NEXT_YEAR_BTN}">
+          Next year
+        </button>`}
+      </div>
+    `;
+  }
+);
 
 export const BodyWeekTmpl = mount(() => {
   return ({ Sun, Mon, Tue, Wed, Thu, Fri, Sat, weeks }) =>

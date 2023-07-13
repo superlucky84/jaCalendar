@@ -229,15 +229,27 @@ export class Calendar extends CustomEvents {
       `.${CLASS_NAME_HEADER}`
     );
 
-    this._header = new Header(options.headerTmpl, headerContainer, options);
+    this._header = new Header(
+      options.headerTmpl,
+      headerContainer,
+      {
+        drawNextYear: this.drawNextYear,
+        drawPrevYear: this.drawPrevYear,
+        drawNextMonth: this.drawNextMonth,
+        drawPrevMonth: this.drawPrevMonth,
+        drawNextWeek: this.drawNextWeek,
+        drawPrevWeek: this.drawPrevWeek,
+      },
+      options
+    );
     this._header.on('click', ev => {
       const target = ev.target;
       const targetClassList = target.classList;
 
       if (targetClassList.contains(CLASS_NAME_NEXT_YEAR_BTN)) {
-        this._onClickNextYear();
+        this.drawNextYear();
       } else if (targetClassList.contains(CLASS_NAME_PREV_YEAR_BTN)) {
-        this._onClickPrevYear();
+        this.drawPrevYear();
       } else if (
         targetClassList.contains(CLASS_NAME_PREV_MONTH_BTN) &&
         [TYPE_WEEK, TYPE_DATE].includes(options.type)
@@ -268,7 +280,7 @@ export class Calendar extends CustomEvents {
     this._body = new Body(bodyContainer, options);
   }
 
-  _onClickPrevYear() {
+  drawPrevYear() {
     if ([TYPE_DATE, TYPE_WEEK, TYPE_MONTH].includes(this.getType())) {
       this.draw({
         date: this._getRelativeDate(-12),
@@ -280,7 +292,7 @@ export class Calendar extends CustomEvents {
     }
   }
 
-  _onClickNextYear() {
+  drawNextYear() {
     if ([TYPE_DATE, TYPE_WEEK, TYPE_MONTH].includes(this.getType())) {
       this.draw({
         date: this._getRelativeDate(12),

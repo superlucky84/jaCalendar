@@ -1,4 +1,4 @@
-import { h, render as lithentRender } from 'lithent';
+import { h, ref, render as lithentRender } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
 
@@ -32,12 +32,13 @@ const YEAR_TITLE_FORMAT = 'yyyy';
  * @param {boolean} option.showJumpButtons - Has jump buttons or not.
  */
 export class Header extends CustomEvents {
-  constructor(tmpl, container, option) {
+  constructor(tmpl, container, events, option) {
     super();
 
     this._tmpl = tmpl || HeaderTmpl;
     this.tmplRemove = null;
     this.eventHandler = null;
+    this.events = event;
 
     this._container = container;
     this._innerElement = null;
@@ -67,6 +68,7 @@ export class Header extends CustomEvents {
 
   render(date, type) {
     const context = {
+      events: this.events,
       showJumpButtons: this._showJumpButtons,
       isDateCalendar: type === TYPE_DATE,
       isWeekCalendar: type === TYPE_WEEK,
@@ -75,16 +77,16 @@ export class Header extends CustomEvents {
       type,
     };
 
-    if (this.remove) {
-      this.remove();
+    if (this.updater) {
+      this.updater.value(context);
+    } else {
+      this.updater = ref();
+      this.remove = lithentRender(
+        html`<${this._tmpl} ...${context} updater=${this.updater} />`,
+        this._container
+      );
+      this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
     }
-
-    this.remove = lithentRender(
-      html`<${this._tmpl} ...${context} />`,
-      this._container
-    );
-
-    this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
   }
 
   destroy() {
