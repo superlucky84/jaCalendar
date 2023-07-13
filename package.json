@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "htm": "^3.1.1",
-    "lithent": "^1.0.4"
+    "lithent": "^1.0.5"
   }
 }

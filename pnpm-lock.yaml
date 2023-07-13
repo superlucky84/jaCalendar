@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -9,8 +9,8 @@ dependencies:
     specifier: ^3.1.1
     version: 3.1.1
   lithent:
-    specifier: ^1.0.4
-    version: 1.0.4
+    specifier: ^1.0.5
+    version: 1.0.5
 
 devDependencies:
   '@nabla/vite-plugin-eslint':
@@ -796,9 +796,8 @@ packages:
       type-check: 0.4.0
     dev: true
 
-  /lithent@1.0.4:
-    resolution: {integrity: sha512-Ka/pgJk1lRnQQoDVCu/NDwT7A8BPFy459xb+yyAmaARjFPwZ3rE9EJSyyRDL5zLXmFMNATxRspbJYIeSfVqrGg==}
-    engines: {node: '>=20.3.0', pnpm: '>=7.6.0'}
+  /lithent@1.0.5:
+    resolution: {integrity: sha512-/G3ruwgRlX/PO4hZSm9W7mUHkgAn9F1cw/9qOEL2R7qiQVdzif6L7h+g+JfVN6b4tzbmlANZlNEpdeD027dzHg==}
     dev: false
 
   /locate-path@6.0.0:
