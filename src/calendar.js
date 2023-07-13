@@ -233,12 +233,12 @@ export class Calendar extends CustomEvents {
       options.headerTmpl,
       headerContainer,
       {
-        drawNextYear: this.drawNextYear,
-        drawPrevYear: this.drawPrevYear,
-        drawNextMonth: this.drawNextMonth,
-        drawPrevMonth: this.drawPrevMonth,
-        drawNextWeek: this.drawNextWeek,
-        drawPrevWeek: this.drawPrevWeek,
+        drawNextYear: this.drawNextYear.bind(this),
+        drawPrevYear: this.drawPrevYear.bind(this),
+        drawNextMonth: this.drawNextMonth.bind(this),
+        drawPrevMonth: this.drawPrevMonth.bind(this),
+        drawNextWeek: this.drawNextWeek.bind(this),
+        drawPrevWeek: this.drawPrevWeek.bind(this),
       },
       options
     );
