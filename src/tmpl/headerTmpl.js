@@ -5,7 +5,6 @@ const html = htm.bind(h);
 const DefaultHeader = mount(() => {
   return ({
     events,
-    showJumpButtons,
     isDateCalendar,
     isWeekCalendar,
     titleClass,
@@ -37,7 +36,6 @@ export const HeaderTmpl = mount(
       updater,
       customTmpl,
       events,
-      showJumpButtons,
       isDateCalendar,
       isWeekCalendar,
       titleClass,
@@ -47,7 +45,6 @@ export const HeaderTmpl = mount(
   ) => {
     if (updater) {
       updater.value = context => {
-        showJumpButtons = context.showJumpButtons;
         isDateCalendar = context.isDateCalendar;
         isWeekCalendar = context.isWeekCalendar;
         titleClass = context.titleClass;
@@ -61,7 +58,6 @@ export const HeaderTmpl = mount(
       <>
         <${customTmpl || DefaultHeader}
           events=${events}
-          showJumpButtons=${showJumpButtons}
           isDateCalendar=${isDateCalendar}
           isWeekCalendar=${isWeekCalendar}
           titleClass=${titleClass}

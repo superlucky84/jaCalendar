@@ -20,7 +20,6 @@ export const LayoutTmpl = mount(
 export const HeaderTmpl = mount(() => {
   return ({
     events,
-    showJumpButtons,
     isDateCalendar,
     isWeekCalendar,
     titleClass,
@@ -151,7 +150,6 @@ const ins = new DateIndicator({
   date: new Date(),
   weekStartDay: 'sun',
   weekStartStandardDay: 'thu',
-  showJumpButtons: true,
   layoutTmpl: LayoutTmpl,
   headerTmpl: HeaderTmpl,
   bodyYearTmpl: null,

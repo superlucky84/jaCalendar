@@ -29,7 +29,6 @@ const YEAR_TITLE_FORMAT = 'yyyy';
  * @param {HTMLElement} container - Header container or selector
  * @param {object} option - Header option
  * @param {string} option.language - Header language
- * @param {boolean} option.showJumpButtons - Has jump buttons or not.
  */
 export class Header extends CustomEvents {
   constructor(customTmpl, container, events, option) {
@@ -43,7 +42,6 @@ export class Header extends CustomEvents {
     this._container = container;
     this._innerElement = null;
     this._infoElement = null;
-    this._showJumpButtons = option.showJumpButtons;
     this._yearMonthTitleFormatter = null;
     this._yearTitleFormatter = null;
     this._weekStartDay = WEEK_START_DAY_MAP[option.weekStartDay.toLowerCase()];
@@ -69,7 +67,6 @@ export class Header extends CustomEvents {
   render(date, type) {
     const context = {
       events: this.events,
-      showJumpButtons: this._showJumpButtons,
       isDateCalendar: type === TYPE_DATE,
       isWeekCalendar: type === TYPE_WEEK,
       titleClass: this._getTitleClass(type),
@@ -98,7 +95,6 @@ export class Header extends CustomEvents {
     this._innerElement.remove();
     this._infoElement.remove();
     this._container = null;
-    this._showJumpButtons = null;
     this._yearMonthTitleFormatter = null;
     this._yearTitleFormatter = null;
     this._innerElement = null;
