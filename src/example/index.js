@@ -8,10 +8,11 @@ const ins = new DateIndicator({
   weekStartDay: 'sun',
   weekStartStandardDay: 'thu',
   showJumpButtons: true,
-  selectedList: {
-    1687418469215: ['classA', 'classB', 'classC'],
-    1687579980000: ['classA', 'classB'],
+  customOptions: {
+    1689300057808: ['classA', 'classB', 'classC'],
+    1689131591000: ['classA', 'classB'],
   },
 });
 
-console.log(ins);
+console.log('window.ins', ins);
+window.ins = ins;

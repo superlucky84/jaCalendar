@@ -14,7 +14,7 @@ const html = htm.bind(h);
  * @ignore
  */
 export class MonthLayer extends LayerBase {
-  constructor(tmpl, language) {
+  constructor(tmpl, customOptions, language) {
     super(language);
 
     /**
@@ -24,6 +24,7 @@ export class MonthLayer extends LayerBase {
      */
     this._type = TYPE_MONTH;
     this._tmpl = tmpl || BodyTmpl;
+    this._customOptions = customOptions;
   }
 
   /**
@@ -48,6 +49,7 @@ export class MonthLayer extends LayerBase {
       Oct: monthsShort[9],
       Nov: monthsShort[10],
       Dec: monthsShort[11],
+      customOptions: this._customOptions,
     };
   }
 

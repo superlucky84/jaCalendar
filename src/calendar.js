@@ -83,6 +83,7 @@ export class Calendar extends CustomEvents {
       bodyMonthTmpl: options.bodyMonthTmpl,
       bodyWeekTmpl: options.bodyWeekTmpl,
       bodyDateTmpl: options.bodyDateTmpl,
+      customOptions: options.customOptions,
       ...options,
     };
 

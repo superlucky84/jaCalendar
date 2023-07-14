@@ -1,22 +1,9 @@
-import {
-  Calendar,
-  CLASS_NAME_HEADER,
-  CLASS_NAME_BODY,
-  CLASS_NAME_BTN,
-  CLASS_NAME_PREV_YEAR_BTN,
-  CLASS_NAME_PREV_MONTH_BTN,
-  CLASS_NAME_NEXT_MONTH_BTN,
-  CLASS_NAME_NEXT_YEAR_BTN,
-  CLASS_NAME_PREV_WEEK_BTN,
-  CLASS_NAME_NEXT_WEEK_BTN,
-} from '@/calendar';
+import { Calendar, CLASS_NAME_HEADER, CLASS_NAME_BODY } from '@/calendar';
 import { dateUtil } from '@/helper/dateUtil';
 
 import { h, mount } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
-
-const CLASS_NAME_SELECTABLE = 'ja-selectable';
 
 export const LayoutTmpl = mount(
   () => () =>
@@ -59,7 +46,7 @@ export const HeaderTmpl = mount(() => {
 });
 
 export const BodyWeekTmpl = mount(() => {
-  return ({ Sun, Mon, Tue, Wed, Thu, Fri, Sat, weeks }) =>
+  return ({ Sun, Mon, Tue, Wed, Thu, Fri, Sat, weeks, customOptions }) =>
     html`
       <table cellspacing="0" cellpadding="0">
         <caption>
@@ -81,10 +68,78 @@ export const BodyWeekTmpl = mount(() => {
           ${weeks.map(
             item =>
               html`
-                <td data-timestamp=${item.timestamp}>${item.dayInMonth}</td>
+                <td
+                  class=${getTargetClass(
+                    customOptions,
+                    new Date(item.timestamp),
+                    'week'
+                  )}
+                  onClick=${() => console.log(new Date(item.timestamp))}
+                  data-timestamp=${item.timestamp}
+                >
+                  ${item.dayInMonth}
+                </td>
               `
           )}
         </tr>
+      </table>
+    `;
+});
+
+const getTargetClass = (infos, targetDate, type) => {
+  return Object.entries(infos)
+    .reduce((acc, [key, value]) => {
+      if (dateUtil.isSame(targetDate, new Date(Number(key)), type)) {
+        acc = acc.concat(value);
+      }
+
+      return acc;
+    }, [])
+    .join(' ');
+};
+
+export const BodyDateTmpl = mount(() => {
+  return ({ Sun, Mon, Tue, Wed, Thu, Fri, Sat, weeks, customOptions }) =>
+    html`
+      <table cellspacing="0" cellpadding="0">
+        <caption>
+          <span>Dates</span>
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">${Sun}</th>
+            <th scope="col">${Mon}</th>
+            <th scope="col">${Tue}</th>
+            <th scope="col">${Wed}</th>
+            <th scope="col">${Thu}</th>
+            <th scope="col">${Fri}</th>
+            <th scope="col">${Sat}</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${weeks.map(
+            week => html`
+              <tr>
+                ${week.map(
+                  item =>
+                    html`
+                      <td
+                        class=${getTargetClass(
+                          customOptions,
+                          new Date(item.timestamp),
+                          'date'
+                        )}
+                        onClick=${() => console.log(new Date(item.timestamp))}
+                        data-timestamp=${item.timestamp}
+                      >
+                        ${item.dayInMonth}
+                      </td>
+                    `
+                )}
+              </tr>
+            `
+          )}
+        </tbody>
       </table>
     `;
 });
@@ -98,8 +153,11 @@ export class DateIndicator {
     weekStartStandardDay,
     showJumpButtons,
     language,
-    selectedList,
+    customOptions,
   }) {
+    this.type = type;
+    this.customOptions = customOptions;
+
     this.calendar = new Calendar(container, {
       date,
       language,
@@ -112,66 +170,13 @@ export class DateIndicator {
       bodyYearTmpl: null,
       bodyMonthTmpl: null,
       bodyWeekTmpl: BodyWeekTmpl,
-      bodyDateTmpl: null,
+      bodyDateTmpl: BodyDateTmpl,
+      customOptions,
     });
-
-    this.type = type;
-    this.selectedList = selectedList;
-    this.dateElements = this.calendar.getDateElements();
-    this.dateLayer = this.calendar._body._container;
-    this.calendar.on('draw', this._calendarUpdated.bind(this));
-
-    this._addClassForDateElements();
-    this._addEvent();
   }
 
   update(calendarOptions = {}) {
-    const { selectedList, ...options } = calendarOptions;
-    if (calendarOptions.selectedList) {
-      this.selectedList = selectedList;
-    }
-
-    this.calendar.draw(options);
-  }
-
-  _calendarUpdated(event) {
-    this.dateElements = event.dateElements;
-    this._addClassForDateElements();
-  }
-
-  _addClassForDateElements() {
-    Array.from(this.dateElements).forEach(item => {
-      item.classList.add(CLASS_NAME_SELECTABLE);
-
-      const itemDate = this._getDateFromElement(item);
-      const classNameList = this._getAddingClassNameList(itemDate);
-
-      if (classNameList.length) {
-        item.classList.add(...classNameList);
-      }
-    });
-  }
-
-  _getAddingClassNameList(itemDate) {
-    return Object.entries(this.selectedList).reduce((acc, [key, value]) => {
-      if (dateUtil.isSame(itemDate, new Date(Number(key)), this.type)) {
-        acc = acc.concat(value);
-      }
-
-      return acc;
-    }, []);
-  }
-
-  _addEvent() {
-    this.dateLayer.addEventListener('click', event => {
-      const target = event.target.closest(`.${CLASS_NAME_SELECTABLE}`);
-
-      if (target) {
-        const date = this._getDateFromElement(target);
-
-        console.log(date);
-      }
-    });
+    this.calendar.draw(calendarOptions);
   }
 
   _getDateFromElement(element) {

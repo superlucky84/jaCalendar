@@ -15,7 +15,7 @@ const html = htm.bind(h);
  * @ignore
  */
 export class YearLayer extends LayerBase {
-  constructor(tmpl, language) {
+  constructor(tmpl, customOptions, language) {
     super(language);
 
     /**
@@ -25,6 +25,7 @@ export class YearLayer extends LayerBase {
      */
     this._type = TYPE_YEAR;
     this._tmpl = tmpl || BodyTmpl;
+    this._customOptions = customOptions;
   }
   /**
    * @override
@@ -41,6 +42,7 @@ export class YearLayer extends LayerBase {
         dateUtil.getRangeArr(year + 2, year + 4),
       ],
       getFirstDayTimestamp: dateUtil.getFirstDayTimestamp,
+      customOptions: this._customOptions,
     };
   }
 
