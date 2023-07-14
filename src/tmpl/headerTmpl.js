@@ -7,9 +7,8 @@ const DefaultHeader = mount(() => {
     events,
     isDateCalendar,
     isWeekCalendar,
-    titleClass,
     title,
-    type,
+    type: _type,
   }) => html`
     <div>
       ${!isWeekCalendar &&

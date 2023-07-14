@@ -15,9 +15,6 @@ import { HeaderTmpl } from '@/tmpl/headerTmpl';
 import { DateTimeFormatter } from '@/helper/dateTimeFormatter';
 import { dateUtil } from '@/helper/dateUtil';
 
-const CLASS_NAME_TITLE_MONTH = 'ja-calendar-title-month';
-const CLASS_NAME_TITLE_YEAR = 'ja-calendar-title-year';
-const CLASS_NAME_TITLE_YEAR_TO_YEAR = 'ja-calendar-title-year-to-year';
 const SELECTOR_INNER_ELEM = '.ja-calendar-header-inner';
 const SELECTOR_BTN = '.ja-calendar-btn';
 const YEAR_TITLE_FORMAT = 'yyyy';
@@ -68,7 +65,6 @@ export class Header extends CustomEvents {
       events: this.events,
       isDateCalendar: type === TYPE_DATE,
       isWeekCalendar: type === TYPE_DATE_WEEK,
-      titleClass: this._getTitleClass(type),
       title: this._getTitleText(date, type),
       type,
     };
@@ -133,19 +129,6 @@ export class Header extends CustomEvents {
 
     if (target.closest(SELECTOR_BTN)) {
       this.fire('click', ev);
-    }
-  }
-
-  _getTitleClass(type) {
-    switch (type) {
-      case TYPE_DATE:
-        return CLASS_NAME_TITLE_MONTH;
-      case TYPE_MONTH:
-        return CLASS_NAME_TITLE_YEAR;
-      case TYPE_YEAR:
-        return CLASS_NAME_TITLE_YEAR_TO_YEAR;
-      default:
-        return '';
     }
   }
 
