@@ -85,6 +85,7 @@ export class Header extends CustomEvents {
         />`,
         this._container
       );
+      console.log('_CONTAINER', this._container);
       this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
     }
   }

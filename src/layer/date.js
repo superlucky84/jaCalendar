@@ -5,7 +5,6 @@ import { TYPE_DATE, WEEK_START_DAY_MAP } from '@/constants';
 import { LayerBase } from '@/layer/base';
 import { BodyTmpl } from '@/tmpl/dateBodyTmpl';
 import {
-  DATE_SELECTOR_DATE as DATE_SELECTOR,
   CLASS_NAME_CALENDER_DATE,
   CLASS_NAME_CALENDER_PREV_MONTH,
   CLASS_NAME_CALENDER_NEXT_MONTH,

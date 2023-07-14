@@ -9,9 +9,6 @@ export const MIN_DATE = new Date(1900, 0, 1);
 export const MAX_DATE = new Date(2999, 11, 31);
 export const DEFAULT_LANGUAGE_TYPE = 'en';
 
-export const CLASS_NAME_CALENDAR = 'ja-calendar';
-export const CLASS_NAME_HEADER_INNER = 'ja-calendar-header-inner';
-
 export const CLASS_NAME_PREV_WEEK_BTN = 'ja-calendar-btn-prev-week';
 export const CLASS_NAME_PREV_MONTH_BTN = 'ja-calendar-btn-prev-month';
 export const CLASS_NAME_PREV_YEAR_BTN = 'ja-calendar-btn-prev-year';
@@ -19,9 +16,6 @@ export const CLASS_NAME_NEXT_YEAR_BTN = 'ja-calendar-btn-next-year';
 export const CLASS_NAME_NEXT_WEEK_BTN = 'ja-calendar-btn-next-week';
 export const CLASS_NAME_NEXT_MONTH_BTN = 'ja-calendar-btn-next-month';
 
-export const CLASS_NAME_CALENDAR_WEEK = 'ja-calendar-week';
-export const CLASS_NAME_CALENDAR_MONTH = 'ja-calendar-month';
-export const CLASS_NAME_CALENDAR_YEAR = 'ja-calendar-year';
 export const CLASS_NAME_HIDDEN = 'ja-calendar-hidden';
 export const CLASS_NAME_HEADER = 'ja-calendar-header';
 export const CLASS_NAME_BODY = 'ja-calendar-body';
@@ -47,6 +41,3 @@ export const WEEK_START_DAY_MAP = {
   fri: 5,
   sat: 6,
 };
-export const DATE_SELECTOR_DATE = '.ja-calendar-date';
-export const DATE_SELECTOR_MONTH = '.ja-calendar-month';
-export const DATE_SELECTOR_YEAR = '.ja-calendar-year';

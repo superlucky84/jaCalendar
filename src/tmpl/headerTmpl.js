@@ -55,7 +55,7 @@ export const HeaderTmpl = mount(
     }
 
     return () => html`
-      <>
+      <${Fragment}>
         <${customTmpl || DefaultHeader}
           events=${events}
           isDateCalendar=${isDateCalendar}
@@ -64,7 +64,7 @@ export const HeaderTmpl = mount(
           title=${title}
           type=${type}
         />
-      </>
+      <//>
     `;
 
     /*

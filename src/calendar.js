@@ -21,9 +21,6 @@ import {
   CLASS_NAME_NEXT_YEAR_BTN,
   CLASS_NAME_NEXT_WEEK_BTN,
   CLASS_NAME_NEXT_MONTH_BTN,
-  CLASS_NAME_CALENDAR_MONTH,
-  CLASS_NAME_CALENDAR_WEEK,
-  CLASS_NAME_CALENDAR_YEAR,
   CLASS_NAME_HIDDEN,
   CLASS_NAME_HEADER,
   CLASS_NAME_BODY,
@@ -328,25 +325,6 @@ export class Calendar extends CustomEvents {
 
     this._header.render(date, type);
     this._body.render(date, type);
-    this._element.classList.remove(
-      CLASS_NAME_CALENDAR_WEEK,
-      CLASS_NAME_CALENDAR_MONTH,
-      CLASS_NAME_CALENDAR_YEAR
-    );
-
-    switch (type) {
-      case TYPE_DATE_WEEK:
-        this._element.classList.add(CLASS_NAME_CALENDAR_WEEK);
-        break;
-      case TYPE_MONTH:
-        this._element.classList.add(CLASS_NAME_CALENDAR_MONTH);
-        break;
-      case TYPE_YEAR:
-        this._element.classList.add(CLASS_NAME_CALENDAR_YEAR);
-        break;
-      default:
-        break;
-    }
   }
 
   _getRelativeWeek(step) {
