@@ -12,7 +12,7 @@ import {
   DEFAULT_LANGUAGE_TYPE,
   DEFAULT_WEEK_START_STANDRAD_DAY,
   TYPE_DATE,
-  TYPE_WEEK,
+  TYPE_DATE_WEEK,
   TYPE_MONTH,
   TYPE_YEAR,
   CLASS_NAME_PREV_MONTH_BTN,
@@ -251,22 +251,22 @@ export class Calendar extends CustomEvents {
         this.drawPrevYear();
       } else if (
         targetClassList.contains(CLASS_NAME_PREV_MONTH_BTN) &&
-        [TYPE_WEEK, TYPE_DATE].includes(options.type)
+        [TYPE_DATE_WEEK, TYPE_DATE].includes(options.type)
       ) {
         this.drawPrevMonth();
       } else if (
         targetClassList.contains(CLASS_NAME_NEXT_MONTH_BTN) &&
-        [TYPE_WEEK, TYPE_DATE].includes(options.type)
+        [TYPE_DATE_WEEK, TYPE_DATE].includes(options.type)
       ) {
         this.drawNextMonth();
       } else if (
         targetClassList.contains(CLASS_NAME_PREV_WEEK_BTN) &&
-        options.type === TYPE_WEEK
+        options.type === TYPE_DATE_WEEK
       ) {
         this.drawPrevWeek();
       } else if (
         targetClassList.contains(CLASS_NAME_NEXT_WEEK_BTN) &&
-        options.type === TYPE_WEEK
+        options.type === TYPE_DATE_WEEK
       ) {
         this.drawNextWeek();
       }
@@ -280,7 +280,7 @@ export class Calendar extends CustomEvents {
   }
 
   drawPrevYear() {
-    if ([TYPE_DATE, TYPE_WEEK, TYPE_MONTH].includes(this.getType())) {
+    if ([TYPE_DATE, TYPE_DATE_WEEK, TYPE_MONTH].includes(this.getType())) {
       this.draw({
         date: this._getRelativeDate(-12),
       });
@@ -292,7 +292,7 @@ export class Calendar extends CustomEvents {
   }
 
   drawNextYear() {
-    if ([TYPE_DATE, TYPE_WEEK, TYPE_MONTH].includes(this.getType())) {
+    if ([TYPE_DATE, TYPE_DATE_WEEK, TYPE_MONTH].includes(this.getType())) {
       this.draw({
         date: this._getRelativeDate(12),
       });
@@ -308,7 +308,7 @@ export class Calendar extends CustomEvents {
       type === TYPE_DATE ||
       type === TYPE_MONTH ||
       type === TYPE_YEAR ||
-      type === TYPE_WEEK
+      type === TYPE_DATE_WEEK
     );
   }
 
@@ -337,7 +337,7 @@ export class Calendar extends CustomEvents {
     );
 
     switch (type) {
-      case TYPE_WEEK:
+      case TYPE_DATE_WEEK:
         this._element.classList.add(CLASS_NAME_CALENDAR_WEEK);
         break;
       case TYPE_MONTH:

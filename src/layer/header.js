@@ -6,7 +6,7 @@ import { CustomEvents } from '@/helper/customEvents';
 import {
   WEEK_START_DAY_MAP,
   TYPE_DATE,
-  TYPE_WEEK,
+  TYPE_DATE_WEEK,
   TYPE_MONTH,
   TYPE_YEAR,
 } from '@/constants';
@@ -68,7 +68,7 @@ export class Header extends CustomEvents {
     const context = {
       events: this.events,
       isDateCalendar: type === TYPE_DATE,
-      isWeekCalendar: type === TYPE_WEEK,
+      isWeekCalendar: type === TYPE_DATE_WEEK,
       titleClass: this._getTitleClass(type),
       title: this._getTitleText(date, type),
       type,
@@ -153,7 +153,7 @@ export class Header extends CustomEvents {
     var currentYear, start, end;
 
     switch (type) {
-      case TYPE_WEEK:
+      case TYPE_DATE_WEEK:
         const displayDate = dateUtil.getStandardDayInWeek(
           date,
           this._weekStartDay,

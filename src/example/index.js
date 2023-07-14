@@ -71,7 +71,7 @@ export const BodyWeekTmpl = mount(() => {
                   class=${getTargetClass(
                     customOptions,
                     new Date(item.timestamp),
-                    'week'
+                    'date-week'
                   )}
                   onClick=${() => console.log(new Date(item.timestamp))}
                   data-timestamp=${item.timestamp}
@@ -146,7 +146,7 @@ export const BodyDateTmpl = mount(() => {
 const ins = new DateIndicator({
   container: document.getElementById('calendar-wrapper'),
   language: 'ko',
-  type: 'week',
+  type: 'date-week',
   date: new Date(),
   weekStartDay: 'sun',
   weekStartStandardDay: 'thu',

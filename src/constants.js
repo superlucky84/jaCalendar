@@ -1,7 +1,7 @@
 export const TYPE_DATE = 'date';
 export const TYPE_MONTH = 'month';
 export const TYPE_YEAR = 'year';
-export const TYPE_WEEK = 'week';
+export const TYPE_DATE_WEEK = 'date-week';
 export const TYPE_HOUR = 'hour';
 export const TYPE_MINUTE = 'minute';
 export const TYPE_MERIDIEM = 'meridiem';

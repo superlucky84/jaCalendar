@@ -1,4 +1,4 @@
-import { TYPE_DATE, TYPE_MONTH, TYPE_YEAR, TYPE_WEEK } from '@/constants';
+import { TYPE_DATE, TYPE_MONTH, TYPE_YEAR, TYPE_DATE_WEEK } from '@/constants';
 
 const isDate = obj => obj instanceof Date;
 const isNumber = obj => typeof obj == 'number';
@@ -224,7 +224,7 @@ export const dateUtil = {
     date.setHours(0, 0, 0, 0);
 
     switch (type) {
-      case TYPE_WEEK:
+      case TYPE_DATE_WEEK:
       case TYPE_DATE:
         break;
       case TYPE_MONTH:

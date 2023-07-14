@@ -1,6 +1,6 @@
 import {
   TYPE_DATE,
-  TYPE_WEEK,
+  TYPE_DATE_WEEK,
   TYPE_MONTH,
   TYPE_YEAR,
   TYPE_HOUR,
@@ -50,7 +50,7 @@ const mapForConverting = {
   },
   WWWW: {
     expression: '(1[012]|0[1-9]|[1-9])',
-    type: TYPE_WEEK,
+    type: TYPE_DATE_WEEK,
   },
   dd: {
     expression: '([12]\\d{1}|3[01]|0[1-9]|[1-9])',

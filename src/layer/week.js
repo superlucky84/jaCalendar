@@ -1,7 +1,7 @@
 import { h, render as lithentRender } from 'lithent';
 import htm from 'htm';
 import { dateUtil } from '@/helper/dateUtil';
-import { TYPE_WEEK, WEEK_START_DAY_MAP } from '@/constants';
+import { TYPE_DATE_WEEK, WEEK_START_DAY_MAP } from '@/constants';
 import { LayerBase } from '@/layer/base';
 import { BodyTmpl } from '@/tmpl/weekBodyTmpl';
 import {
@@ -27,7 +27,7 @@ export class WeekLayer extends LayerBase {
     super(language);
     this.weekStartDay =
       WEEK_START_DAY_MAP[String(weekStartDay).toLowerCase()] || 0;
-    this._type = TYPE_WEEK;
+    this._type = TYPE_DATE_WEEK;
     this._tmpl = tmpl || BodyTmpl;
     this._customOptions = customOptions;
   }
