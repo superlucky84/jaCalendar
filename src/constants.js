@@ -12,16 +12,12 @@ export const DEFAULT_LANGUAGE_TYPE = 'en';
 export const CLASS_NAME_CALENDAR = 'ja-calendar';
 export const CLASS_NAME_HEADER_INNER = 'ja-calendar-header-inner';
 
-export const CLASS_NAME_BTN = 'ja-calendar-btn';
-export const CLASS_NAME_HAS_BTNS = 'ja-calendar-has-btns';
-export const CLASS_NAME_SELECTED = 'ja-calendar-is-selected';
 export const CLASS_NAME_PREV_WEEK_BTN = 'ja-calendar-btn-prev-week';
 export const CLASS_NAME_PREV_MONTH_BTN = 'ja-calendar-btn-prev-month';
 export const CLASS_NAME_PREV_YEAR_BTN = 'ja-calendar-btn-prev-year';
 export const CLASS_NAME_NEXT_YEAR_BTN = 'ja-calendar-btn-next-year';
 export const CLASS_NAME_NEXT_WEEK_BTN = 'ja-calendar-btn-next-week';
 export const CLASS_NAME_NEXT_MONTH_BTN = 'ja-calendar-btn-next-month';
-export const CLASS_NAME_TITLE = 'ja-calendar-title';
 
 export const CLASS_NAME_CALENDAR_WEEK = 'ja-calendar-week';
 export const CLASS_NAME_CALENDAR_MONTH = 'ja-calendar-month';

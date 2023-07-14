@@ -19,7 +19,6 @@ const CLASS_NAME_TITLE_MONTH = 'ja-calendar-title-month';
 const CLASS_NAME_TITLE_YEAR = 'ja-calendar-title-year';
 const CLASS_NAME_TITLE_YEAR_TO_YEAR = 'ja-calendar-title-year-to-year';
 const SELECTOR_INNER_ELEM = '.ja-calendar-header-inner';
-const SELECTOR_INFO_ELEM = '.ja-calendar-header-info';
 const SELECTOR_BTN = '.ja-calendar-btn';
 const YEAR_TITLE_FORMAT = 'yyyy';
 
