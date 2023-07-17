@@ -18,14 +18,7 @@ export const LayoutTmpl = mount(
 );
 
 export const HeaderTmpl = mount(() => {
-  return ({
-    events,
-    isDateCalendar,
-    isWeekCalendar,
-    titleClass,
-    title,
-    type,
-  }) => html`
+  return ({ events, isDateCalendar, isWeekCalendar, title, type }) => html`
     <div>
       ${!isWeekCalendar &&
       html`<button onClick=${events.drawPrevYear}>Prev year</button>`}

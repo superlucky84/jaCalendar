@@ -30,7 +30,7 @@ export class Header extends CustomEvents {
   constructor(customTmpl, container, events, option) {
     super();
 
-    this._customTmpl = customTmpl;
+    this._tmpl = customTmpl || HeaderTmpl;
     this.tmplRemove = null;
     this.eventHandler = null;
     this.events = events;
@@ -69,20 +69,16 @@ export class Header extends CustomEvents {
       type,
     };
 
-    if (this.updater) {
-      this.updater.value(context);
-    } else {
-      this.updater = ref();
-      this.remove = lithentRender(
-        html`<${HeaderTmpl}
-          ...${context}
-          updater=${this.updater}
-          customTmpl=${this._customTmpl}
-        />`,
-        this._container
-      );
-      this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
+    if (this.remove) {
+      this.remove();
     }
+
+    this.remove = lithentRender(
+      html`<${this._tmpl} ...${context} customTmpl=${this._customTmpl} />`,
+      this._container
+    );
+
+    this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
   }
 
   destroy() {

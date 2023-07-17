@@ -9,8 +9,8 @@ dependencies:
     specifier: ^3.1.1
     version: 3.1.1
   lithent:
-    specifier: ^1.0.6
-    version: 1.0.6
+    specifier: ^1.0.7
+    version: 1.0.7
 
 devDependencies:
   '@nabla/vite-plugin-eslint':
@@ -796,8 +796,8 @@ packages:
       type-check: 0.4.0
     dev: true
 
-  /lithent@1.0.6:
-    resolution: {integrity: sha512-+IzlDTvqiR/N3s30RffNpkF7EkIWEpN7mEVkREUsH0tmlJPcfCFmpHzxpBAO6GfB18de565FFGxkSqXbdp2zJQ==}
+  /lithent@1.0.7:
+    resolution: {integrity: sha512-4NGFONkOFDcbwlUGzgWjXV9ZhOH0CC8yJ3d1LA4aqsvIGSz5u2RQqyZYtqdCzWCqsUG8AHc9kPY2bk0/VLEKkQ==}
     dev: false
 
   /locate-path@6.0.0:
