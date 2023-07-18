@@ -7,14 +7,6 @@ import { BodyTmpl as MonthBodyTmpl } from '@/tmpl/monthBodyTmpl';
 import { BodyTmpl as WeekBodyTmpl } from '@/tmpl/weekBodyTmpl';
 
 export const BodyTmpl = mount((r, props) => {
-  const getTmpl = type => {
-    return {
-      date: DateBodyTmpl,
-      month: MonthBodyTmpl,
-      year: YearBodyTmpl,
-      'date-week': WeekBodyTmpl,
-    }[type];
-  };
   let context = props;
 
   if (props.updater) {
@@ -25,6 +17,6 @@ export const BodyTmpl = mount((r, props) => {
   }
 
   return () => {
-    return html`<${Fragment}><${getTmpl(context.type)} ...${context} /><//>`;
+    return html`<${Fragment}><${context.Tmpl} ...${context} /><//>`;
   };
 });

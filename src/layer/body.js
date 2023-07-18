@@ -120,7 +120,8 @@ export class Body {
    */
   render(date, type) {
     const layer = this._getLayer(type);
-    const context = Object.assign(layer._makeContext(date), { type });
+    const Tmpl = layer._tmpl;
+    const context = Object.assign(layer._makeContext(date), { Tmpl });
 
     if (this.updater) {
       this.updater.value(context);
