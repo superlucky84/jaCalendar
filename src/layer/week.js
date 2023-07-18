@@ -19,10 +19,18 @@ const DAYS_OF_WEEK = 7;
  * @param {string} language - Initial language
  */
 export class WeekLayer extends LayerBase {
-  constructor(tmpl, customOptions, language, weekStartDay) {
+  constructor(
+    tmpl,
+    customOptions,
+    language,
+    weekStartDay,
+    weekStartStandardDay
+  ) {
     super(language);
     this.weekStartDay =
       WEEK_START_DAY_MAP[String(weekStartDay).toLowerCase()] || 0;
+    this.weekStartStandardDay =
+      WEEK_START_DAY_MAP[String(weekStartStandardDay).toLowerCase()];
     this._type = TYPE_DATE_WEEK;
     this._tmpl = tmpl || BodyTmpl;
     this._customOptions = customOptions;
@@ -44,9 +52,16 @@ export class WeekLayer extends LayerBase {
     var year, month, day, days, i;
 
     date = date || new Date();
-    year = date.getFullYear();
-    month = date.getMonth() + 1;
-    day = date.getDate();
+
+    const displayDate = dateUtil.getStandardDayInWeek(
+      date,
+      this.weekStartDay,
+      this.weekStartStandardDay
+    );
+
+    year = displayDate.getFullYear();
+    month = displayDate.getMonth() + 1;
+    day = displayDate.getDate();
 
     if (this.weekStartDay) {
       days = daysShort.slice();

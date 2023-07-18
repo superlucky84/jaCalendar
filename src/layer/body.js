@@ -13,6 +13,7 @@ export class Body {
   constructor(options) {
     var language = options.language;
     var weekStartDay = options.weekStartDay;
+    var weekStartStandardDay = options.weekStartStandardDay;
 
     /**
      * DateLayer
@@ -23,7 +24,8 @@ export class Body {
       options.bodyWeekTmpl,
       options.customOptions,
       language,
-      weekStartDay
+      weekStartDay,
+      weekStartStandardDay
     );
 
     /**
