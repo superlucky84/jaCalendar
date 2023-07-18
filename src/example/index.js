@@ -174,6 +174,7 @@ render(
     bodyWeekTmpl=${BodyWeekTmpl}
     bodyDateTmpl=${BodyDateTmpl}
     updateRef=${updateRef}
+    portalHeaderElement=${document.getElementById('portal-header')}
     customOptions=${{
       1689300057808: ['classA', 'classB', 'classC'],
       1689131591000: ['classA', 'classB'],

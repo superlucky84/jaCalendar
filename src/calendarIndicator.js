@@ -28,6 +28,7 @@ export const CalendarComponent = mount((_r, props) => {
       props.bodyDateTmpl,
       props.updateRef,
       props.customOptions,
+      props.portalHeaderElement,
     ]
   );
 

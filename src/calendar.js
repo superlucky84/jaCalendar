@@ -51,6 +51,7 @@ export class Calendar {
       ...options,
     };
 
+    this.portalHeaderElement = options.portalHeaderElement;
     this._date = options.date;
     this._type = options.type;
 
@@ -229,20 +230,56 @@ export class Calendar {
     const dataHeader = this._header.render(date, type);
     const dataBody = this._body.render(date, type);
 
-    return mount(renew => {
-      let header = dataHeader;
-      let body = dataBody;
-      this.reRender = (newHeader, newBody) => {
-        header = newHeader;
-        body = newBody;
-        renew();
+    if (this.portalHeaderElement) {
+      this.reRender = (dataHeader, dataBody) => {
+        this.reRenderHeader(dataHeader);
+        this.reRenderBody(dataBody);
       };
 
-      return () => html`<${Fragment}>
-        <${header[0]} ...${header[1]} />
-        <${body[0]} ...${body[1]} />
-      <//>`;
-    });
+      const PortalHeader = mount(renew => {
+        let header = dataHeader;
+
+        this.reRenderHeader = newHeader => {
+          header = newHeader;
+          renew();
+        };
+
+        return () => html`<${Fragment}>
+          <${header[0]} ...${header[1]} />
+        <//>`;
+      });
+
+      lithentRender(html`<${PortalHeader} />`, this.portalHeaderElement);
+
+      return mount(renew => {
+        let body = dataBody;
+
+        this.reRenderBody = newBody => {
+          body = newBody;
+          renew();
+        };
+
+        return () => html`<${Fragment}>
+          <${body[0]} ...${body[1]} />
+        <//>`;
+      });
+    } else {
+      return mount(renew => {
+        let header = dataHeader;
+        let body = dataBody;
+
+        this.reRender = (newHeader, newBody) => {
+          header = newHeader;
+          body = newBody;
+          renew();
+        };
+
+        return () => html`<${Fragment}>
+          <${header[0]} ...${header[1]} />
+          <${body[0]} ...${body[1]} />
+        <//>`;
+      });
+    }
   }
 
   _getRelativeWeek(step) {
