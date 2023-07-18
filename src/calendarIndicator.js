@@ -1,5 +1,10 @@
 import { Calendar } from '@/calendar';
-export class DateIndicator {
+import { h, mount } from 'lithent';
+import htm from 'htm';
+
+const html = htm.bind(h);
+
+export class CalendarClass {
   constructor({
     type,
     date,

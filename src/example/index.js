@@ -1,5 +1,5 @@
 import { CLASS_NAME_HEADER, CLASS_NAME_BODY } from '@/calendar';
-import { DateIndicator } from '@/dateIndicator';
+import { CalendarClass } from '@/calendarIndicator';
 import { dateUtil } from '@/helper/dateUtil';
 import { h, mount } from 'lithent';
 import htm from 'htm';
@@ -136,7 +136,7 @@ export const BodyDateTmpl = mount(() => {
     `;
 });
 
-const ins = new DateIndicator({
+const ins = new CalendarClass({
   container: document.getElementById('calendar-wrapper'),
   language: 'ko',
   type: 'date-week',
