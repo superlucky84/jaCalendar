@@ -238,24 +238,34 @@ export class Calendar extends CustomEvents {
     const dataHeader = this._header.render(date, type);
     const dataBody = this._body.render(date, type);
 
-    if (this.reRender) {
-      this.reRender(dataHeader, dataBody);
-    } else {
-      return mount(renew => {
-        let header = dataHeader;
-        let body = dataBody;
-        this.reRender = (newHeader, newBody) => {
-          header = newHeader;
-          body = newBody;
-          renew();
-        };
-
-        return () => html`<${Fragment}>
-          <${header[0]} ...${header[1]} />
-          <${body[0]} ...${body[1]} />
-        <//>`;
-      });
+    if (!this.reRender) {
+      throw new Error('먼저 마운트 해야 합니다.');
     }
+
+    this.reRender(dataHeader, dataBody);
+  }
+
+  mount() {
+    const date = this._date;
+    const type = this.getType();
+
+    const dataHeader = this._header.render(date, type);
+    const dataBody = this._body.render(date, type);
+
+    return mount(renew => {
+      let header = dataHeader;
+      let body = dataBody;
+      this.reRender = (newHeader, newBody) => {
+        header = newHeader;
+        body = newBody;
+        renew();
+      };
+
+      return () => html`<${Fragment}>
+        <${header[0]} ...${header[1]} />
+        <${body[0]} ...${body[1]} />
+      <//>`;
+    });
   }
 
   _getRelativeWeek(step) {

@@ -1,7 +1,7 @@
 import { CLASS_NAME_HEADER, CLASS_NAME_BODY } from '@/calendar';
 import { CalendarComponent } from '@/calendarIndicator';
 import { dateUtil } from '@/helper/dateUtil';
-import { h, mount, render } from 'lithent';
+import { h, mount, render, ref } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
 
@@ -136,6 +136,9 @@ export const BodyDateTmpl = mount(() => {
     `;
 });
 
+const updateRef = ref(null);
+window.updateRef = updateRef;
+
 render(
   html`<${CalendarComponent}
     language="ko"
@@ -149,6 +152,7 @@ render(
     bodyMonthTmpl=${null}
     bodyWeekTmpl=${BodyWeekTmpl}
     bodyDateTmpl=${BodyDateTmpl}
+    updateRef=${updateRef}
     customOptions=${{
       1689300057808: ['classA', 'classB', 'classC'],
       1689131591000: ['classA', 'classB'],
