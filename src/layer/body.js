@@ -15,16 +15,9 @@ const html = htm.bind(h);
  * @class
  */
 export class Body {
-  constructor(bodyContainer, options) {
+  constructor(options) {
     var language = options.language;
     var weekStartDay = options.weekStartDay;
-
-    /**
-     * Body container element
-     * @type {HTMLElement}
-     * @private
-     */
-    this._container = bodyContainer;
 
     /**
      * DateLayer
@@ -141,7 +134,6 @@ export class Body {
   destroy() {
     this.remove();
 
-    this._container = null;
     this._currentLayer = null;
     this._dateLayer = null;
     this._monthLayer = null;

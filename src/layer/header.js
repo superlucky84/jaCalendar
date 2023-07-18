@@ -48,7 +48,6 @@ export class Header extends CustomEvents {
       this._weekStartDay,
       this._weekStartStandardDay
     );
-    this._setEvents(option);
   }
 
   changeLanguage(language) {
@@ -97,24 +96,6 @@ export class Header extends CustomEvents {
       YEAR_TITLE_FORMAT,
       localeText.titles
     );
-  }
-
-  _setEvents() {
-    this.eventHandler = this._onClickHandler.bind(this);
-    this._container.addEventListener('click', this.eventHandler);
-  }
-
-  _removeEvents() {
-    this.off();
-    this._container.removeEventListener('click', this.eventHandler);
-  }
-
-  _onClickHandler(ev) {
-    const target = ev.target;
-
-    if (target.closest(SELECTOR_BTN)) {
-      this.fire('click', ev);
-    }
   }
 
   _getTitleText(date, type) {

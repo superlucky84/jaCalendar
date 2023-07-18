@@ -1,4 +1,4 @@
-import { h, mount, render as lithentRender } from 'lithent';
+import { h, mount, Fragment, render as lithentRender } from 'lithent';
 import htm from 'htm';
 import { Header } from '@/layer/header';
 import { Body } from '@/layer/body';
@@ -62,17 +62,14 @@ export class Calendar extends CustomEvents {
       ...options,
     };
 
-    this._date = null;
-    this._type = null;
+    this._date = options.date;
+    this._type = options.type;
+
     this._header = null;
     this._body = null;
 
     this._initHeader(options);
     this._initBody(options);
-    this.draw({
-      date: options.date,
-      type: options.type,
-    });
   }
 
   /**
@@ -238,15 +235,27 @@ export class Calendar extends CustomEvents {
     const date = this._date;
     const type = this.getType();
 
-    const [HTmpl, hContext] = this._header.render(date, type);
-    const [BTmpl, bContext] = this._body.render(date, type);
+    const dataHeader = this._header.render(date, type);
+    const dataBody = this._body.render(date, type);
 
-    return mount(() => {
-      return () => html`<${Fragment}>
-        <${HTmpl} ...${hContext} />
-        <${BTmpl} ...${bContext} />
-      <//>`;
-    });
+    if (this.reRender) {
+      this.reRender(dataHeader, dataBody);
+    } else {
+      return mount(renew => {
+        let header = dataHeader;
+        let body = dataBody;
+        this.reRender = (newHeader, newBody) => {
+          header = newHeader;
+          body = newBody;
+          renew();
+        };
+
+        return () => html`<${Fragment}>
+          <${header[0]} ...${header[1]} />
+          <${body[0]} ...${body[1]} />
+        <//>`;
+      });
+    }
   }
 
   _getRelativeWeek(step) {
