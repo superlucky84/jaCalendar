@@ -27,15 +27,14 @@ const YEAR_TITLE_FORMAT = 'yyyy';
  * @param {string} option.language - Header language
  */
 export class Header extends CustomEvents {
-  constructor(customTmpl, container, events, option) {
+  constructor(customTmpl, events, option) {
     super();
 
-    this._customTmpl = customTmpl;
+    this._tmpl = customTmpl || HeaderTmpl;
     this.tmplRemove = null;
     this.eventHandler = null;
     this.events = events;
 
-    this._container = container;
     this._innerElement = null;
     this._infoElement = null;
     this._yearMonthTitleFormatter = null;
@@ -49,7 +48,6 @@ export class Header extends CustomEvents {
       this._weekStartDay,
       this._weekStartStandardDay
     );
-    this._setEvents(option);
   }
 
   changeLanguage(language) {
@@ -69,20 +67,7 @@ export class Header extends CustomEvents {
       type,
     };
 
-    if (this.updater) {
-      this.updater.value(context);
-    } else {
-      this.updater = ref();
-      this.remove = lithentRender(
-        html`<${HeaderTmpl}
-          ...${context}
-          updater=${this.updater}
-          customTmpl=${this._customTmpl}
-        />`,
-        this._container
-      );
-      this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
-    }
+    return [this._tmpl, context];
   }
 
   destroy() {
@@ -111,24 +96,6 @@ export class Header extends CustomEvents {
       YEAR_TITLE_FORMAT,
       localeText.titles
     );
-  }
-
-  _setEvents() {
-    this.eventHandler = this._onClickHandler.bind(this);
-    this._container.addEventListener('click', this.eventHandler);
-  }
-
-  _removeEvents() {
-    this.off();
-    this._container.removeEventListener('click', this.eventHandler);
-  }
-
-  _onClickHandler(ev) {
-    const target = ev.target;
-
-    if (target.closest(SELECTOR_BTN)) {
-      this.fire('click', ev);
-    }
   }
 
   _getTitleText(date, type) {

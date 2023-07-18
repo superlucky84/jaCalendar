@@ -2,7 +2,7 @@ import { h, mount, Fragment } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
 
-const DefaultHeader = mount(() => {
+export const HeaderTmpl = mount(() => {
   return ({
     events,
     isDateCalendar,
@@ -27,43 +27,3 @@ const DefaultHeader = mount(() => {
     </div>
   `;
 });
-
-export const HeaderTmpl = mount(
-  (
-    renew,
-    {
-      updater,
-      customTmpl,
-      events,
-      isDateCalendar,
-      isWeekCalendar,
-      titleClass,
-      title,
-      type,
-    }
-  ) => {
-    if (updater) {
-      updater.value = context => {
-        isDateCalendar = context.isDateCalendar;
-        isWeekCalendar = context.isWeekCalendar;
-        titleClass = context.titleClass;
-        title = context.title;
-        type = context.type;
-        renew();
-      };
-    }
-
-    return () => html`
-      <${Fragment}>
-        <${customTmpl || DefaultHeader}
-          events=${events}
-          isDateCalendar=${isDateCalendar}
-          isWeekCalendar=${isWeekCalendar}
-          titleClass=${titleClass}
-          title=${title}
-          type=${type}
-        />
-      <//>
-    `;
-  }
-);
