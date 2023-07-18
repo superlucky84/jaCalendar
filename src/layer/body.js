@@ -1,14 +1,9 @@
-import { h, render as lithentRender, ref } from 'lithent';
-import htm from 'htm';
 import { TYPE_DATE_WEEK, TYPE_DATE, TYPE_MONTH, TYPE_YEAR } from '@/constants';
 
-import { BodyTmpl } from '@/tmpl/mainBodyTmpl';
 import { DateLayer } from '@/layer/date';
 import { WeekLayer } from '@/layer/week';
 import { MonthLayer } from '@/layer/month';
 import { YearLayer } from '@/layer/year';
-
-const html = htm.bind(h);
 
 /**
  * @ignore
@@ -114,18 +109,9 @@ export class Body {
   render(date, type) {
     const layer = this._getLayer(type);
     const Tmpl = layer._tmpl;
-    const context = Object.assign(layer._makeContext(date), { Tmpl });
+    const context = Object.assign(layer.makeContext(date), { Tmpl });
 
     return [layer._tmpl, context];
-  }
-
-  /**
-   * Returns date elements
-   * @returns {HTMLElement[]}
-   */
-  getDateElements() {
-    // this._currentLayer.getDateElements();
-    return [];
   }
 
   /**

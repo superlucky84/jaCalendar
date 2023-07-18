@@ -41,8 +41,8 @@ export class LayerBase {
    * @returns {object}
    * @private
    */
-  _makeContext() {
-    throwOverrideError(this.getType(), '_makeContext');
+  makeContext() {
+    throwOverrideError(this.getType(), 'makeContext');
   }
 
   /**
@@ -52,16 +52,6 @@ export class LayerBase {
    */
   render() {
     throwOverrideError(this.getType(), 'render');
-  }
-
-  /**
-   * Returns date elements
-   * @abstract
-   * @throws {Error}
-   * @returns {HTMLElement[]}
-   */
-  getDateElements() {
-    throwOverrideError(this.getType(), 'getDateElements');
   }
 
   /**

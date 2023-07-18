@@ -140,10 +140,6 @@ export class Calendar {
     return this._type;
   }
 
-  getDateElements() {
-    return this._body.getDateElements();
-  }
-
   addCssClass(className) {
     this._element.classList.add(className);
   }

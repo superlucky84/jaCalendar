@@ -1,10 +1,6 @@
-import { h, render as lithentRender } from 'lithent';
-import htm from 'htm';
 import { LayerBase } from '@/layer/base';
 import { TYPE_MONTH } from '@/constants';
 import { BodyTmpl } from '@/tmpl/monthBodyTmpl';
-
-const html = htm.bind(h);
 
 /**
  * @class
@@ -31,7 +27,7 @@ export class MonthLayer extends LayerBase {
    * @returns {object} Template context
    * @private
    */
-  _makeContext(date) {
+  makeContext(date) {
     const monthsShort = this._localeText.titles.MMM;
 
     return {
@@ -50,14 +46,5 @@ export class MonthLayer extends LayerBase {
       Dec: monthsShort[11],
       customOptions: this._customOptions,
     };
-  }
-
-  /**
-   * Returns month elements
-   * @override
-   * @returns {HTMLElement[]}
-   */
-  getDateElements() {
-    return this._element.querySelectorAll('[data-timestamp]');
   }
 }

@@ -1,7 +1,3 @@
-import { h, ref, render as lithentRender } from 'lithent';
-import htm from 'htm';
-const html = htm.bind(h);
-
 import {
   WEEK_START_DAY_MAP,
   TYPE_DATE,
@@ -14,8 +10,6 @@ import { HeaderTmpl } from '@/tmpl/headerTmpl';
 import { DateTimeFormatter } from '@/helper/dateTimeFormatter';
 import { dateUtil } from '@/helper/dateUtil';
 
-const SELECTOR_INNER_ELEM = '.ja-calendar-header-inner';
-const SELECTOR_BTN = '.ja-calendar-btn';
 const YEAR_TITLE_FORMAT = 'yyyy';
 
 /**

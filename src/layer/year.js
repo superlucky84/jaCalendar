@@ -1,11 +1,7 @@
-import { h, render as lithentRender } from 'lithent';
-import htm from 'htm';
 import { TYPE_YEAR } from '@/constants';
 import { dateUtil } from '@/helper/dateUtil';
 import { BodyTmpl } from '@/tmpl/yearBodyTmpl';
 import { LayerBase } from '@/layer/base';
-
-const html = htm.bind(h);
 
 /**
  * @class
@@ -31,7 +27,7 @@ export class YearLayer extends LayerBase {
    * @returns {object} Template context
    * @private
    */
-  _makeContext(date) {
+  makeContext(date) {
     var year = date.getFullYear();
 
     return {
@@ -43,14 +39,5 @@ export class YearLayer extends LayerBase {
       getFirstDayTimestamp: dateUtil.getFirstDayTimestamp,
       customOptions: this._customOptions,
     };
-  }
-
-  /**
-   * Returns year elements
-   * @override
-   * @returns {HTMLElement[]}
-   */
-  getDateElements() {
-    return this._element.querySelectorAll('[data-timestamp]');
   }
 }

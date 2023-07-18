@@ -1,5 +1,3 @@
-import { h, render as lithentRender } from 'lithent';
-import htm from 'htm';
 import { dateUtil } from '@/helper/dateUtil';
 import { TYPE_DATE, WEEK_START_DAY_MAP } from '@/constants';
 import { LayerBase } from '@/layer/base';
@@ -12,7 +10,6 @@ import {
   CLASS_NAME_CALENDAR_SAT,
 } from '@/constants';
 
-const html = htm.bind(h);
 const DAYS_OF_WEEK = 7;
 
 /**
@@ -42,7 +39,7 @@ export class DateLayer extends LayerBase {
    * @private
    * @returns {object} Template context
    */
-  _makeContext(date) {
+  makeContext(date) {
     var daysShort = this._localeText.titles.D;
     var year, month, days, i;
 
@@ -154,15 +151,6 @@ export class DateLayer extends LayerBase {
     }
 
     return contexts;
-  }
-
-  /**
-   * Return date elements
-   * @override
-   * @returns {HTMLElement[]}
-   */
-  getDateElements() {
-    return this._element.querySelectorAll('[data-timestamp]');
   }
 
   _getFirstWeek(year, month) {
