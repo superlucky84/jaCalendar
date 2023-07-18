@@ -16,10 +16,6 @@ export const CLASS_NAME_NEXT_YEAR_BTN = 'ja-calendar-btn-next-year';
 export const CLASS_NAME_NEXT_WEEK_BTN = 'ja-calendar-btn-next-week';
 export const CLASS_NAME_NEXT_MONTH_BTN = 'ja-calendar-btn-next-month';
 
-export const CLASS_NAME_HIDDEN = 'ja-calendar-hidden';
-export const CLASS_NAME_HEADER = 'ja-calendar-header';
-export const CLASS_NAME_BODY = 'ja-calendar-body';
-
 export const CLASS_NAME_CALENDER_DATE = 'ja-calendar-date';
 export const CLASS_NAME_CALENDER_PREV_MONTH = 'ja-calendar-prev-month';
 export const CLASS_NAME_CALENDER_NEXT_MONTH = 'ja-calendar-next-month';

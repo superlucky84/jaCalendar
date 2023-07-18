@@ -2,10 +2,8 @@ import { h, mount, Fragment, render as lithentRender } from 'lithent';
 import htm from 'htm';
 import { Header } from '@/layer/header';
 import { Body } from '@/layer/body';
-import { LayoutTmpl } from '@/tmpl/layoutTmpl';
 import { CustomEvents } from '@/helper/customEvents';
 import { localeTexts } from '@/locale/localeTexts';
-import { dateUtil } from '@/helper/dateUtil';
 
 import {
   DEFAULT_WEEK_START_DAY,
@@ -21,9 +19,6 @@ import {
   CLASS_NAME_NEXT_YEAR_BTN,
   CLASS_NAME_NEXT_WEEK_BTN,
   CLASS_NAME_NEXT_MONTH_BTN,
-  CLASS_NAME_HIDDEN,
-  CLASS_NAME_HEADER,
-  CLASS_NAME_BODY,
 } from '@/constants';
 
 export {
@@ -33,8 +28,6 @@ export {
   CLASS_NAME_NEXT_MONTH_BTN,
   CLASS_NAME_NEXT_WEEK_BTN,
   CLASS_NAME_PREV_WEEK_BTN,
-  CLASS_NAME_HEADER,
-  CLASS_NAME_BODY,
 };
 
 const html = htm.bind(h);
@@ -52,7 +45,6 @@ export class Calendar extends CustomEvents {
       usageStatistics: true,
       weekStartDay: DEFAULT_WEEK_START_DAY,
       weekStartStandardDay: DEFAULT_WEEK_START_STANDRAD_DAY,
-      layoutTmpl: options.layoutTmpl,
       headerTmpl: options.headerTmpl,
       bodyYearTmpl: options.bodyYearTmpl,
       bodyMonthTmpl: options.bodyMonthTmpl,
@@ -102,14 +94,6 @@ export class Calendar extends CustomEvents {
     this._type = type;
 
     return this._render();
-  }
-
-  show() {
-    this._element.classList.remove(CLASS_NAME_HIDDEN);
-  }
-
-  hide() {
-    this._element.classList.add(CLASS_NAME_HIDDEN);
   }
 
   drawNextMonth() {

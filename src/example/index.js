@@ -1,21 +1,8 @@
-import { CLASS_NAME_HEADER, CLASS_NAME_BODY } from '@/calendar';
 import { CalendarComponent } from '@/calendarIndicator';
 import { dateUtil } from '@/helper/dateUtil';
 import { h, mount, render, ref } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
-
-export const LayoutTmpl = mount(
-  () => () =>
-    html`
-      <div>
-        asdga
-        <div class=${CLASS_NAME_HEADER}></div>
-        <div class=${CLASS_NAME_BODY}></div>
-        vase
-      </div>
-    `
-);
 
 export const HeaderTmpl = mount(() => {
   return ({ events, isDateCalendar, isWeekCalendar, title, type }) => html`
@@ -157,7 +144,6 @@ render(
     date=${new Date()}
     weekStartDay="sun"
     weekStartStandardDay="thu"
-    layoutTmpl=${LayoutTmpl}
     headerTmpl=${HeaderTmpl}
     bodyYearTmpl=${null}
     bodyMonthTmpl=${null}
@@ -182,7 +168,6 @@ render(
     date=${new Date()}
     weekStartDay="sun"
     weekStartStandardDay="thu"
-    layoutTmpl=${LayoutTmpl}
     headerTmpl=${HeaderTmpl}
     bodyYearTmpl=${null}
     bodyMonthTmpl=${null}

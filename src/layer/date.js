@@ -157,22 +157,6 @@ export class DateLayer extends LayerBase {
   }
 
   /**
-   * Render date-layer
-   * @override
-   * @param {Date} date Date to render
-   * @param {HTMLElement} container A container element for the rendered element
-   */
-  render(date, container) {
-    var context = this._makeContext(date);
-
-    this.remove = lithentRender(
-      html`<${this._tmpl} ...${context} />`,
-      container
-    );
-    this._element = container.firstChild;
-  }
-
-  /**
    * Return date elements
    * @override
    * @returns {HTMLElement[]}

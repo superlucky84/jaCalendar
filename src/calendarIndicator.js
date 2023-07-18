@@ -21,7 +21,6 @@ export const CalendarComponent = mount((_r, props) => {
       props.date,
       props.weekStartDay,
       props.weekStartStandardDay,
-      props.layoutTmpl,
       props.headerTmpl,
       props.bodyYearTmpl,
       props.bodyMonthTmpl,
