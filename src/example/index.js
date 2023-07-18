@@ -136,6 +136,42 @@ export const BodyDateTmpl = mount(() => {
     `;
 });
 
+/*
+const IndexComponent = mount((renew, props) => {
+  const options = { ...props };
+  const changeType = () => {
+    options.type = 'date';
+    renew();
+  };
+
+  return () => html`<div>
+    <button onClick=${changeType}>changeType</button>
+    <${CalendarComponent} ...${options} />
+  </div>`;
+});
+
+render(
+  html`<${IndexComponent}
+    language="ko"
+    type="date-week"
+    date=${new Date()}
+    weekStartDay="sun"
+    weekStartStandardDay="thu"
+    layoutTmpl=${LayoutTmpl}
+    headerTmpl=${HeaderTmpl}
+    bodyYearTmpl=${null}
+    bodyMonthTmpl=${null}
+    bodyWeekTmpl=${BodyWeekTmpl}
+    bodyDateTmpl=${BodyDateTmpl}
+    customOptions=${{
+      1689300057808: ['classA', 'classB', 'classC'],
+      1689131591000: ['classA', 'classB'],
+    }}
+  />`,
+  document.getElementById('calendar-wrapper')
+);
+*/
+
 const updateRef = ref(null);
 window.updateRef = updateRef;
 

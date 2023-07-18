@@ -9,17 +9,11 @@ export const CalendarComponent = mount((_r, props) => {
   const calendar = new Calendar(options);
   const templateVDom = calendar.mount();
 
-  mountCallback(() => {
-    console.log('mount');
-    return () => {
-      calendar.destroy();
-    };
-  });
+  mountCallback(() => () => calendar.destroy());
 
   updateCallback(
     () => {
       calendar.draw({ ...props });
-      console.log('update');
     },
     () => [
       props.language,
