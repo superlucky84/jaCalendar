@@ -13,13 +13,6 @@ export class LayerBase {
     this.language = language || DEFAULT_LANGUAGE_TYPE;
 
     /**
-     * Layer element
-     * @type {HTMLElement}
-     * @private
-     */
-    this._element = null;
-
-    /**
      * Language type
      * @type {string}
      * @private
