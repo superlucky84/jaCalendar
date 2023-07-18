@@ -231,55 +231,63 @@ export class Calendar {
     const dataBody = this._body.render(date, type);
 
     if (this.portalHeaderElement) {
-      this.reRender = (dataHeader, dataBody) => {
-        this.reRenderHeader(dataHeader);
-        this.reRenderBody(dataBody);
+      return this._mountForPortalHeader(dataHeader, dataBody);
+    } else {
+      return this._mountForNormal(dataHeader, dataBody);
+    }
+  }
+
+  _mountForNormal(dataHeader, dataBody) {
+    return mount(renew => {
+      let header = dataHeader;
+      let body = dataBody;
+
+      this.reRender = (newHeader, newBody) => {
+        header = newHeader;
+        body = newBody;
+        renew();
       };
 
-      const PortalHeader = mount(renew => {
-        let header = dataHeader;
+      return () => html`<${Fragment}>
+        <${header[0]} ...${header[1]} />
+        <${body[0]} ...${body[1]} />
+      <//>`;
+    });
+  }
 
-        this.reRenderHeader = newHeader => {
-          header = newHeader;
-          renew();
-        };
+  _mountForPortalHeader(dataHeader, dataBody) {
+    this.reRender = (dataHeader, dataBody) => {
+      this.reRenderHeader(dataHeader);
+      this.reRenderBody(dataBody);
+    };
 
-        return () => html`<${Fragment}>
-          <${header[0]} ...${header[1]} />
-        <//>`;
-      });
+    const PortalHeader = mount(renew => {
+      let header = dataHeader;
 
-      lithentRender(html`<${PortalHeader} />`, this.portalHeaderElement);
+      this.reRenderHeader = newHeader => {
+        header = newHeader;
+        renew();
+      };
 
-      return mount(renew => {
-        let body = dataBody;
+      return () => html`<${Fragment}>
+        <${header[0]} ...${header[1]} />
+      <//>`;
+    });
 
-        this.reRenderBody = newBody => {
-          body = newBody;
-          renew();
-        };
+    lithentRender(html`<${PortalHeader} />`, this.portalHeaderElement);
 
-        return () => html`<${Fragment}>
-          <${body[0]} ...${body[1]} />
-        <//>`;
-      });
-    } else {
-      return mount(renew => {
-        let header = dataHeader;
-        let body = dataBody;
+    return mount(renew => {
+      let body = dataBody;
 
-        this.reRender = (newHeader, newBody) => {
-          header = newHeader;
-          body = newBody;
-          renew();
-        };
+      this.reRenderBody = newBody => {
+        body = newBody;
+        renew();
+      };
 
-        return () => html`<${Fragment}>
-          <${header[0]} ...${header[1]} />
-          <${body[0]} ...${body[1]} />
-        <//>`;
-      });
-    }
+      return () => html`<${Fragment}>
+        <${body[0]} ...${body[1]} />
+      <//>`;
+    });
   }
 
   _getRelativeWeek(step) {
