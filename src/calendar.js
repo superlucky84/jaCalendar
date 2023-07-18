@@ -1,4 +1,4 @@
-import { h, render as lithentRender } from 'lithent';
+import { h, mount, render as lithentRender } from 'lithent';
 import htm from 'htm';
 import { Header } from '@/layer/header';
 import { Body } from '@/layer/body';
@@ -39,26 +39,8 @@ export {
 
 const html = htm.bind(h);
 
-/**
- * const calendar = DatePicker.createCalendar('#calendar-wrapper', {
- *     language: 'en',
- *     date: new Date(),
- *     type: 'date',
- *     weekStartDay: 'Mon',
- * });
- *
- * calendar.on('draw', (event) => {
- *     console.log(event.date);
- *     console.log(event.type);
- *     for (let i = 0, len = event.dateElements.length; i < len; i += 1) {
- *         const el = event.dateElements[i];
- *         const date = new Date(getData(el, 'timestamp'));
- *         console.log(date);
- *     }
- * });
- */
 export class Calendar extends CustomEvents {
-  constructor(container, options) {
+  constructor(options) {
     super();
 
     this.static = { localeTexts };
@@ -80,14 +62,6 @@ export class Calendar extends CustomEvents {
       ...options,
     };
 
-    this._container = container;
-
-    lithentRender(
-      html`<${options.layoutTmpl || LayoutTmpl} />`,
-      this._container
-    );
-
-    this._element = this._container.firstChild;
     this._date = null;
     this._type = null;
     this._header = null;
@@ -127,17 +101,10 @@ export class Calendar extends CustomEvents {
     date = options.date || this._date;
     type = (options.type || this.getType()).toLowerCase();
 
-    if (this._shouldUpdate(date, type)) {
-      this._date = date;
-      this._type = type;
-      this._render();
-    }
+    this._date = date;
+    this._type = type;
 
-    this.fire('draw', {
-      date: this._date,
-      type: type,
-      dateElements: this._body.getDateElements(),
-    });
+    return this._render();
   }
 
   show() {
@@ -183,7 +150,8 @@ export class Calendar extends CustomEvents {
   changeLanguage(language) {
     this._header.changeLanguage(language);
     this._body.changeLanguage(language);
-    this._render();
+
+    return this._render();
   }
 
   getDate() {
@@ -207,25 +175,16 @@ export class Calendar extends CustomEvents {
   }
 
   destroy() {
-    this._header.destroy();
-    this._body.destroy();
-    this._element.remove();
     this._type = null;
     this._date = null;
     this._container = null;
-    this._element = null;
     this._header = null;
     this._body = null;
   }
 
   _initHeader(options) {
-    const headerContainer = this._element.querySelector(
-      `.${CLASS_NAME_HEADER}`
-    );
-
     this._header = new Header(
       options.headerTmpl,
-      headerContainer,
       {
         drawNextYear: this.drawNextYear.bind(this),
         drawPrevYear: this.drawPrevYear.bind(this),
@@ -236,42 +195,10 @@ export class Calendar extends CustomEvents {
       },
       options
     );
-    this._header.on('click', ev => {
-      const target = ev.target;
-      const targetClassList = target.classList;
-
-      if (targetClassList.contains(CLASS_NAME_NEXT_YEAR_BTN)) {
-        this.drawNextYear();
-      } else if (targetClassList.contains(CLASS_NAME_PREV_YEAR_BTN)) {
-        this.drawPrevYear();
-      } else if (
-        targetClassList.contains(CLASS_NAME_PREV_MONTH_BTN) &&
-        [TYPE_DATE_WEEK, TYPE_DATE].includes(options.type)
-      ) {
-        this.drawPrevMonth();
-      } else if (
-        targetClassList.contains(CLASS_NAME_NEXT_MONTH_BTN) &&
-        [TYPE_DATE_WEEK, TYPE_DATE].includes(options.type)
-      ) {
-        this.drawNextMonth();
-      } else if (
-        targetClassList.contains(CLASS_NAME_PREV_WEEK_BTN) &&
-        options.type === TYPE_DATE_WEEK
-      ) {
-        this.drawPrevWeek();
-      } else if (
-        targetClassList.contains(CLASS_NAME_NEXT_WEEK_BTN) &&
-        options.type === TYPE_DATE_WEEK
-      ) {
-        this.drawNextWeek();
-      }
-    });
   }
 
   _initBody(options) {
-    var bodyContainer = this._element.querySelector(`.${CLASS_NAME_BODY}`);
-
-    this._body = new Body(bodyContainer, options);
+    this._body = new Body(options);
   }
 
   drawPrevYear() {
@@ -307,24 +234,19 @@ export class Calendar extends CustomEvents {
     );
   }
 
-  _shouldUpdate(date, type) {
-    if (!dateUtil.isValidDate(date)) {
-      throw new Error('Invalid date');
-    }
-
-    if (!this._isValidType(type)) {
-      throw new Error('Invalid layer type');
-    }
-
-    return true;
-  }
-
   _render() {
     const date = this._date;
     const type = this.getType();
 
-    this._header.render(date, type);
-    this._body.render(date, type);
+    const [HTmpl, hContext] = this._header.render(date, type);
+    const [BTmpl, bContext] = this._body.render(date, type);
+
+    return mount(() => {
+      return () => html`<${Fragment}>
+        <${HTmpl} ...${hContext} />
+        <${BTmpl} ...${bContext} />
+      <//>`;
+    });
   }
 
   _getRelativeWeek(step) {

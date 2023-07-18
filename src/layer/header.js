@@ -27,15 +27,14 @@ const YEAR_TITLE_FORMAT = 'yyyy';
  * @param {string} option.language - Header language
  */
 export class Header extends CustomEvents {
-  constructor(customTmpl, container, events, option) {
+  constructor(customTmpl, events, option) {
     super();
 
-    this._customTmpl = customTmpl;
+    this._tmpl = customTmpl || HeaderTmpl;
     this.tmplRemove = null;
     this.eventHandler = null;
     this.events = events;
 
-    this._container = container;
     this._innerElement = null;
     this._infoElement = null;
     this._yearMonthTitleFormatter = null;
@@ -69,20 +68,7 @@ export class Header extends CustomEvents {
       type,
     };
 
-    if (this.updater) {
-      this.updater.value(context);
-    } else {
-      this.updater = ref();
-      this.remove = lithentRender(
-        html`<${HeaderTmpl}
-          ...${context}
-          updater=${this.updater}
-          customTmpl=${this._customTmpl}
-        />`,
-        this._container
-      );
-      this._innerElement = this._container.querySelector(SELECTOR_INNER_ELEM);
-    }
+    return [this._tmpl, context];
   }
 
   destroy() {

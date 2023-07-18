@@ -1,7 +1,7 @@
 import { CLASS_NAME_HEADER, CLASS_NAME_BODY } from '@/calendar';
-import { CalendarClass } from '@/calendarIndicator';
+import { CalendarComponent } from '@/calendarIndicator';
 import { dateUtil } from '@/helper/dateUtil';
-import { h, mount } from 'lithent';
+import { h, mount, render } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
 
@@ -136,24 +136,23 @@ export const BodyDateTmpl = mount(() => {
     `;
 });
 
-const ins = new CalendarClass({
-  container: document.getElementById('calendar-wrapper'),
-  language: 'ko',
-  type: 'date-week',
-  date: new Date(),
-  weekStartDay: 'sun',
-  weekStartStandardDay: 'thu',
-  layoutTmpl: LayoutTmpl,
-  headerTmpl: HeaderTmpl,
-  bodyYearTmpl: null,
-  bodyMonthTmpl: null,
-  bodyWeekTmpl: BodyWeekTmpl,
-  bodyDateTmpl: BodyDateTmpl,
-  customOptions: {
-    1689300057808: ['classA', 'classB', 'classC'],
-    1689131591000: ['classA', 'classB'],
-  },
-});
-
-console.log('window.ins', ins);
-window.ins = ins;
+render(
+  html`<${CalendarComponent}
+    language="ko"
+    type="date-week"
+    date=${new Date()}
+    weekStartDay="sun"
+    weekStartStandardDay="thu"
+    layoutTmpl=${LayoutTmpl}
+    headerTmpl=${HeaderTmpl}
+    bodyYearTmpl=${null}
+    bodyMonthTmpl=${null}
+    bodyWeekTmpl=${BodyWeekTmpl}
+    bodyDateTmpl=${BodyDateTmpl}
+    customOptions=${{
+      1689300057808: ['classA', 'classB', 'classC'],
+      1689131591000: ['classA', 'classB'],
+    }}
+  />`,
+  document.getElementById('calendar-wrapper')
+);

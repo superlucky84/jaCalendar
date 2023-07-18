@@ -123,15 +123,7 @@ export class Body {
     const Tmpl = layer._tmpl;
     const context = Object.assign(layer._makeContext(date), { Tmpl });
 
-    if (this.updater) {
-      this.updater.value(context);
-    } else {
-      this.updater = ref();
-      this.remove = lithentRender(
-        html`<${BodyTmpl} ...${context} updater=${this.updater} />`,
-        this._container
-      );
-    }
+    return [layer._tmpl, context];
   }
 
   /**
