@@ -1,9 +1,14 @@
+import { h, render as lithentRender, ref } from 'lithent';
+import htm from 'htm';
 import { TYPE_DATE_WEEK, TYPE_DATE, TYPE_MONTH, TYPE_YEAR } from '@/constants';
 
+import { BodyTmpl } from '@/tmpl/mainBodyTmpl';
 import { DateLayer } from '@/layer/date';
 import { WeekLayer } from '@/layer/week';
 import { MonthLayer } from '@/layer/month';
 import { YearLayer } from '@/layer/year';
+
+const html = htm.bind(h);
 
 /**
  * @ignore
@@ -114,13 +119,18 @@ export class Body {
    * @param {string} type - Layer type
    */
   render(date, type) {
-    var nextLayer = this._getLayer(type);
-    var prevLayer = this._currentLayer;
+    const layer = this._getLayer(type);
+    const context = Object.assign(layer._makeContext(date), { type });
 
-    prevLayer.remove();
-    nextLayer.render(date, this._container);
-
-    this._currentLayer = nextLayer;
+    if (this.updater) {
+      this.updater.value(context);
+    } else {
+      this.updater = ref();
+      this.remove = lithentRender(
+        html`<${BodyTmpl} ...${context} updater=${this.updater} />`,
+        this._container
+      );
+    }
   }
 
   /**
@@ -128,16 +138,15 @@ export class Body {
    * @returns {HTMLElement[]}
    */
   getDateElements() {
-    return this._currentLayer.getDateElements();
+    // this._currentLayer.getDateElements();
+    return [];
   }
 
   /**
    * Destory
    */
   destroy() {
-    this._eachLayer(function (layer) {
-      layer.remove();
-    });
+    this.remove();
 
     this._container = null;
     this._currentLayer = null;
