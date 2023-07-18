@@ -2,7 +2,6 @@ import { h, mount, Fragment, render as lithentRender } from 'lithent';
 import htm from 'htm';
 import { Header } from '@/layer/header';
 import { Body } from '@/layer/body';
-import { CustomEvents } from '@/helper/customEvents';
 import { localeTexts } from '@/locale/localeTexts';
 
 import {
@@ -32,10 +31,8 @@ export {
 
 const html = htm.bind(h);
 
-export class Calendar extends CustomEvents {
+export class Calendar {
   constructor(options) {
-    super();
-
     this.static = { localeTexts };
 
     options = {

@@ -2,7 +2,6 @@ import { h, ref, render as lithentRender } from 'lithent';
 import htm from 'htm';
 const html = htm.bind(h);
 
-import { CustomEvents } from '@/helper/customEvents';
 import {
   WEEK_START_DAY_MAP,
   TYPE_DATE,
@@ -26,10 +25,8 @@ const YEAR_TITLE_FORMAT = 'yyyy';
  * @param {object} option - Header option
  * @param {string} option.language - Header language
  */
-export class Header extends CustomEvents {
+export class Header {
   constructor(customTmpl, events, option) {
-    super();
-
     this._tmpl = customTmpl || HeaderTmpl;
     this.tmplRemove = null;
     this.eventHandler = null;
