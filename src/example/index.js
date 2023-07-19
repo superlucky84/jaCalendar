@@ -158,7 +158,7 @@ render(
 const apiRef = ref(null);
 window.apiRef = apiRef;
 
-render(
+window.destroy = render(
   html`<${CalendarComponent}
     language="ko"
     type="date-week"

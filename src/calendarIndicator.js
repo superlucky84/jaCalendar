@@ -9,7 +9,14 @@ export const CalendarComponent = mount((_r, props) => {
   const calendar = new Calendar(options);
   const templateVDom = calendar.mount();
 
-  mountCallback(() => () => calendar.destroy());
+  mountCallback(() => {
+    console.log('MOUNT');
+
+    return () => {
+      console.log('DESTROY');
+      calendar.destroy();
+    };
+  });
 
   updateCallback(
     () => {
@@ -36,6 +43,9 @@ export const CalendarComponent = mount((_r, props) => {
     apiRef.value = {
       update(newOptions) {
         calendar.draw(newOptions);
+      },
+      destroy() {
+        calendar.destroy();
       },
       getDate() {
         return calendar.getDate();

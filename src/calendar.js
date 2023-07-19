@@ -1,4 +1,5 @@
-import { h, mount, Fragment, render as lithentRender } from 'lithent';
+import { h, mount, Fragment } from 'lithent';
+import { portal } from 'lithent/helper';
 import htm from 'htm';
 import { Header } from '@/layer/header';
 import { Body } from '@/layer/body';
@@ -170,6 +171,9 @@ export class Calendar {
     this._container = null;
     this._header = null;
     this._body = null;
+    if (this.portalDistroy) {
+      this.portalDistroy();
+    }
   }
 
   _initHeader(options) {
@@ -277,7 +281,10 @@ export class Calendar {
       <//>`;
     });
 
-    lithentRender(html`<${PortalHeader} />`, this.portalHeaderElement);
+    this.portalDistroy = portal(
+      () => html`<${PortalHeader} />`,
+      this.portalHeaderElement
+    );
 
     return mount(renew => {
       let body = dataBody;
