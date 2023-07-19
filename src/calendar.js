@@ -141,14 +141,6 @@ export class Calendar {
     return this._type;
   }
 
-  addCssClass(className) {
-    this._element.classList.add(className);
-  }
-
-  removeCssClass(className) {
-    this._element.classList.remove(className);
-  }
-
   destroy() {
     this._type = null;
     this._date = null;
