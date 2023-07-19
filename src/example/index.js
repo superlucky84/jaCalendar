@@ -32,9 +32,6 @@ export const BodyWeekTmpl = mount(() => {
           <span>Date!!!s</span>
         </caption>
         <tr>
-          ${weeks.map(item => html` <td>${item.dayInMonth}</td> `)}
-        </tr>
-        <tr>
           <th scope="col">${Sun}</th>
           <th scope="col">${Mon}</th>
           <th scope="col">${Tue}</th>
