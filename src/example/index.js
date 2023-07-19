@@ -158,8 +158,8 @@ render(
 );
 */
 
-const updateRef = ref(null);
-window.updateRef = updateRef;
+const apiRef = ref(null);
+window.apiRef = apiRef;
 
 render(
   html`<${CalendarComponent}
@@ -173,7 +173,7 @@ render(
     bodyMonthTmpl=${null}
     bodyWeekTmpl=${BodyWeekTmpl}
     bodyDateTmpl=${BodyDateTmpl}
-    updateRef=${updateRef}
+    apiRef=${apiRef}
     portalHeaderElement=${document.getElementById('portal-header')}
     customOptions=${{
       1689300057808: ['classA', 'classB', 'classC'],

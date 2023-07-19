@@ -5,7 +5,7 @@ import htm from 'htm';
 const html = htm.bind(h);
 
 export const CalendarComponent = mount((_r, props) => {
-  const { updateRef, ...options } = props;
+  const { apiRef, ...options } = props;
   const calendar = new Calendar(options);
   const templateVDom = calendar.mount();
 
@@ -26,15 +26,44 @@ export const CalendarComponent = mount((_r, props) => {
       props.bodyMonthTmpl,
       props.bodyWeekTmpl,
       props.bodyDateTmpl,
-      props.updateRef,
+      props.apiRef,
       props.customOptions,
       props.portalHeaderElement,
     ]
   );
 
-  if (updateRef) {
-    updateRef.value = newOptions => {
-      calendar.draw(newOptions);
+  if (apiRef) {
+    apiRef.value = {
+      update(newOptions) {
+        calendar.draw(newOptions);
+      },
+      getDate() {
+        return calendar.getDate();
+      },
+      getType() {
+        return calendar.getType();
+      },
+      getNextMonth() {
+        return calendar.getNextMonth();
+      },
+      getPrevMonth() {
+        return calendar.getPrevMonth();
+      },
+      getNextWeek() {
+        return calendar.getNextWeek();
+      },
+      getPrevWeek() {
+        return calendar.getPrevWeek();
+      },
+      getNextYear() {
+        return calendar.getNextYear();
+      },
+      getPrevYear() {
+        return calendar.getPrevYear();
+      },
+      getEventHandler() {
+        return calendar.eventHandler;
+      },
     };
   }
 

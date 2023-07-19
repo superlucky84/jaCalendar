@@ -58,6 +58,7 @@ export class Calendar {
     this._header = null;
     this._body = null;
 
+    this.makeEventHandler();
     this._initHeader(options);
     this._initBody(options);
   }
@@ -96,34 +97,56 @@ export class Calendar {
 
   drawNextMonth() {
     this.draw({
-      date: this.getNextDate(),
+      date: this.getNextMonth(),
     });
   }
 
   drawPrevMonth() {
     this.draw({
-      date: this.getPrevDate(),
+      date: this.getPrevMonth(),
     });
   }
 
   drawNextWeek() {
     this.draw({
-      date: this._getRelativeWeek(7),
+      date: this.getNextWeek(),
     });
   }
 
   drawPrevWeek() {
     this.draw({
-      date: this._getRelativeWeek(-7),
+      date: this.getPrevWeek(),
     });
   }
 
-  getNextDate() {
+  getNextWeek() {
+    return this._getRelativeWeek(7);
+  }
+
+  getPrevWeek() {
+    return this._getRelativeWeek(-7);
+  }
+
+  getNextMonth() {
     return this._getRelativeDate(1);
   }
 
-  getPrevDate() {
+  getPrevMonth() {
     return this._getRelativeDate(-1);
+  }
+
+  getPrevYear() {
+    if ([TYPE_DATE, TYPE_DATE_WEEK, TYPE_MONTH].includes(this.getType())) {
+      return this._getRelativeDate(-12);
+    }
+    return this._getRelativeDate(-108);
+  }
+
+  getNextYear() {
+    if ([TYPE_DATE, TYPE_DATE_WEEK, TYPE_MONTH].includes(this.getType())) {
+      return this._getRelativeDate(12);
+    }
+    return this._getRelativeDate(108);
   }
 
   changeLanguage(language) {
@@ -150,18 +173,18 @@ export class Calendar {
   }
 
   _initHeader(options) {
-    this._header = new Header(
-      options.headerTmpl,
-      {
-        drawNextYear: this.drawNextYear.bind(this),
-        drawPrevYear: this.drawPrevYear.bind(this),
-        drawNextMonth: this.drawNextMonth.bind(this),
-        drawPrevMonth: this.drawPrevMonth.bind(this),
-        drawNextWeek: this.drawNextWeek.bind(this),
-        drawPrevWeek: this.drawPrevWeek.bind(this),
-      },
-      options
-    );
+    this._header = new Header(options.headerTmpl, this.eventHandler, options);
+  }
+
+  makeEventHandler() {
+    this.eventHandler = {
+      drawNextYear: this.drawNextYear.bind(this),
+      drawPrevYear: this.drawPrevYear.bind(this),
+      drawNextMonth: this.drawNextMonth.bind(this),
+      drawPrevMonth: this.drawPrevMonth.bind(this),
+      drawNextWeek: this.drawNextWeek.bind(this),
+      drawPrevWeek: this.drawPrevWeek.bind(this),
+    };
   }
 
   _initBody(options) {
@@ -169,27 +192,15 @@ export class Calendar {
   }
 
   drawPrevYear() {
-    if ([TYPE_DATE, TYPE_DATE_WEEK, TYPE_MONTH].includes(this.getType())) {
-      this.draw({
-        date: this._getRelativeDate(-12),
-      });
-    } else {
-      this.draw({
-        date: this._getRelativeDate(-108),
-      });
-    }
+    this.draw({
+      date: this.getPrevYear(),
+    });
   }
 
   drawNextYear() {
-    if ([TYPE_DATE, TYPE_DATE_WEEK, TYPE_MONTH].includes(this.getType())) {
-      this.draw({
-        date: this._getRelativeDate(12),
-      });
-    } else {
-      this.draw({
-        date: this._getRelativeDate(108),
-      });
-    }
+    this.draw({
+      date: this.getNextYear(),
+    });
   }
 
   _isValidType(type) {
