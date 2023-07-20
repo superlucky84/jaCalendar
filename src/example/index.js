@@ -1,8 +1,7 @@
 import { CalendarComponent } from '@/calendarIndicator';
 import { dateUtil } from '@/helper/dateUtil';
-import { h, mount, render, ref } from 'lithent';
-import htm from 'htm';
-const html = htm.bind(h);
+import { mount, render, ref } from 'lithent';
+import { lTag as html } from 'lithent/tag';
 
 export const HeaderTmpl = mount(() => {
   return ({ events, isDateCalendar, isWeekCalendar, title, type }) => html`

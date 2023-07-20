@@ -1,6 +1,5 @@
-import { h, mount, Fragment } from 'lithent';
-import htm from 'htm';
-const html = htm.bind(h);
+import { mount, Fragment } from 'lithent';
+import { lTag as html } from 'lithent/tag';
 
 export const BodyTmpl = mount((r, props) => {
   let context = props;

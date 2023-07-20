@@ -1,6 +1,5 @@
-import { h, mount } from 'lithent';
-import htm from 'htm';
-const html = htm.bind(h);
+import { mount } from 'lithent';
+import { lTag as html } from 'lithent/tag';
 
 export const BodyTmpl = mount(() => {
   return ({ Sun, Mon, Tue, Wed, Thu, Fri, Sat, weeks }) =>

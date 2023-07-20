@@ -1,8 +1,6 @@
 import { Calendar } from '@/calendar';
-import { h, mount, Fragment, mountCallback, updateCallback } from 'lithent';
-import htm from 'htm';
-
-const html = htm.bind(h);
+import { mount, Fragment, mountCallback, updateCallback } from 'lithent';
+import { lTag as html } from 'lithent/tag';
 
 export const CalendarComponent = mount((_r, props) => {
   const { apiRef, ...options } = props;

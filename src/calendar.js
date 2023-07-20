@@ -1,6 +1,6 @@
-import { h, mount, Fragment } from 'lithent';
+import { mount, Fragment } from 'lithent';
+import { lTag as html } from 'lithent/tag';
 import { portal } from 'lithent/helper';
-import htm from 'htm';
 import { Header } from '@/layer/header';
 import { Body } from '@/layer/body';
 import { localeTexts } from '@/locale/localeTexts';
@@ -29,8 +29,6 @@ export {
   CLASS_NAME_NEXT_WEEK_BTN,
   CLASS_NAME_PREV_WEEK_BTN,
 };
-
-const html = htm.bind(h);
 
 export class Calendar {
   constructor(options) {

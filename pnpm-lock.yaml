@@ -5,12 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  htm:
-    specifier: ^3.1.1
-    version: 3.1.1
   lithent:
-    specifier: ^1.1.1
-    version: 1.1.1
+    specifier: ^1.2.1
+    version: 1.2.1
 
 devDependencies:
   '@nabla/vite-plugin-eslint':
@@ -709,10 +706,6 @@ packages:
       function-bind: 1.1.1
     dev: true
 
-  /htm@3.1.1:
-    resolution: {integrity: sha512-983Vyg8NwUE7JkZ6NmOqpCZ+sh1bKv2iYTlUkzlWmA5JD2acKoxd4KVxbMmxX/85mtfdnDmTFoNKcg5DGAvxNQ==}
-    dev: false
-
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
@@ -796,8 +789,8 @@ packages:
       type-check: 0.4.0
     dev: true
 
-  /lithent@1.1.1:
-    resolution: {integrity: sha512-47aKOGN91KJww35uAuRrCH0Gc8hAYK/TWTNsOvddOXX3wY89lLkk99+Mb47S9E+6icBnlOu3rPtt9NMa6hE0Qw==}
+  /lithent@1.2.1:
+    resolution: {integrity: sha512-gcG4bp73uVfXvMEr6egyPzLfBou2WyohAc8VDTHD91m7uRtqGZHWWMal9mOWEN1AWPYetz844iAC8mUHssiTDQ==}
     dev: false
 
   /locate-path@6.0.0:
