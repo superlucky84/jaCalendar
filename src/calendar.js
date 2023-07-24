@@ -262,27 +262,31 @@ export class Calendar {
 
   _mountForPortalHeader(dataHeader, dataBody) {
     this.reRender = (dataHeader, dataBody) => {
-      this.reRenderHeader(dataHeader);
+      if (this.reRenderHeader) {
+        this.reRenderHeader(dataHeader);
+      }
       this.reRenderBody(dataBody);
     };
 
-    const PortalHeader = mount(renew => {
-      let header = dataHeader;
+    if (this.portalHeaderElement !== 'ignore') {
+      const PortalHeader = mount(renew => {
+        let header = dataHeader;
 
-      this.reRenderHeader = newHeader => {
-        header = newHeader;
-        renew();
-      };
+        this.reRenderHeader = newHeader => {
+          header = newHeader;
+          renew();
+        };
 
-      return () => html`<${Fragment}>
-        <${header[0]} ...${header[1]} />
-      <//>`;
-    });
+        return () => html`<${Fragment}>
+          <${header[0]} ...${header[1]} />
+        <//>`;
+      });
 
-    this.portalDistroy = nextTickRender(
-      () => html`<${PortalHeader} />`,
-      this.portalHeaderElement
-    );
+      this.portalDistroy = nextTickRender(
+        () => html`<${PortalHeader} />`,
+        this.portalHeaderElement
+      );
+    }
 
     return mount(renew => {
       let body = dataBody;
