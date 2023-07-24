@@ -19,6 +19,7 @@ import {
   CLASS_NAME_NEXT_YEAR_BTN,
   CLASS_NAME_NEXT_WEEK_BTN,
   CLASS_NAME_NEXT_MONTH_BTN,
+  WEEK_START_DAY_MAP,
 } from '@/constants';
 
 export {
@@ -51,6 +52,11 @@ export class Calendar {
     };
 
     this.portalHeaderElement = options.portalHeaderElement;
+
+    this.weekStartDay = WEEK_START_DAY_MAP[options.weekStartDay.toLowerCase()];
+    this.weekStartStandardDay =
+      WEEK_START_DAY_MAP[options.weekStartStandardDay.toLowerCase()];
+
     this._date = options.date;
     this._type = options.type;
 
@@ -156,7 +162,15 @@ export class Calendar {
   }
 
   getDate() {
-    return new Date(this._date);
+    if (this._type === 'date-week') {
+      return dateUtil.getStandardDayInWeek(
+        this._date,
+        this.weekStartDay,
+        this.weekStartStandardDay
+      );
+    }
+
+    return this._date;
   }
 
   getType() {
