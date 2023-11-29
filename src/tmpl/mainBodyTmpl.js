@@ -1,4 +1,4 @@
-import { mount, Fragment } from 'lithent';
+import { mount } from 'lithent';
 import { lTag as html } from 'lithent/tag';
 
 export const BodyTmpl = mount((r, props) => {
@@ -12,6 +12,6 @@ export const BodyTmpl = mount((r, props) => {
   }
 
   return () => {
-    return html`<${Fragment}><${context.Tmpl} ...${context} /><//>`;
+    return html`<${context.Tmpl} ...${context} />`;
   };
 });

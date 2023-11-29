@@ -1,5 +1,5 @@
 import { Calendar } from '@/calendar';
-import { mount, Fragment, mountCallback, updateCallback } from 'lithent';
+import { mount, mountCallback, updateCallback } from 'lithent';
 import { lTag as html } from 'lithent/tag';
 
 export const CalendarComponent = mount((_r, props) => {
@@ -75,5 +75,5 @@ export const CalendarComponent = mount((_r, props) => {
     };
   }
 
-  return () => html`<${Fragment}><${templateVDom} /><//>`;
+  return () => html`<${templateVDom} />`;
 });

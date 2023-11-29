@@ -160,7 +160,7 @@ window.apiRef = apiRef;
 window.destroy = render(
   html`<${CalendarComponent}
     language="ko"
-    type="date-week"
+    type="date"
     date=${new Date()}
     weekStartDay="sun"
     weekStartStandardDay="thu"

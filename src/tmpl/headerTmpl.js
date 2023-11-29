@@ -1,4 +1,4 @@
-import { mount, Fragment } from 'lithent';
+import { mount } from 'lithent';
 import { lTag as html } from 'lithent/tag';
 
 export const HeaderTmpl = mount(() => {

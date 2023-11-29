@@ -291,9 +291,7 @@ export class Calendar {
           renew();
         };
 
-        return () => html`<${Fragment}>
-          <${header[0]} ...${header[1]} />
-        <//>`;
+        return () => html`<${header[0]} ...${header[1]} />`;
       });
 
       this.portalDistroy = nextTickRender(
@@ -310,9 +308,7 @@ export class Calendar {
         renew();
       };
 
-      return () => html`<${Fragment}>
-        <${body[0]} ...${body[1]} />
-      <//>`;
+      return () => html`<${body[0]} ...${body[1]} />`;
     });
   }
 
